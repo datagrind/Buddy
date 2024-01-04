@@ -1,0 +1,15 @@
+
+
+-swipe through profiles
+-filter profiles via preferences
+  -event
+  -location
+  -gender
+  -race
+-memberships and tiers
+-custom offers
+-tokens or crypto
+-availabilities and requests
+-messenging
+-booking fee and cancelation fee
+-buddy tracking and safety

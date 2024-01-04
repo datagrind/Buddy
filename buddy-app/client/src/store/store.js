@@ -7,3 +7,5 @@ export const useAuthStore = create((set) => ({
     },
     setUsername : (name) => set((state) => ({ auth : { ...state.auth, username : name }})) 
 }))
+
+console.log(useAuthStore.auth)

@@ -28,6 +28,7 @@ export async function authenticate(username){
 export async function getUser({ username }){
     try {
         const { data } = await axios.get(`/api/user/${username}`);
+        console.log(data, "line 31")
         return { data };
     } catch (error) {
         return { error : "Password doesn't Match...!"}
@@ -58,6 +59,7 @@ export async function registerUser(credentials){
 
 /** login function */
 export async function verifyPassword({ username, password }){
+    console.log(axios.post('/api/login', { username, password }))
     try {
         if(username){
             const { data } = await axios.post('/api/login', { username, password })
@@ -83,12 +85,15 @@ export async function updateUser(response){
 
 /** generate OTP */
 export async function generateOTP(username){
+    console.log("username: ", username)
     try {
         const {data : { code }, status } = await axios.get('/api/generateOTP', { params : { username }});
-
+        console.log(status, "line90")
+        
         // send mail with the OTP
         if(status === 201){
             let { data : { email }} = await getUser({ username });
+            console.log(email)
             let text = `Your Password Recovery OTP is ${code}. Verify and recover your password.`;
             await axios.post('/api/registerMail', { username, userEmail: email, text, subject : "Password Recovery OTP"})
         }

@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import ENV from '../config.js'
 import otpGenerator from 'otp-generator';
 
+
 /** middleware for verify user */
 export async function verifyUser(req, res, next){
     try {
@@ -274,4 +275,33 @@ export async function resetPassword(req,res){
     }
 }
 
+const nodemailer = require('nodemailer')
+const { EMAIL, PASSWORD } = require('../env.js')
+const Mailgen = require('mailgen')
+const getGmail = (req, res) => {
+    
+    const { userEmail } = req.body;
+    
+    let config = {
+        service: 'gmail',
+        auth: {
+            user: EMAIL,
+            pass: PASSWORD
+        }
+    }
 
+    let transporter = nodemailer.createTransporter(config)
+    
+    let MailGenerator = new Mailgen({
+        theme: "default",
+        product: {
+            name: "Mailgen",
+            link: "https://mailgen.js"
+        }
+    })
+
+    let mail = MailGenerator.generate
+
+    let message = 
+    res.status(201).json("getGmail Successful...!")
+}

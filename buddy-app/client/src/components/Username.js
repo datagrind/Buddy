@@ -10,7 +10,7 @@ import styles from '../styles/Username.module.css';
 
 export default function Username() {
 
-  useAuthStore(state => console.log(state, 'line 14'))
+  useAuthStore(state => console.log(state.auth.username, 'line 13'))
   const navigate = useNavigate();
   const setUsername = useAuthStore(state => state.setUsername);
 
@@ -22,7 +22,8 @@ export default function Username() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit : async values => {
-      setUsername(values.username);
+      console.log(values.username, "line 25")
+      await setUsername(values.username);
       navigate('/password')
     }
   })

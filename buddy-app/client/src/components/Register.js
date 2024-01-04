@@ -53,9 +53,9 @@ export default function Register() {
         <div className={styles.glass} style={{ width: "45%", paddingTop: '3em'}}>
 
           <div className="title flex flex-col items-center">
-            <h4 className='text-5xl font-bold'>Register</h4>
+            <h4 className='text-5xl font-bold'>Buddy</h4>
             <span className='py-4 text-xl w-2/3 text-center text-gray-500'>
-                Happy to join you!
+                Find your companionship
             </span>
           </div>
 

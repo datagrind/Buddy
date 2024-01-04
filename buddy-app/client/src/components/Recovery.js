@@ -10,14 +10,15 @@ export default function Recovery() {
   const { username } = useAuthStore(state => state.auth);
   const [OTP, setOTP] = useState();
   const navigate = useNavigate()
-
+  console.log("line 13", username)
   useEffect(() => {
     generateOTP(username).then((OTP) => {
-      console.log(OTP)
+      console.log(OTP, "line 16")
       if(OTP) return toast.success('OTP has been send to your email!');
       return toast.error('Problem while generating OTP!')
     })
   }, [username]);
+  console.log(username, "line 21")
 
   async function onSubmit(e){
     e.preventDefault();
@@ -28,7 +29,7 @@ export default function Recovery() {
         return navigate('/reset')
       }  
     } catch (error) {
-      return toast.error('Wront OTP! Check email again!')
+      return toast.error('Wrong OTP! Check email again!')
     }
   }
 
@@ -40,7 +41,7 @@ export default function Recovery() {
     toast.promise(sentPromise ,
       {
         loading: 'Sending...',
-        success: <b>OTP has been send to your email!</b>,
+        success: <b>OTP has been sent to your email!</b>,
         error: <b>Could not Send it!</b>,
       }
     );
