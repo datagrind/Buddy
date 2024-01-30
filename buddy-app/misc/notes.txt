@@ -13,3 +13,17 @@
 -messenging
 -booking fee and cancelation fee
 -buddy tracking and safety
+
+-Create Account
+ -with phone number
+  -verify / text authentication
+ -with social media
+  -facebook
+  -instagram
+  -google account
+ -ask for email
+  -verify / confirmation link
+
+
+
+
