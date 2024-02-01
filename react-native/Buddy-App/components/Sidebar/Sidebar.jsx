@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import UserDashboard from '../Dashboard/UserDashBoard';
 
 const Sidebar = ({ navigation, username, onLogout }) => {
   return (
@@ -14,7 +15,7 @@ const Sidebar = ({ navigation, username, onLogout }) => {
     )}>
       <Text style={styles.username}>Hello, {username}!</Text>
 
-      <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Dashboard')}>
         <Text>Home</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Profile')}>

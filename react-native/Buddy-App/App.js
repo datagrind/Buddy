@@ -17,26 +17,24 @@ export default function App() {
     setTimeout(() => {
       setIsLoading(false); // Set loading to false after the operation is complete
     }, 3000); // Simulating a 3-second loading time
-  }, []);
+  }, [handleSetLogin,handleLogout]);
 
   function handleSetLogin(name) {
     setIsLogin(true)
     setUsername(name)
+    setIsLoading(true)
   }
 
   function handleLogout(){
     setIsLogin(false);
     setUsername('');
+    setIsLoading(true)
   };
 
 
   return (
     <>
-      {isLoading ? (
-          <View style={styles.container}>
-            <LoadingScreen />
-          </View>
-          ) : (
+      { isLoading ? <LoadingScreen/> : (
             <>
               { !isLogin ? (
               <View style={styles.container}>

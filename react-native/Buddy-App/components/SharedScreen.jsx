@@ -6,6 +6,8 @@ import Home from './Home/Home';
 import Profile from './Profile/Profile'
 import Likes from './Likes/Likes'
 import Chat from './Chat/Chat'
+import Host from './Host/Host';
+import Search from './Search/Search';
 
 const SharedScreen = ({navigation, route}) => {
     console.log(route)
@@ -32,6 +34,18 @@ const SharedScreen = ({navigation, route}) => {
         return (
             <View style={styles.container}>
                 <Chat />
+            </View>
+        )
+    } else if (path === 'host'){
+        return (
+            <View style={styles.container}>
+                <Host />
+            </View>
+        )
+    } else if (path === 'search'){
+        return (
+            <View style={styles.container}>
+                <Search />
             </View>
         )
     } else {

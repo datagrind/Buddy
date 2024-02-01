@@ -1,16 +1,17 @@
 // UserDashboard.js
 import React from 'react';
-import { View, StyleSheet, Image, Platform, TouchableOpacity, useNavigation } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View, Image, Platform, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Sidebar from '../Sidebar/Sidebar';
 import BottomTabNavigator from '../Navigation/BottomTabNavigator';
 import appSettings from '../Settings/Settings'
-import { EvilIcons, Ionicons } from '@expo/vector-icons';
-import Profile from '../Profile/Profile';
 import NoPhotoProfile from '../Profile/NoPhotoProfile';
+import Profile from '../Profile/Profile';
 
 
 const isIos = Platform.OS === 'ios'
+
 
 const DashboardScreen = () => {
   return (
@@ -35,17 +36,11 @@ const LogoHeader = () => {
 const Drawer = createDrawerNavigator();
 
 const UserDashboard = ({ username, onLogout }) => {
+  const navigation = useNavigation()
   console.log(username, "UserDashBoard")
   // const navigation = useNavigation()
   // const renderSideBar = (props) => {
   //   return <Sidebar {...props} username={username} onLogout={onLogout} />
-  // }
-  // const NavigateToProfile = () => {
-  //   return (
-  //     <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Profile')}>
-  //       <NoPhotoProfile />
-  //   </TouchableOpacity>
-  //   )
   // }
   return (
     <Drawer.Navigator 
@@ -64,54 +59,19 @@ const UserDashboard = ({ username, onLogout }) => {
             height: isIos ? 140 : 125, // Adjust the height as needed
           },
           // headerRight: (props) => {return <NavigateToProfile {...props} />},
-          headerRight: () => <NoPhotoProfile factor='smallCircle'/>
-        }}
+          headerRight: () => <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+            <NoPhotoProfile factor='smallCircle'/>
+          </TouchableOpacity>
+      }}
     >
         <Drawer.Screen name='Dashboard' component={DashboardScreen}/> 
         <Drawer.Screen name='Settings' component={appSettings} /> 
-        {/* <Drawer.Screen name='Profile' component={Profile} />  */}
+        <Drawer.Screen name='Profile' component={Profile} />  
     </Drawer.Navigator>
   );
 };
 
 // const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   title: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     marginBottom: 20,
-//   },
-//   content: {
-//     fontSize: 16,
-//     marginBottom: 20,
-//   },
-//   menuButton: {
-//     backgroundColor: 'blue',
-//     padding: 10,
-//     borderRadius: 5,
-//     marginTop: 20,
-//   },
-//   buttonText: {
-//     color: 'white',
-//     textAlign: 'center',
-//     fontSize: 16,
-//   },
-//   circle: {
-//     width: 50,
-//     height: 50,
-//     border: 10,
-//     borderColor: 'black',
-//     borderRadius: 25, // Half of the width and height to make it a circle
-//     backgroundColor: 'white',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     borderWidth: 2,
-//     marginRight: 20,
-//   },
 // });
 
 export default UserDashboard;
