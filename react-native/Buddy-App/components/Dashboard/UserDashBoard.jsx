@@ -60,7 +60,7 @@ const UserDashboard = ({ username, onLogout }) => {
           },
           // headerRight: (props) => {return <NavigateToProfile {...props} />},
           headerRight: () => <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-            <NoPhotoProfile factor='smallCircle'/>
+            <NoPhotoProfile factor='small'/>
           </TouchableOpacity>
       }}
     >

@@ -1,7 +1,9 @@
 import { View, Text } from "react-native"
+import { useState } from "react";
+import getUsers from "../../logic/getUser";
 
 const Likes = () => {
-
+    const [likes, setLikes] = useState()
     return (
         <>
             <View>

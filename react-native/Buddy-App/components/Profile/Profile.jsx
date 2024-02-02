@@ -1,10 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native"
-import { useState } from 'react'
 import NoPhotoProfile from "./NoPhotoProfile";
 import { AntDesign } from '@expo/vector-icons';
 
 const Profile = () => {
-    const [profileImage, setProfileImage] = useState();
     const profileData = [
         {
             title: 'About Me',
@@ -37,7 +35,7 @@ const Profile = () => {
 
     const staticHeader = () =>{
         return <View style={styles.itemm}>
-            <NoPhotoProfile factor='medCircle' size={100} style={styles.subItem} hasImage ={profileImage} />    
+            <NoPhotoProfile factor='med' size={100} style={styles.subItem}/>    
             <TouchableOpacity onPress={handlePhotoUpload} style={[styles.flexRow]}>
                 <Text style={[styles.subItem, styles.underline]}>Upload Profile Photo(s)</Text>
                 <AntDesign name="upload" size={20} color="black" style={styles.subItem}/>

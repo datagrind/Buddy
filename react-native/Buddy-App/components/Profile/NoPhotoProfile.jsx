@@ -1,12 +1,29 @@
 import { View, StyleSheet,Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState, useEffect } from "react";
+import { getUser } from "../../logic/getUser";
 
 
-const NoPhotoProfile = ( {focused, size = 25, color, factor, hasImage}) => {
+const NoPhotoProfile = ( {focused, size = 25, color, factor}) => {
+  const [userImage, setUserImage] = useState()
 
-  return <View style={styles[factor]}>
-        {!hasImage && <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={color}/>}
-        {hasImage && <Image source={hasImage} style={styles.profileImage} />}
+  const fetchData = async () => {
+    try {
+        const userData = await getUser();
+        // setUserImage(userData.results[0].picture.large)
+        console.log('Received data:', userData);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  };  
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+  // console.log("NOPHOTOPROFILE :", userImage)
+  return <View style={!userImage && styles[factor+"Circle"]}>
+        {!userImage && <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={color}/>}
+        {userImage && <Image source={{uri: userImage} || userImage} style={styles[factor+"Circle"]} />}
       </View>
 }
 
@@ -46,12 +63,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 2,
         marginRight: 20,
-      },
-      profileImage: {
-        width: 150,
-        height: 150,
-        borderRadius: 75,
-        marginBottom: 10,
       },
     });
 
