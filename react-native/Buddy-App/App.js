@@ -12,6 +12,7 @@ export default function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [username, setUsername] = useState('');
 
+
   useEffect(() => {
     // Simulate some asynchronous operation (e.g., fetching data)
     setTimeout(() => {
