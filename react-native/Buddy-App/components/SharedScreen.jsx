@@ -13,41 +13,18 @@ const SharedScreen = ({navigation, route}) => {
     console.log(route)
     const { path } = route.params
     if (path === 'home'){
-        return (
-            <View style={styles.container}>
-                <Home />
-            </View>
-        )
+        return <Home />
     } else if (path === 'profile'){
-        return (
-            <View style={styles.container}>
-                <Profile />
-            </View>
-        )
+        return <Profile />
     } else if (path === 'likes'){
-        return (
-            <View style={styles.container}>
-                <Likes />
-            </View>
-        )
+        return <Likes />
     } else if (path === 'chat'){
-        return (
-            <View style={styles.container}>
-                <Chat />
-            </View>
-        )
+        return <Chat />
     } else if (path === 'host'){
-        return (
-            <View style={styles.container}>
-                <Host />
-            </View>
-        )
+        return <Host />
     } else if (path === 'search'){
-        return (
-            <View style={styles.container}>
-                <Search />
-            </View>
-        )
+        return <Search />
+
     } else {
         return (
             <View style={styles.container}>
@@ -69,15 +46,6 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-    title: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      marginBottom: 20,
-    },
-    content: {
-      fontSize: 16,
-      marginBottom: 20,
-    },
     menuButton: {
       backgroundColor: 'blue',
       padding: 10,
@@ -88,11 +56,6 @@ const styles = StyleSheet.create({
       color: 'white',
       textAlign: 'center',
       fontSize: 16,
-    },
-    navBarHeader: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 2,
     },
   });
 

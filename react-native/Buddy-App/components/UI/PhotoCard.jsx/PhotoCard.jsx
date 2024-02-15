@@ -1,18 +1,18 @@
-import { View, StyleSheet, ImageBackground } from "react-native";
+import { View, StyleSheet, ImageBackground, Text } from "react-native";
 
 const PhotoCard = (props) => {
 
-    const {name, image, bio} = props;
+    const {image, userData, photo} = props;
 
     return (
             <View style={styles.card}>
                 <ImageBackground
-                    source={null}
+                    source={{uri: photo}}
                     style={styles.image}
                 >
                     <View style={styles.cardInner}>
-                        <Text style={styles.name}>{name}</Text>
-                        <Text style={styles.bio}>{bio}</Text>
+                        <Text style={styles.name}>{userData.name}</Text>
+                        <Text style={styles.bio}>{userData.bio}</Text>
                     </View>
                 </ImageBackground>
             </View>

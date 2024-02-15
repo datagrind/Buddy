@@ -1,17 +1,10 @@
 import { View, Text } from "react-native"
+import AnimatedCard from "../UI/Animation/AnimateCard";
+
 
 
 const Search = () => {
-    return (
-        <>
-            <View>
-                <Text>Buddy1</Text>
-            </View>
-            <View>
-                <Text>Buddy2</Text>
-            </View>
-        </>
-    )
+    return <AnimatedCard />
 }
 
 export default Search;
