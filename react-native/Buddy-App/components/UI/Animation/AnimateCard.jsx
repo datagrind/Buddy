@@ -2,7 +2,7 @@ import Animated, {useSharedValue, useAnimatedStyle} from 'react-native-reanimate
 import PhotoCard from '../PhotoCard.jsx/PhotoCard';
 import { useEffect, useState } from 'react';
 import { getUser } from '../../../logic/getUser';
-import { StyleSheet, Text } from 'react-native';
+import { View, Pressable, StyleSheet, Text } from 'react-native';
 
 
 const AnimatedCard = () => {
@@ -33,9 +33,14 @@ const AnimatedCard = () => {
       }, []);
 
     return (
-        <Animated.View style={[styles.animateCard, cardStyle]}>
-            <PhotoCard photo={photo} userData={userData}/>
-        </Animated.View>
+        <View>
+            <Animated.View style={[styles.animateCard, cardStyle]}>
+                <PhotoCard photo={photo} userData={userData}/>
+            </Animated.View>
+            <Pressable onPress={() => (sharedValue.value = Math.random())}>
+                <Text>Change value</Text>
+            </Pressable>
+        </View>
     )
 }
 

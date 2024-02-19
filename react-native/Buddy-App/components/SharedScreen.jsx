@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      height: "100%",
+      width: "100%",
     },
     menuButton: {
       backgroundColor: 'blue',

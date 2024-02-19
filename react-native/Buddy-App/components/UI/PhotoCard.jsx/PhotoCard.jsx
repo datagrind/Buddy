@@ -23,14 +23,14 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: "100%",
-        borderRadius:10,
+        borderRadius:20,
         overflow:'hidden',
         justifyContent: 'flex-end',
         padding: 20,
     },
     card: {
         width: '95%',
-        height: '70%',
+        height: '75%',
         shadowOffset: {
             width: 0,
             height: 5,
