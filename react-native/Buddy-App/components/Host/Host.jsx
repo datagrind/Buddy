@@ -1,11 +1,14 @@
-import { View, Text } from "react-native"
+import { View } from "react-native"
+import { Text } from "native-base";
+import LinearGradient from 'react-native-linear-gradient';
+
 
 
 const Host = () => {
     return (
         <>
             <View>
-                <Text>Calender</Text>
+                <Text>Matches</Text>
             </View>
             <View>
                 <Text>Rates</Text>

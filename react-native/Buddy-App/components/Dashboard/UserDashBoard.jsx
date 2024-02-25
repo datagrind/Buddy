@@ -5,73 +5,50 @@ import { View, Image, Platform, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Sidebar from '../Sidebar/Sidebar';
 import BottomTabNavigator from '../Navigation/BottomTabNavigator';
-import appSettings from '../Settings/Settings'
+import appSettings from '../Settings/Settings';
 import NoPhotoProfile from '../Profile/NoPhotoProfile';
 import Profile from '../Profile/Profile';
 
-
-const isIos = Platform.OS === 'ios'
-
-
-const DashboardScreen = () => {
-  return (
-    <>
-      <BottomTabNavigator />
-    </>
-  );
-};
+const isIos = Platform.OS === 'ios';
 
 const LogoHeader = () => {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Image
         source={require('../../assets/logo_white_background.jpg')}
-        style={ (isIos) ? { width: 75, height: 100, marginBottom: 10} : { width: 75, height: 100}}
-          // Adjust the width and height as needed
+        style={(isIos) ? { width: 75, height: 100, marginBottom: 10 } : { width: 75, height: 100 }}
       />
     </View>
-  )
-}
+  );
+};
 
 const Drawer = createDrawerNavigator();
 
 const UserDashboard = ({ username, onLogout }) => {
-  const navigation = useNavigation()
-  console.log(username, "UserDashBoard")
-  // const navigation = useNavigation()
-  // const renderSideBar = (props) => {
-  //   return <Sidebar {...props} username={username} onLogout={onLogout} />
-  // }
+  const navigation = useNavigation();
+
   return (
-    <Drawer.Navigator 
-      drawerContent={
-        (props) => {
-          return <Sidebar {...props} username={username} onLogout={onLogout} />
-        }
-      }
+    <Drawer.Navigator
+      drawerContent={(props) => <Sidebar {...props} username={username} onLogout={onLogout} />}
       screenOptions={{
-          headerTitle: (props) => <LogoHeader {...props} />,
-          headerTitleAlign: 'center',
-          // headerLeft: (focused, size=50) => {
-          //   return <Ionicons name={focused ? 'menu' : ''} size={size} onPress={()=>{renderSideBar}}/>
-          // },
-          headerStyle: {
-            height: isIos ? 140 : 125, // Adjust the height as needed
-          },
-          // headerRight: (props) => {return <NavigateToProfile {...props} />},
-          headerRight: () => <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-            <NoPhotoProfile factor='small'/>
+        headerTitle: (props) => <LogoHeader {...props} />,
+        headerTitleAlign: 'center',
+        headerStyle: {
+          height: isIos ? 140 : 125,
+          background: 'transparent',
+        },
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+            <NoPhotoProfile factor='small' />
           </TouchableOpacity>
+        ),
       }}
     >
-        <Drawer.Screen name='Dashboard' component={DashboardScreen}/> 
-        <Drawer.Screen name='Settings' component={appSettings} /> 
-        <Drawer.Screen name='Profile' component={Profile} />  
+      <Drawer.Screen name='Dashboard' component={BottomTabNavigator} />
+      <Drawer.Screen name='Settings' component={appSettings} />
+      <Drawer.Screen name='Profile' component={Profile} />
     </Drawer.Navigator>
   );
 };
-
-// const styles = StyleSheet.create({
-// });
 
 export default UserDashboard;

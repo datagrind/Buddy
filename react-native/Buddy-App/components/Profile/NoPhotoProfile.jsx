@@ -11,7 +11,6 @@ const NoPhotoProfile = ( {focused, size = 25, color, factor}) => {
     try {
         const userData = await getUser();
         // setUserImage(userData.results[0].picture.large)
-        console.log('Received data:', userData);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -20,7 +19,6 @@ const NoPhotoProfile = ( {focused, size = 25, color, factor}) => {
   useEffect(() => {
     fetchData()
   }, []);
-  // console.log("NOPHOTOPROFILE :", userImage)
   return <View style={!userImage && styles[factor+"Circle"]}>
         {!userImage && <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={color}/>}
         {userImage && <Image source={{uri: userImage} || userImage} style={styles[factor+"Circle"]} />}

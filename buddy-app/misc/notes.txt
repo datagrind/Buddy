@@ -23,6 +23,14 @@
   -google account
  -ask for email
   -verify / confirmation link
+ -ask for geolocation
+  -while using app
+  -always on
+
+
+-Pre-Launch
+  -getwaitlist
+    -free account to hold emails 
 
 
 
