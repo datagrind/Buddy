@@ -1,12 +1,12 @@
 import { getUsers } from '../../logic/getUsers';
 import ImageCard from '../Profile/ImageCard';
-import { ScrollView, NativeBaseProvider, VStack, Center, HStack } from "native-base";
-import { Animated } from 'react-native';
+import { ScrollView, VStack, Center, HStack } from "native-base";
 import { useState, useEffect } from "react";
-import { useRef } from 'react';
 
 
-const Requests = () => {
+
+const Requests = ( {handleSetPath} ) => {
+  console.log("Requests.handleSetPath: ", handleSetPath)
   const [users, setUsers] = useState([]);
 
   const fetchData = async () => {
@@ -46,21 +46,20 @@ const Requests = () => {
         alignItems: "flex-start",
         marginLeft: isLastCard ? 0 : 'auto', // Add marginLeft for the last card to align left
         aspectRatio: 1,
-        
       };
   
       renderedCards.push( 
         <HStack key={i} space={3} {...hStackStyles}>
-          <Center flex={1}>
-            <ImageCard img={users[i]} />
+          <Center flex={1} >
+            <ImageCard img={users[i]} status={"PENDING"}/>
           </Center>
           {!isLastCard && (
-            <Center flex={1}>
-              <ImageCard img={users[i + 1]} />
+            <Center flex={1} >
+              <ImageCard img={users[i + 1]} status={"PENDING"}/>
             </Center>
           )}
           {isLastCard && totalUsers%2 !== 0 && (
-            <Center flex={1}>
+            <Center flex={1} >
             <ImageCard img={null} />
           </Center>
           )}
@@ -81,7 +80,7 @@ const Requests = () => {
           borderRadius={30}
           showsVerticalScrollIndicator={false}
         >
-          <VStack space={1} alignItems="center" >
+          <VStack space={5} alignItems="center" >
             {renderTwoCardsPerRow()}
           </VStack>
         </ScrollView>

@@ -1,5 +1,5 @@
 import { extendTheme } from 'native-base';
-import { Poppins_400Regular } from '@expo-google-fonts/poppins';
+
 
 const theme = extendTheme({
   fonts: {

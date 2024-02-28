@@ -8,7 +8,7 @@ import {
   Center,
 } from "native-base";
 
-const ImageCard = ({ img }) => {
+const ImageCard = ({ img, status }) => {
   if (!img) {
     // console.log("Card: Received undefined or empty img prop");
     return null;
@@ -54,10 +54,10 @@ const ImageCard = ({ img }) => {
           px="3"
           py="1.5"
         >
-          PENDING
+          {status}
         </Center>
       </Box>
-      <Box p="4" space={3} style={{backgroundColor: 'white',}}>
+      <Box p="4" space={3} bg={'white'} borderBottomRadius={15}>
         <Heading size="md" ml="-1">
           {`${img.name.first} ${img.name.last}`}
         </Heading>

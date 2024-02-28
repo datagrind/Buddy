@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, NativeBaseProvider } from "native-base";
+import TestComponent from "../Test/IoniconTest/IoniconTest";
 
 const Chat = () => {
   const data = [{
@@ -36,14 +37,13 @@ const Chat = () => {
   return <Box 
             w='100%'
             h="100%" 
-            borderRadius={30}
-            borderWidth={2}
             borderColor={'black'}
             alignItems={'center'}
+            bg={'white'}
         >
-      {/* <Heading fontSize="xl" p="4" pb="3" bg='white' w='100%'>
-        Inbox
-      </Heading> */}
+      <Heading fontSize="xl" p="4" pb="3" bg='white' w='100%'>
+        Chats
+      </Heading>
       <FlatList 
         data={data} 
         w='100%'
@@ -52,20 +52,21 @@ const Chat = () => {
             item
         }) => <Box bg='white'  
             zIndex={-1}
-            borderBottomWidth="1" 
-            _dark={{
-                borderColor: "muted.50"
-            }} 
-            borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]} py="2"
+            margin={4}
+            // borderBottomWidth="1" 
+            // _dark={{
+            //     borderColor: "muted.50"
+            // }} 
+            // borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]} py="2"
         >
             <HStack space={[2, 3]} justifyContent="space-between">
-            <Avatar size="48px" source={{
+            <Avatar size="70px" source={{
                 uri: item.avatarUrl
             }} />
             <VStack>
                 <Text _dark={{
                     color: "warmGray.50"
-                }} color="coolGray.800" bold>
+                }} color="coolGray.800" bold fontSize={18}>
                 {item.fullName}
                 </Text>
                 <Text color="coolGray.600" _dark={{
@@ -77,11 +78,12 @@ const Chat = () => {
             <Spacer />
             <Text fontSize="xs" _dark={{
                 color: "warmGray.50"
-            }} color="coolGray.800" alignSelf="flex-start">
+            }} color="coolGray.800" alignSelf="flex-start" >
                 {item.timeStamp}
             </Text>
             </HStack>
         </Box>} keyExtractor={item => item.id} />
+        <TestComponent />
     </Box>;
 };
 

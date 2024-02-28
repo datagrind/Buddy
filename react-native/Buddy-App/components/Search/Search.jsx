@@ -1,70 +1,86 @@
-import Card from '../Profile/Card'
-import { 
-    ScrollView,
-    VStack,
-    useTheme, 
-    NativeBaseProvider,
-    Center,
-    HStack,
-} from "native-base";
-import { Animated } from 'react-native';
-import { getUsers } from "../../logic/getUsers";
-import { useState,useEffect, useRef } from "react";
+import React from 'react';
+import { ScrollView, VStack, Center, HStack } from 'native-base';
+import { TouchableOpacity } from 'react-native';
+import ImageCard from '../Profile/ImageCard';
+import { getUsers } from '../../logic/getUsers';
+import { useState, useEffect } from 'react';
 
 
+const Search = ( { handleSetPath }) => {
+  const [users, setUsers] = useState([]);
 
-const Search = () => {
-    const [user, setUser] = useState([])
+  const fetchData = async () => {
+    try {
+      const retrievedUser = await getUsers(11);
+      setUsers(retrievedUser.results);
+    } catch (error) {
+      console.error('Error:', error);
 
-    const fetchData = async () => {
-        try {
-          const retrievedUser = await getUsers(5);
-          setUser(retrievedUser.results);
-        } catch (error) {
-          console.error('Error:', error);
-      
-          // Check if the error is due to rate-limiting (status code 429)
-          if (error.response && error.response.status === 429) {
-            // Implement retry logic after a certain delay (e.g., 5 seconds)
-            console.log('Retrying after 5 seconds...');
-            setTimeout(() => {
-              fetchData();
-            }, 5000);
-          }
-        }
+      if (error.response && error.response.status === 429) {
+        console.log('Retrying after 5 seconds...');
+        setTimeout(() => {
+          fetchData();
+        }, 5000);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const renderTwoCardsPerRow = () => {
+    const renderedCards = [];
+    const totalUsers = users.length;
+
+    for (let i = 0; i < totalUsers; i += 2) {
+      const isLastCard = i + 1 === totalUsers;
+
+      const hStackWidth = isLastCard ? '100%' : '100%';
+      const hStackJustifyContent = isLastCard ? 'flex-start' : 'center';
+      const hStackStyles = {
+        width: hStackWidth,
+        justifyContent: hStackJustifyContent,
+        alignItems: 'flex-start',
+        marginLeft: isLastCard ? 0 : 'auto', 
+        aspectRatio: 1,
       };
-    useEffect( () => {
-        fetchData()
-    }, [])
 
+      renderedCards.push(
+        <HStack space={3} {...hStackStyles} borderWidth={2} key={i}>
+          <Center flex={1}>
+            <TouchableOpacity w='100%' h='100%' onPress={ () => handleSetPath('profiledetails', users[i])}>
+              <ImageCard img={users[i]} status={'AVAILABLE'} />
+            </TouchableOpacity>
+          </Center>
+          {!isLastCard && (
+            <Center flex={1}>
+              <TouchableOpacity onPress={ () => handleSetPath('profiledetails', users[i +1 ])}>
+                <ImageCard img={users[i + 1]} status={'AVAILABLE'} />
+              </TouchableOpacity>
+            </Center>
+          )}
+          {isLastCard && totalUsers % 2 !== 0 && (
+            <Center flex={1}>
+              <ImageCard img={null} />
+            </Center>
+          )}
+        </HStack>
+      );
+    }
 
-    return <ScrollView 
-            w={"100%"} 
-            h="100%" 
-            borderRadius='30'
-            borderWidth={2}
-            zIndex={1}
-            overflow={'hidden'}
-            showsVerticalScrollIndicator={false}
-        >  
-            {
-                user.map((person, index) => {
-                    return(
-                        <VStack key={index} space={2} style={{ marginTop: 15 }}>
-                            <Card img={person}/>
-                        </VStack>
-                    )
-                })
-            }
-    </ScrollView>
-}
+    return renderedCards;
+  };
 
-export default () => {
-    return (
-        <NativeBaseProvider>
-        <Center flex={1} px="3">
-            <Search />
-        </Center>
-        </NativeBaseProvider>
-    );
+  return (
+    <Center flex={1} px="3" w="100%">
+      <ScrollView w="100%" h="100%" borderRadius={30} showsVerticalScrollIndicator={false}>
+        <VStack space={5} alignItems="center">
+          {renderTwoCardsPerRow()}
+        </VStack>
+      </ScrollView>
+    </Center>
+  );
 };
+
+export default Search;

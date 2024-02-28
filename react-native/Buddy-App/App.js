@@ -9,8 +9,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider } from 'native-base';
 import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import theme from './components/UI/Fonts/Font';
-import BottomTabNavigator from './components/Navigation/BottomTabNavigator';
 import { Box } from 'native-base';
+import MainScreen from './components/MainScreen/MainScreen';
 
 
 export default function App() {
@@ -57,7 +57,7 @@ export default function App() {
               </View>
               ) : (
               <NavigationContainer>
-                    <BottomTabNavigator />
+                    <MainScreen />
                 {/* <UserDashboard username={username} onLogout={handleLogout} onLogin={handleSetLogin} isLogin={isLogin} isLoading={isLoading}/> */}
               </NavigationContainer>
                 )

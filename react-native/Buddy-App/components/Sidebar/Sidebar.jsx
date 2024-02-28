@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import UserDashboard from '../Dashboard/UserDashBoard';
 
 const Sidebar = ({ navigation, username, onLogout }) => {
   return (
