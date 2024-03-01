@@ -12,12 +12,32 @@ import {
     Menu,
     Pressable,
     AddIcon,
+    ScrollView
 
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import { logVariables } from "../../logVariables";
 
 
-const Card = ({img}) => {
+const Card = ({img}) => { 
+    // var hello;
+    // const sampleData = {
+    //     name: "Jason",
+    //     age: 20,
+    //     sayHello: function() {
+    //     console.log('Hello!');
+    //     },
+    //     hello: hello,
+    //     address: {
+    //     street: '123 Main St',
+    //     city: 'Anytown',
+    //     postalCode: '12345'
+    //     },
+    //     hobbies: ['reading', 'coding', 'traveling'],
+    //     img: img
+    // };
+
+    // logVariables(sampleData, 'sampleData ')
 
     if (!img) {
         console.log("Card: Received undefined or empty img prop");
@@ -26,7 +46,7 @@ const Card = ({img}) => {
     const imageSource = {uri: img.picture.large }  
     // : { uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg" };
 
-  return <Box alignItems="center">
+  return <Box alignItems="center" h={'100%'} w={'100%'}>
         <Box maxW="full" borderRadius={15} overflow="hidden"  _dark={{
         borderColor: "coolGray.600",
         backgroundColor: "gray.700"
@@ -71,23 +91,38 @@ const Card = ({img}) => {
                             ))}
                         </View>
                     </Stack>
-                    <Box w="full" alignItems="flex-end" borderWidth={2}>
-                        <Menu w="190" trigger={triggerProps => {
-                        return <Pressable accessibilityLabel="More options menu" {...triggerProps} 
-                        borderWidth={2} h={30} w={30} borderRadius={15} background={'red.600'} alignItems={'center'} justifyContent={'center'}>
-                                    <AddIcon color={'white'}/>
-                                </Pressable>;
-                        }}>
+                    <Box w={{ base: '60%', md: '50%' }} alignItems="flex-end" justifyContent={'center'} borderWidth={0}>
+                        <Menu
+                            placement="top right"
+                            trigger={(triggerProps) => {
+                            return (
+                                <Pressable
+                                accessibilityLabel="More options menu"
+                                {...triggerProps}
+                                borderWidth={2}
+                                h={30}
+                                w={30}
+                                borderRadius={15}
+                                background={'red.600'}
+                                alignItems={'center'}
+                                justifyContent={'center'}
+                                >
+                                <AddIcon color={'white'} />
+                                </Pressable>
+                            );
+                            }}
+                        >
                             <Menu.Item>Add to Favorites</Menu.Item>
-                            <Menu.Item>Nunito Sans</Menu.Item>
+                            {/* <Menu.Item>Nunito Sans</Menu.Item>
                             <Menu.Item>Roboto</Menu.Item>
                             <Menu.Item>Poppins</Menu.Item>
                             <Menu.Item>SF Pro</Menu.Item>
                             <Menu.Item>Helvetica</Menu.Item>
                             <Menu.Item isDisabled>Sofia</Menu.Item>
-                            <Menu.Item>Cookie</Menu.Item>
+                            <Menu.Item>Cookie</Menu.Item> */}
                         </Menu>
                     </Box>
+
                 </HStack>
                 <Text fontWeight="400" >
                 👋 Hey there! I'm [Your Name], your friendly neighborhood explorer of life's adventures! 🌟 I'm passionate about [insert interests/hobbies], a firm believer in kindness, and always up for a good laugh. Join me on this journey as I share snippets of my life, connect with amazing people, and embrace the beauty of everyday moments. Let's create memories together and make this social space a positive and uplifting community. 🌈✨ #LifeIsAnAdventure #PositiveVibesOnly
@@ -101,6 +136,11 @@ const Card = ({img}) => {
                     </Text>
                     </HStack>
                 </HStack>
+                <Stack alignItems={'flex-end'}>
+                    <Pressable justifyContent={'center'} alignItems={'center'} borderRadius={50} borderWidth={2} w={100} h={50} bg={'red.600'}>
+                        <Text color={'white'}>Book Me</Text>
+                    </Pressable>
+                </Stack>
             </Stack>
         </Box>
     </Box>

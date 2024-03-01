@@ -1,21 +1,23 @@
 import React from 'react';
-import { ScrollView, VStack, Center, HStack } from 'native-base';
-import { TouchableOpacity } from 'react-native';
+import { ScrollView, VStack, Center, HStack, Stack } from 'native-base';
 import ImageCard from '../Profile/ImageCard';
 import { getUsers } from '../../logic/getUsers';
 import { useState, useEffect } from 'react';
+import { logVariables } from '../../logVariables';
 
 
 const Search = ( { handleSetPath }) => {
-  const [users, setUsers] = useState([]);
 
+  
+  const [users, setUsers] = useState([]);
+  
   const fetchData = async () => {
     try {
       const retrievedUser = await getUsers(11);
       setUsers(retrievedUser.results);
     } catch (error) {
       console.error('Error:', error);
-
+      
       if (error.response && error.response.status === 429) {
         console.log('Retrying after 5 seconds...');
         setTimeout(() => {
@@ -24,14 +26,21 @@ const Search = ( { handleSetPath }) => {
       }
     }
   };
-
+  
   useEffect(() => {
     fetchData();
   }, []);
+  
+  // const debug = {
+  //   users: users && users
+  // }
+
+  // logVariables(debug, 'debug')
+
 
   const renderTwoCardsPerRow = () => {
     const renderedCards = [];
-    const totalUsers = users.length;
+    const totalUsers = users.length; 
 
     for (let i = 0; i < totalUsers; i += 2) {
       const isLastCard = i + 1 === totalUsers;
@@ -43,21 +52,18 @@ const Search = ( { handleSetPath }) => {
         justifyContent: hStackJustifyContent,
         alignItems: 'flex-start',
         marginLeft: isLastCard ? 0 : 'auto', 
-        aspectRatio: 1,
+        // aspectRatio: 1,
+        h: 300,
       };
 
       renderedCards.push(
-        <HStack space={3} {...hStackStyles} borderWidth={2} key={i}>
-          <Center flex={1}>
-            <TouchableOpacity w='100%' h='100%' onPress={ () => handleSetPath('profiledetails', users[i])}>
-              <ImageCard img={users[i]} status={'AVAILABLE'} />
-            </TouchableOpacity>
+        <HStack space={3} {...hStackStyles} borderWidth={0} key={i}>
+          <Center flex={1} >
+              <ImageCard img={users[i]} status={'AVAILABLE'} handleSetPath={handleSetPath} />
           </Center>
           {!isLastCard && (
             <Center flex={1}>
-              <TouchableOpacity onPress={ () => handleSetPath('profiledetails', users[i +1 ])}>
-                <ImageCard img={users[i + 1]} status={'AVAILABLE'} />
-              </TouchableOpacity>
+                <ImageCard img={users[i + 1]} status={'AVAILABLE'} handleSetPath={handleSetPath} />
             </Center>
           )}
           {isLastCard && totalUsers % 2 !== 0 && (
@@ -75,8 +81,9 @@ const Search = ( { handleSetPath }) => {
   return (
     <Center flex={1} px="3" w="100%">
       <ScrollView w="100%" h="100%" borderRadius={30} showsVerticalScrollIndicator={false}>
-        <VStack space={5} alignItems="center">
+        <VStack space={5} alignItems="flex-start">
           {renderTwoCardsPerRow()}
+          <Stack w={'100%'} h={300}></Stack>
         </VStack>
       </ScrollView>
     </Center>

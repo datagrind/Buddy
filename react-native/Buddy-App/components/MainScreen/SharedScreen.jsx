@@ -14,10 +14,14 @@ import { Box } from 'native-base';
 
 const SharedScreen = ({route}) => {
 
+    if (!route || !route.params) {
+        // Handle the case when route or params is undefined
+        return <Text>Error: Missing route or params</Text>;
+      }
 
     const isIos = Platform.OS === 'ios'
     const { path, handleSetPath } = route.params
-    console.log("ShardeScreen prop: ", path, handleSetPath) 
+    console.log("ShardeScreen prop: ", path) 
     const currentPath = () => {
         if (path === 'home'){
             return <Home />
@@ -62,7 +66,7 @@ const SharedScreen = ({route}) => {
                 {/* <Spacer /> */}
                 <Box 
                     w='100%' 
-                    h='70%'         
+                    h='100%'         
                     position="absolute"
                     top={40}
                     zIndex={2}

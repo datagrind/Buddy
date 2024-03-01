@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, NativeBaseProvider } from "native-base";
-import TestComponent from "../Test/IoniconTest/IoniconTest";
 
 const Chat = () => {
   const data = [{
@@ -83,7 +82,6 @@ const Chat = () => {
             </Text>
             </HStack>
         </Box>} keyExtractor={item => item.id} />
-        <TestComponent />
     </Box>;
 };
 
