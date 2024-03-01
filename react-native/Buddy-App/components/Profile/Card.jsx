@@ -20,43 +20,28 @@ import { logVariables } from "../../logVariables";
 
 
 const Card = ({img}) => { 
-    // var hello;
-    // const sampleData = {
-    //     name: "Jason",
-    //     age: 20,
-    //     sayHello: function() {
-    //     console.log('Hello!');
-    //     },
-    //     hello: hello,
-    //     address: {
-    //     street: '123 Main St',
-    //     city: 'Anytown',
-    //     postalCode: '12345'
-    //     },
-    //     hobbies: ['reading', 'coding', 'traveling'],
-    //     img: img
-    // };
-
-    // logVariables(sampleData, 'sampleData ')
 
     if (!img) {
         console.log("Card: Received undefined or empty img prop");
-        return null
+        return (
+            <Box>
+              <Text>No image available</Text>
+            </Box>
+          );
     }
     const imageSource = {uri: img.picture.large }  
-    // : { uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg" };
 
-  return <Box alignItems="center" h={'100%'} w={'100%'}>
-        <Box maxW="full" borderRadius={15} overflow="hidden"  _dark={{
+  return <Box alignItems="center" h={'100%'} w={'100%'}  overflow={'hidden'}>
+        <Box  maxW="full"  borderRadius={15}  _dark={{
         borderColor: "coolGray.600",
         backgroundColor: "gray.700"
         }} _web={{
         shadow: 2,
-        borderWidth: 0
         }} _light={{
-        backgroundColor: "gray.50"
+        backgroundColor: "gray.50",
+        borderColor: "coolGray.600",
         }}>
-            <Box>
+            <Box w={'100%'}  >
             <AspectRatio w="100%" ratio={1}>
                 <Image 
                 source={imageSource} 
@@ -72,16 +57,30 @@ const Card = ({img}) => {
                 AVAILABLE
             </Center>
             </Box>
-            <Stack p="4" space={3}>
-                <HStack>
-                    <Stack space={2}>
+            <Stack  p="4" w={'100%'} space={3}  borderColor={'pink.500'}>
+                <HStack  w={'100%'}>
+                    <Stack  space={2} flex={1} w={'50%'}>
                         <Heading size="md" ml="-1">
                             {`${img.name.first} ${img.name.last}`}
                         </Heading>
                         <Text fontSize="xs" _light={{
-                        color: "violet.500"
+                        color: "black"
                         }} _dark={{
-                            color: "violet.400"
+                            color: "black"
+                        }} fontWeight="500" ml="-0.5" mt="-1">
+                            Age: XX
+                        </Text>
+                        <Text fontSize="xs" _light={{
+                        color: "black"
+                        }} _dark={{
+                            color: "black"
+                        }} fontWeight="500" ml="-0.5" mt="-1">
+                            Sex Orientation: Straight
+                        </Text>
+                        <Text fontSize="xs" _light={{
+                        color: "black"
+                        }} _dark={{
+                            color: "black"
                         }} fontWeight="500" ml="-0.5" mt="-1">
                             Location
                         </Text>
@@ -91,7 +90,7 @@ const Card = ({img}) => {
                             ))}
                         </View>
                     </Stack>
-                    <Box w={{ base: '60%', md: '50%' }} alignItems="flex-end" justifyContent={'center'} borderWidth={0}>
+                    <HStack   w={'50%'} h={30} alignItems="center" justifyContent={'flex-end'}  >
                         <Menu
                             placement="top right"
                             trigger={(triggerProps) => {
@@ -100,6 +99,7 @@ const Card = ({img}) => {
                                 accessibilityLabel="More options menu"
                                 {...triggerProps}
                                 borderWidth={2}
+                                borderColor={'gray.700'}
                                 h={30}
                                 w={30}
                                 borderRadius={15}
@@ -113,30 +113,19 @@ const Card = ({img}) => {
                             }}
                         >
                             <Menu.Item>Add to Favorites</Menu.Item>
-                            {/* <Menu.Item>Nunito Sans</Menu.Item>
-                            <Menu.Item>Roboto</Menu.Item>
-                            <Menu.Item>Poppins</Menu.Item>
-                            <Menu.Item>SF Pro</Menu.Item>
-                            <Menu.Item>Helvetica</Menu.Item>
-                            <Menu.Item isDisabled>Sofia</Menu.Item>
-                            <Menu.Item>Cookie</Menu.Item> */}
                         </Menu>
-                    </Box>
+                    </HStack>
 
                 </HStack>
-                <Text fontWeight="400" >
+                <Text  fontWeight="400" >
                 👋 Hey there! I'm [Your Name], your friendly neighborhood explorer of life's adventures! 🌟 I'm passionate about [insert interests/hobbies], a firm believer in kindness, and always up for a good laugh. Join me on this journey as I share snippets of my life, connect with amazing people, and embrace the beauty of everyday moments. Let's create memories together and make this social space a positive and uplifting community. 🌈✨ #LifeIsAnAdventure #PositiveVibesOnly
                 </Text>
-                <HStack alignItems="center" space={4} justifyContent="space-between">
-                    <HStack alignItems="center">
-                    <Text color="coolGray.600" _dark={{
-                    color: "warmGray.200"
-                    }} fontWeight="400">
-                        6 mins ago
-                    </Text>
-                    </HStack>
-                </HStack>
-                <Stack alignItems={'flex-end'}>
+                <Stack flex={1} alignItems={'flex-end'} h={100} >
+                    <Text>Rate:            $40/HR</Text>
+                    <Text>Rate:            $300/7HR</Text>
+                    <Text>Rate:            $40/HR</Text>
+                </Stack>
+                <Stack alignItems={'flex-end'} h={100} >
                     <Pressable justifyContent={'center'} alignItems={'center'} borderRadius={50} borderWidth={2} w={100} h={50} bg={'red.600'}>
                         <Text color={'white'}>Book Me</Text>
                     </Pressable>
@@ -147,13 +136,5 @@ const Card = ({img}) => {
 };
 
 export default Card;
-// export default () => {
-//     return (
-//         <NativeBaseProvider>
-//         <Center flex={1} px="3">
-//             <Card />
-//         </Center>
-//         </NativeBaseProvider>
-//     );
-// };
+
     

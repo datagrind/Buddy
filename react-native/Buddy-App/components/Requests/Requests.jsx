@@ -80,7 +80,7 @@ const Requests = ( { handleSetPath }) => {
 
   return (
     <Center flex={1} px="3" w="100%">
-      <ScrollView w="100%" h="100%" borderRadius={30} showsVerticalScrollIndicator={false}>
+      <ScrollView w="100%" h="100%" showsVerticalScrollIndicator={false}>
         <VStack space={5} alignItems="flex-start">
           {renderTwoCardsPerRow()}
           <Stack w={'100%'} h={300}></Stack>
