@@ -11,7 +11,18 @@ const ImageCard = ({ img, status, handleSetPath }) => {
   const imageSource = { uri: img.picture.large };
 
   return (
-    <TouchableWithoutFeedback onPress={() => handleSetPath('profiledetails', img)}>
+    <TouchableWithoutFeedback onPress={() => handleSetPath('profiledetails', img)}
+      //   style={{
+      //   shadowColor: '#000',
+      //   shadowOffset: {
+      //     width: 0,
+      //     height: 2,
+      //   },
+      //   shadowOpacity: 0.25,
+      //   shadowRadius: 8.84,
+      //   elevation: 5, // for Android
+      // }}
+    >
       <Box
         width="100%"
         borderWidth="1"

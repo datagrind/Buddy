@@ -9,10 +9,15 @@ import Chat from '../Chat/Chat'
 import Host from '../Host/Host';
 import Search from '../Search/Search';
 import Background from '../UI/Background';
-import { Box } from 'native-base';
+import { Box, Pressable, HamburgerIcon } from 'native-base';
+import HeaderSearchHub from '../Search/HeaderSearch';
+import ProfileDetails from '../Profile/ProfileDetails';
+import SearchHub from '../Search/SearchHub';
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 
-const SharedScreen = ({route}) => {
+const SharedScreen = ({ route }) => {
 
     if (!route || !route.params) {
         // Handle the case when route or params is undefined
@@ -21,7 +26,10 @@ const SharedScreen = ({route}) => {
 
     const isIos = Platform.OS === 'ios'
     const { path, handleSetPath } = route.params
+    const navigation = useNavigation();
+    const [searchHubPath, setSearchHubPath] = useState(path);
     console.log("ShardeScreen prop: ", path) 
+
     const currentPath = () => {
         if (path === 'home'){
             return <Home />
@@ -34,22 +42,30 @@ const SharedScreen = ({route}) => {
         } else if (path === 'host'){
             return <Host />
         } else if (path === 'search'){
-            return <Search handleSetPath={handleSetPath}/>
+            // return <Search handleSetPath={handleSetPath}/>
+        // } else if (path === 'search' || path === 'requests'){
+        // return <ProfileDetails handleSetPath={handleSetPath} />
+        return <SearchHub handleSetPath={handleSetPath} path={searchHubPath}/>
         }else{
             return <DefaultPath />
         }
     }
     const DefaultPath = () => {
         return (
-            <Text> 404 </Text>
+            <Text>  404 </Text>
         )
     }
 
+    const handlePress = (newPath) => {
+        if (newPath !== searchHubPath){
+            setSearchHubPath(newPath);
+        }
+      };
 
 
     return (
         <View style={styles.container}>
-            <Background />
+            {/* <Background /> */}
             <View style={styles.overlay}>
                 <Box 
                     safeAreaTop 
@@ -59,9 +75,15 @@ const SharedScreen = ({route}) => {
                     position="absolute"
                     zIndex={1}
                 >
-                    <Text fontSize="xl" color="white">
-                    Your Transparent Header
-                    </Text>
+                    <Pressable onPress={ () => navigation.navigate('Settings')}>
+                        <HamburgerIcon />
+                    </Pressable>
+                    { path === 'search'
+                    ?   <HeaderSearchHub handlePress={handlePress} searchHubPath={searchHubPath} marginTop={100}/>
+                    :   <Text fontSize="xl" color="white">
+                        Your Transparent Header
+                        </Text>
+                    }
                 </Box>
                 {/* <Spacer /> */}
                 <Box 

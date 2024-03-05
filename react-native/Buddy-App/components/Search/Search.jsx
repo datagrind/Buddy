@@ -57,7 +57,7 @@ const Search = ( { handleSetPath }) => {
       };
 
       renderedCards.push(
-        <HStack space={3} {...hStackStyles} borderWidth={0} key={i}>
+        <HStack space={3} {...hStackStyles} key={i}>
           <Center flex={1} >
               <ImageCard img={users[i]} status={'AVAILABLE'} handleSetPath={handleSetPath} />
           </Center>

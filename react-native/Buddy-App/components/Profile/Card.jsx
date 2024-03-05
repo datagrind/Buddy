@@ -32,7 +32,7 @@ const Card = ({img}) => {
     const imageSource = {uri: img.picture.large }  
 
   return <Box alignItems="center" h={'100%'} w={'100%'}  overflow={'hidden'}>
-        <Box  maxW="full"  borderRadius={15}  _dark={{
+        <Box  maxW="full"    _dark={{
         borderColor: "coolGray.600",
         backgroundColor: "gray.700"
         }} _web={{
@@ -98,7 +98,6 @@ const Card = ({img}) => {
                                 <Pressable
                                 accessibilityLabel="More options menu"
                                 {...triggerProps}
-                                borderWidth={2}
                                 borderColor={'gray.700'}
                                 h={30}
                                 w={30}
