@@ -28,7 +28,7 @@ const Settings = () => {
     return (
         <>
             <View style={styles.container}>        
-                <FlatList 
+                <FlatList  
                     data={settingsData} 
                     renderItem={({item}) =>
                         <View style={styles.section}>

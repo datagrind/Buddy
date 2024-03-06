@@ -49,8 +49,8 @@ const BottomTabNavigator = ({ handleSetPath }) => {
     );
   };
 
-  const TabNavigator = () => (
-    <Tab.Navigator
+  // const TabNavigator = () => (
+  return  <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) =>
           tabBarIcon(route, focused, color, size),
@@ -98,9 +98,9 @@ const BottomTabNavigator = ({ handleSetPath }) => {
         options={{ headerShown: false }}
       />
     </Tab.Navigator>
-  );
+  // );
 
-  return <TabNavigator />;
+  // return <TabNavigator />;
 };
 
 export default BottomTabNavigator;

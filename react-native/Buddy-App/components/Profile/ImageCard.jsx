@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 
 const ImageCard = ({ img, status, handleSetPath }) => {
   if (!img) {
-    // console.log("Card: Received undefined or empty img prop");
+    console.log("Card: Received undefined or empty img prop");
     return null;
   }
 

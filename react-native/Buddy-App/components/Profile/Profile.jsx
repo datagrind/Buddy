@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native
 import NoPhotoProfile from "./NoPhotoProfile";
 import { AntDesign } from '@expo/vector-icons';
 
-const Profile = () => {
+const Profile = ({ route }) => {
     const profileData = [
         {
             title: 'About Me',
@@ -40,7 +40,7 @@ const Profile = () => {
                 <Text style={[styles.subItem, styles.underline]}>Upload Profile Photo(s)</Text>
                 <AntDesign name="upload" size={20} color="black" style={styles.subItem}/>
             </TouchableOpacity>
-            <Text style={[styles.subItem, styles.textLarge]}> Firstname Lastname</Text>
+            <Text style={[styles.subItem, styles.textLarge]}> { route.params.name } </Text>
         </View>
     }
 

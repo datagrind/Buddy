@@ -57,8 +57,8 @@ export default function App() {
               </View>
               ) : (
               <NavigationContainer>
-                    <MainScreen />
-                {/* <UserDashboard username={username} onLogout={handleLogout} onLogin={handleSetLogin} isLogin={isLogin} isLoading={isLoading}/> */}
+                    {/* <MainScreen /> */}
+                <UserDashboard username={username} onLogout={handleLogout} onLogin={handleSetLogin} isLogin={isLogin} isLoading={isLoading}/>
               </NavigationContainer>
                 )
               }

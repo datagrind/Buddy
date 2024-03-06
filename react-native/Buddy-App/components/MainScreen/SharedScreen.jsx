@@ -69,15 +69,16 @@ const SharedScreen = ({ route }) => {
             <View style={styles.overlay}>
                 <Box 
                     safeAreaTop 
-                    bg="white"
+                    bg="transparent"
                     w='100%'
                     height={'25%'}
                     position="absolute"
                     zIndex={1}
+                    top={75}
                 >
-                    <Pressable onPress={ () => navigation.navigate('Settings')}>
+                    {/* <Pressable onPress={ () => navigation.navigate('Settings')}>
                         <HamburgerIcon />
-                    </Pressable>
+                    </Pressable> */}
                     { path === 'search'
                     ?   <HeaderSearchHub handlePress={handlePress} searchHubPath={searchHubPath} marginTop={100}/>
                     :   <Text fontSize="xl" color="white">

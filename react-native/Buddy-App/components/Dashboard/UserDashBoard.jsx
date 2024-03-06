@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { View, Image, Platform, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Sidebar from '../Sidebar/Sidebar';
-import BottomTabNavigator from '../Navigation/BottomTabNavigator';
 import appSettings from '../Settings/Settings';
 import NoPhotoProfile from '../Profile/NoPhotoProfile';
 import Profile from '../Profile/Profile';
+import ScreenHub from '../MainScreen/ScreenHub';
 
 const isIos = Platform.OS === 'ios';
 
@@ -27,24 +27,29 @@ const Drawer = createDrawerNavigator();
 const UserDashboard = ({ username, onLogout }) => {
   const navigation = useNavigation();
 
+  const navigateToProfile = () => {
+    navigation.navigate('Profile', { name: username });
+  };
+
   return (
     <Drawer.Navigator
       drawerContent={(props) => <Sidebar {...props} username={username} onLogout={onLogout} />}
       screenOptions={{
-        headerTitle: (props) => <LogoHeader {...props} />,
+        // headerTitle: (props) => <LogoHeader {...props} />,
+        headerTitle: () => null,
         headerTitleAlign: 'center',
         headerStyle: {
           height: isIos ? 140 : 125,
-          background: 'transparent',
         },
+        headerTransparent: 'transparent',
         headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <TouchableOpacity onPress={navigateToProfile}>
             <NoPhotoProfile factor='small' />
           </TouchableOpacity>
         ),
       }}
     >
-      <Drawer.Screen name='Dashboard' component={BottomTabNavigator} />
+      <Drawer.Screen name='Dashboard' component={ScreenHub} />
       <Drawer.Screen name='Settings' component={appSettings} />
       <Drawer.Screen name='Profile' component={Profile} />
     </Drawer.Navigator>

@@ -20,7 +20,7 @@ const NoPhotoProfile = ( {focused, size = 25, color, factor}) => {
     fetchData()
   }, []);
   return <View style={!userImage && styles[factor+"Circle"]}>
-        {!userImage && <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={color}/>}
+        {!userImage && <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={factor === 'small' ? 'white' : color}/>}
         {userImage && <Image source={{uri: userImage} || userImage} style={styles[factor+"Circle"]} />}
       </View>
 }
@@ -30,36 +30,36 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         border: 10,
-        borderColor: 'black',
+        // borderColor: 'black',
         borderRadius: 25, // Half of the width and height to make it a circle
-        backgroundColor: 'white',
+        backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 2,
+        // borderWidth: 2,
         marginRight: 20,
       },
       bigCircle: {
         width: 300,
         height: 300,
         border: 10,
-        borderColor: 'black',
+        // borderColor: 'black',
         borderRadius: 150, // Half of the width and height to make it a circle
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 2,
+        // borderWidth: 2,
         marginRight: 20,
       },
       medCircle: {
         width: 200,
         height: 200,
         border: 10,
-        borderColor: 'black',
+        // borderColor: 'black',
         borderRadius: 150, // Half of the width and height to make it a circle
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 2,
+        // borderWidth: 2,
         marginRight: 20,
       },
     });
