@@ -3,7 +3,10 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const Sidebar = ({ navigation, username, onLogout }) => {
+const Sidebar = ({ navigation, userData, onLogout }) => {
+
+  // console.log("Sidebar.userData: ", userData)
+
   return (
     <View style={styles.container} icon={({ focused, size }) => (
       <MaterialCommunityIcons
@@ -12,12 +15,12 @@ const Sidebar = ({ navigation, username, onLogout }) => {
         color={focused ? 'blue' : 'black'}
       />
     )}>
-      <Text style={styles.username}>Hello, {username}!</Text>
+      <Text style={styles.username}>Hello, {userData[0]} {userData[1]}!</Text>
 
       <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Dashboard')}>
         <Text>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Profile')}>
+      <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Profile', {data: userData})}>
         <Text>Profile</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate( 'Settings')}>

@@ -13,7 +13,7 @@ const Onboarding2 = () => {
         <Box h={'100%'} w={'100%'}>
         <Stack h={'30%'} w={'100%'}>
             <Text> Onboarding2 </Text>
-            <Image></Image>
+            {/* <Image></Image> */}
         </Stack>
         <Stack h={'30%'} w={'100%'} p={5}>
             <Box h={'25%'} w={'100%'}>

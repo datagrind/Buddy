@@ -8,6 +8,8 @@ import appSettings from '../Settings/Settings';
 import NoPhotoProfile from '../Profile/NoPhotoProfile';
 import Profile from '../Profile/Profile';
 import ScreenHub from '../MainScreen/ScreenHub';
+import SignUp from '../SignUp/SignUp'
+import Onboarding1 from '../Onboarding/Onboarding1';
 
 const isIos = Platform.OS === 'ios';
 
@@ -24,16 +26,20 @@ const LogoHeader = () => {
 
 const Drawer = createDrawerNavigator();
 
-const UserDashboard = ({ username, onLogout }) => {
+const UserDashboard = ({ userData, onLogout }) => {
+
+  console.log("UserDashboard.userData: ", userData)
+
+
   const navigation = useNavigation();
 
   const navigateToProfile = () => {
-    navigation.navigate('Profile', { name: username });
+    navigation.navigate('Profile', { data: userData });
   };
 
   return (
     <Drawer.Navigator
-      drawerContent={(props) => <Sidebar {...props} username={username} onLogout={onLogout} />}
+      drawerContent={(props) => <Sidebar {...props} userData={userData} onLogout={onLogout} />}
       screenOptions={{
         // headerTitle: (props) => <LogoHeader {...props} />,
         headerTitle: () => null,
@@ -52,6 +58,8 @@ const UserDashboard = ({ username, onLogout }) => {
       <Drawer.Screen name='Dashboard' component={ScreenHub} />
       <Drawer.Screen name='Settings' component={appSettings} />
       <Drawer.Screen name='Profile' component={Profile} />
+      <Drawer.Screen name='Sign Up' component={SignUp} />
+      <Drawer.Screen name='Onboarding' component={Onboarding1} />
     </Drawer.Navigator>
   );
 };

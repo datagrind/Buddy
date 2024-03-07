@@ -2,12 +2,14 @@ import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
 import LoginLoad from './LoginLoad'
+import SignUpLoad from '../Loading/SignUpLoad'
 
-const LoadingScreen = ({login}) => {
+const LoadingScreen = ({ login, signup }) => {
   return (
     <>
       {
         login ? <LoginLoad /> : 
+        signup ? <SignUpLoad /> :
         <View style={styles.container}>
           <Image
             source={require('../../assets/logo_white_background.jpg')}

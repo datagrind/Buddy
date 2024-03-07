@@ -7,16 +7,15 @@ import { StatusBar } from 'expo-status-bar';
 import Login from './components/Login/Login'
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider } from 'native-base';
-import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
-import theme from './components/UI/Fonts/Font';
-import { Box } from 'native-base';
-import MainScreen from './components/MainScreen/MainScreen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import SignUp from './components/SignUp/SignUp';
 
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
-  const [username, setUsername] = useState('');
+  const [userData, setUserData] = useState();
+  const [isSignUp, setIsSignUp] = useState(false)
 
 
   useEffect(() => {
@@ -24,48 +23,46 @@ export default function App() {
     setTimeout(() => {
       setIsLoading(false); // Set loading to false after the operation is complete
     }, 4000); // Simulating a 4-second loading time
-  }, [handleSetLogin,handleLogout]);
+  }, [handleSetLogin,handleLogout, handleIsSignUp]);
 
-  function handleSetLogin(name) {
+  function handleSetLogin(data) {
     setIsLogin(true)
-    setUsername(name)
+    setUserData(data)
+    setIsLoading(true)
+    setIsSignUp(false)
+  }
+
+  function handleIsSignUp(bool) {
+    setIsSignUp(bool)
     setIsLoading(true)
   }
 
   function handleLogout(){
     setIsLogin(false);
-    setUsername('');
+    setUserData([]);
     setIsLoading(true)
   };
 
-  let [fontsLoaded] = useFonts({
-    'Poppins-Regular': Poppins_400Regular,
-  });
-
-  if (!fontsLoaded) {
-    return <LoadingScreen login={isLogin} /> ;
-  }
-
   return (
-    <NativeBaseProvider theme={theme}>
-      { isLoading ? <LoadingScreen login={isLogin} /> : (
-            <>
-              { !isLogin ? (
-              <View style={styles.container}>
-                  <Login login={handleSetLogin}/>
-                  <StatusBar style="auto" />
-              </View>
-              ) : (
-              <NavigationContainer>
-                    {/* <MainScreen /> */}
-                <UserDashboard username={username} onLogout={handleLogout} onLogin={handleSetLogin} isLogin={isLogin} isLoading={isLoading}/>
-              </NavigationContainer>
-                )
-              }
-            </>
-          )
-      }
-    </NativeBaseProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NativeBaseProvider >
+        <NavigationContainer>
+          { isLoading ? <LoadingScreen login={isLogin} /> : (
+                  !isLogin ?  (
+                  <View style={styles.container}>
+
+                      <Login login={handleSetLogin} signup={handleIsSignUp} /> 
+
+                      <StatusBar style="auto" />
+                  </View>
+                  ) : 
+                    <UserDashboard userData={userData} onLogout={handleLogout} onLogin={handleSetLogin} isLogin={isLogin} isLoading={isLoading}/>
+                  
+              )
+          }
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </GestureHandlerRootView>
   );
 }
 

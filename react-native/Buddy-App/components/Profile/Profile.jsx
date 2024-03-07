@@ -40,7 +40,7 @@ const Profile = ({ route }) => {
                 <Text style={[styles.subItem, styles.underline]}>Upload Profile Photo(s)</Text>
                 <AntDesign name="upload" size={20} color="black" style={styles.subItem}/>
             </TouchableOpacity>
-            <Text style={[styles.subItem, styles.textLarge]}> { route.params.name } </Text>
+            <Text style={[styles.subItem, styles.textLarge]}> { route.params.data[0] } { route.params.data[1] }</Text>
         </View>
     }
 
