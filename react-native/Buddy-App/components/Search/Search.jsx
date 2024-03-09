@@ -31,11 +31,11 @@ const Search = ( { handleSetPath }) => {
     fetchData();
   }, []);
   
-  // const debug = {
-  //   users: users && users
-  // }
+  const debug = {
+    users: users && users
+  }
 
-  // logVariables(debug, 'debug')
+  logVariables(debug, 'debug')
 
 
   const renderTwoCardsPerRow = () => {
@@ -59,11 +59,11 @@ const Search = ( { handleSetPath }) => {
       renderedCards.push(
         <HStack space={3} {...hStackStyles} key={i}>
           <Center flex={1} >
-              <ImageCard img={users[i]} status={'AVAILABLE'} handleSetPath={handleSetPath} />
+              <ImageCard img={users[i]} status={'AVAILABLE'}  />
           </Center>
           {!isLastCard && (
             <Center flex={1}>
-                <ImageCard img={users[i + 1]} status={'AVAILABLE'} handleSetPath={handleSetPath} />
+                <ImageCard img={users[i + 1]} status={'AVAILABLE'} />
             </Center>
           )}
           {isLastCard && totalUsers % 2 !== 0 && (

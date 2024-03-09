@@ -71,10 +71,11 @@ const SharedScreen = ({ route }) => {
                     safeAreaTop 
                     bg="transparent"
                     w='100%'
-                    height={'25%'}
+                    height={'10%'}
                     position="absolute"
                     zIndex={1}
                     top={75}
+                    borderWidth={0}
                 >
                     {/* <Pressable onPress={ () => navigation.navigate('Settings')}>
                         <HamburgerIcon />
@@ -96,6 +97,7 @@ const SharedScreen = ({ route }) => {
                     borderColor={'black'}
                     borderTopRadius={50}
                     overflow={'hidden'}
+                    borderWidth={0}
                 >
                     { currentPath() }
                 </Box>

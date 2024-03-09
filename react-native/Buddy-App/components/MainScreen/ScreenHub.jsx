@@ -24,11 +24,12 @@ const ScreenHub = () => {
     }
 
     const currentPath = () => {
-        if (path === 'profiledetails' && !screenHub){
-            return <ProfileDetails handleScreenHub={handleScreenHub} profileProp={profileProp}/>
-        }else{
-            return <BottomTabNavigator handleSetPath={handleSetPath}/>
-        }
+        path === 'profiledetails' && !screenHub && <ProfileDetails handleScreenHub={handleScreenHub} profileProp={profileProp}/>
+        // if (path === 'profiledetails' && !screenHub){
+        //     return <ProfileDetails handleScreenHub={handleScreenHub} profileProp={profileProp}/>
+        // }else{
+        //     return <BottomTabNavigator handleSetPath={handleSetPath}/>
+        // }
     }
 
     return (

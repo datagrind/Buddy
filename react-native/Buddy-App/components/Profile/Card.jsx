@@ -17,9 +17,14 @@ import {
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { logVariables } from "../../logVariables";
+import Service from "../Service/Service";
+import { useState } from "react";
 
 
-const Card = ({img}) => { 
+
+const Card = ({ img }) => { 
+
+    const [bookMe, setBookMe] = useState(false)
 
     if (!img) {
         console.log("Card: Received undefined or empty img prop");
@@ -30,6 +35,11 @@ const Card = ({img}) => {
           );
     }
     const imageSource = {uri: img.picture.large }  
+
+
+    const toggleBookMe = () => {
+        !bookMe ? setBookMe(true) : setBookMe(false)
+    }
 
   return <Box alignItems="center" h={'100%'} w={'100%'}  overflow={'hidden'}>
         <Box  maxW="full"    _dark={{
@@ -116,18 +126,25 @@ const Card = ({img}) => {
                     </HStack>
 
                 </HStack>
-                <Text  fontWeight="400" >
-                👋 Hey there! I'm [Your Name], your friendly neighborhood explorer of life's adventures! 🌟 I'm passionate about [insert interests/hobbies], a firm believer in kindness, and always up for a good laugh. Join me on this journey as I share snippets of my life, connect with amazing people, and embrace the beauty of everyday moments. Let's create memories together and make this social space a positive and uplifting community. 🌈✨ #LifeIsAnAdventure #PositiveVibesOnly
-                </Text>
-                <Stack flex={1} alignItems={'flex-end'} h={100} >
-                    <Text>Rate:            $40/HR</Text>
-                    <Text>Rate:            $300/7HR</Text>
-                    <Text>Rate:            $40/HR</Text>
-                </Stack>
-                <Stack alignItems={'flex-end'} h={100} >
-                    <Pressable justifyContent={'center'} alignItems={'center'} borderRadius={50} borderWidth={2} w={100} h={50} bg={'red.600'}>
-                        <Text color={'white'}>Book Me</Text>
-                    </Pressable>
+                <Stack h={'40%'} w={'100%'}>
+                    { !bookMe ? 
+                        <>
+                            <Text  fontWeight="400" >
+                            👋 Hey there! I'm [Your Name], your friendly neighborhood explorer of life's adventures! 🌟 I'm passionate about [insert interests/hobbies], a firm believer in kindness, and always up for a good laugh. Join me on this journey as I share snippets of my life, connect with amazing people, and embrace the beauty of everyday moments. Let's create memories together and make this social space a positive and uplifting community. 🌈✨ #LifeIsAnAdventure #PositiveVibesOnly
+                            </Text>
+                            <Stack flex={1} alignItems={'flex-end'} h={100} >
+                                <Text>Rate:            $40/HR</Text>
+                                <Text>Rate:            $300/7HR</Text>
+                                <Text>Rate:            $40/HR</Text>
+                            </Stack>
+                            <Stack alignItems={'flex-end'} h={100} >
+                                <Pressable onPress={toggleBookMe} justifyContent={'center'} alignItems={'center'} borderRadius={50} w={100} h={50} bg={'red.600'}>
+                                    <Text color={'white'}>Book Me</Text>
+                                </Pressable>
+                            </Stack> 
+                        </> :
+                        <Service toggleBook={toggleBookMe} />
+                    }
                 </Stack>
             </Stack>
         </Box>

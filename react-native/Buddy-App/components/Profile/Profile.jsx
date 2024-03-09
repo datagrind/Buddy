@@ -54,6 +54,7 @@ const Profile = ({ route }) => {
         <>
             <View style={styles.container}>        
                 <FlatList 
+                    showsVerticalScrollIndicator={false}
                     data={profileData} 
                     renderItem={({item}) =>
                         <View style={styles.section}>
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         flexGrow: 1, // Allows the container to take up the full available space
         padding: 5,
+        marginTop: 100
     },
     itemm: {
         padding: 0,

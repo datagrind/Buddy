@@ -34,7 +34,7 @@ export default function App() {
 
   function handleIsSignUp(bool) {
     setIsSignUp(bool)
-    setIsLoading(true)
+    // setIsLoading(true)
   }
 
   function handleLogout(){
@@ -50,9 +50,9 @@ export default function App() {
           { isLoading ? <LoadingScreen login={isLogin} /> : (
                   !isLogin ?  (
                   <View style={styles.container}>
-
+                    { isSignUp ? <SignUp login={handleSetLogin} /> :
                       <Login login={handleSetLogin} signup={handleIsSignUp} /> 
-
+                    }
                       <StatusBar style="auto" />
                   </View>
                   ) : 

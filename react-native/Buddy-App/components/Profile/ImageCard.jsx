@@ -1,17 +1,22 @@
 import React from "react";
 import { Box, Heading, AspectRatio, Image, Text, Center } from "native-base";
 import { TouchableWithoutFeedback } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 
 const ImageCard = ({ img, status, handleSetPath }) => {
+
+  var debugText = "ImageCard: Received undefined or empty img prop"
   if (!img) {
-    console.log("Card: Received undefined or empty img prop");
-    return null;
+    console.log(debugText);
+    return <Text> {debugText} </Text>;
   }
+
+  const navigation = useNavigation()
 
   const imageSource = { uri: img.picture.large };
 
   return (
-    <TouchableWithoutFeedback onPress={() => handleSetPath('profiledetails', img)}
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('ProfileDetails', {img: img})}
       //   style={{
       //   shadowColor: '#000',
       //   shadowOffset: {

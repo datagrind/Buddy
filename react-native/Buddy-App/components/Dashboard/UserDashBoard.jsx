@@ -10,6 +10,8 @@ import Profile from '../Profile/Profile';
 import ScreenHub from '../MainScreen/ScreenHub';
 import SignUp from '../SignUp/SignUp'
 import Onboarding1 from '../Onboarding/Onboarding1';
+import BottomTabNavigator from '../Navigation/BottomTabNavigator';
+import ProfileDetails from '../Profile/ProfileDetails';
 
 const isIos = Platform.OS === 'ios';
 
@@ -45,7 +47,8 @@ const UserDashboard = ({ userData, onLogout }) => {
         headerTitle: () => null,
         headerTitleAlign: 'center',
         headerStyle: {
-          height: isIos ? 140 : 125,
+          height: isIos ? 100 : 125,
+          borderWidth: 2,
         },
         headerTransparent: 'transparent',
         headerRight: () => (
@@ -55,11 +58,12 @@ const UserDashboard = ({ userData, onLogout }) => {
         ),
       }}
     >
-      <Drawer.Screen name='Dashboard' component={ScreenHub} />
+      <Drawer.Screen name='Dashboard' component={BottomTabNavigator} />
       <Drawer.Screen name='Settings' component={appSettings} />
       <Drawer.Screen name='Profile' component={Profile} />
       <Drawer.Screen name='Sign Up' component={SignUp} />
       <Drawer.Screen name='Onboarding' component={Onboarding1} />
+      <Drawer.Screen name='ProfileDetails' component={ProfileDetails} />
     </Drawer.Navigator>
   );
 };
