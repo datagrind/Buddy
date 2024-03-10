@@ -12,7 +12,7 @@ import {
     Menu,
     Pressable,
     AddIcon,
-    ScrollView
+    VStack,
 
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
@@ -50,7 +50,7 @@ const Card = ({ img }) => {
         }} _light={{
         backgroundColor: "gray.50",
         borderColor: "coolGray.600",
-        }}>
+        }} w={'100%'}>
             <Box w={'100%'}  >
             <AspectRatio w="100%" ratio={1}>
                 <Image 
@@ -68,7 +68,7 @@ const Card = ({ img }) => {
             </Center>
             </Box>
             <Stack  p="4" w={'100%'} space={3}  borderColor={'pink.500'}>
-                <HStack  w={'100%'}>
+                <HStack  w={'100%'} >
                     <Stack  space={2} flex={1} w={'50%'}>
                         <Heading size="md" ml="-1">
                             {`${img.name.first} ${img.name.last}`}
@@ -126,26 +126,28 @@ const Card = ({ img }) => {
                     </HStack>
 
                 </HStack>
-                <Stack h={'40%'} w={'100%'}>
+                <VStack h={'40%'} w={'100%'} borderWidth={0}>
                     { !bookMe ? 
                         <>
                             <Text  fontWeight="400" >
                             👋 Hey there! I'm [Your Name], your friendly neighborhood explorer of life's adventures! 🌟 I'm passionate about [insert interests/hobbies], a firm believer in kindness, and always up for a good laugh. Join me on this journey as I share snippets of my life, connect with amazing people, and embrace the beauty of everyday moments. Let's create memories together and make this social space a positive and uplifting community. 🌈✨ #LifeIsAnAdventure #PositiveVibesOnly
                             </Text>
-                            <Stack flex={1} alignItems={'flex-end'} h={100} >
+                            <Stack flex={1} alignItems={'flex-end'} h={100} borderWidth={0}>
                                 <Text>Rate:            $40/HR</Text>
                                 <Text>Rate:            $300/7HR</Text>
                                 <Text>Rate:            $40/HR</Text>
                             </Stack>
-                            <Stack alignItems={'flex-end'} h={100} >
+                            <Stack flex={1} alignItems={'flex-end'} h={100} >
                                 <Pressable onPress={toggleBookMe} justifyContent={'center'} alignItems={'center'} borderRadius={50} w={100} h={50} bg={'red.600'}>
                                     <Text color={'white'}>Book Me</Text>
                                 </Pressable>
                             </Stack> 
                         </> :
-                        <Service toggleBook={toggleBookMe} />
+                         <Stack w={'100%'} borderWidth={0}>
+                            <Service toggleBook={toggleBookMe} />
+                        </Stack>
                     }
-                </Stack>
+                </VStack>
             </Stack>
         </Box>
     </Box>

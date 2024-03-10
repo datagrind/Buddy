@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import SharedScreen from '../MainScreen/SharedScreen';
@@ -6,8 +6,8 @@ import { View, Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = ({ handleSetPath }) => {
-  console.log( "BottomTabNavigator.handleSetPath: ", handleSetPath)
+const BottomTabNavigator = ({ route }) => {
+
   const isIos = Platform.OS === 'ios';
 
   // const BecomeABuddyScreen = () => <SharedScreen path="host" handleSetPath={handleSetPath} />;
@@ -27,6 +27,11 @@ const BottomTabNavigator = ({ handleSetPath }) => {
     } else if (route.name === 'Chat') {
       iconName = focused ? 'chatbox' : 'chatbox-outline';
     }
+
+    // useEffect(() => {
+    //   handleComponentReset(true, null)
+    // },[])
+
 
     return (
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -76,25 +81,25 @@ const BottomTabNavigator = ({ handleSetPath }) => {
       <Tab.Screen
         name="Become a Buddy"
         component={SharedScreen}
-        initialParams={{ path: 'host' , handleSetPath: handleSetPath }}
+        initialParams={{ path: 'host'}}
         options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Find a Buddy"
         component={SharedScreen}
-        initialParams={{ path: 'search' , handleSetPath: handleSetPath }}
+        initialParams={{ path: 'search'}}
         options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Requests"
         component={SharedScreen}
-        initialParams={{ path: 'requests' , handleSetPath: handleSetPath }}
+        initialParams={{ path: 'requests'}}
         options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Chat"
         component={SharedScreen}
-        initialParams={{ path: 'chat' , handleSetPath: handleSetPath}}
+        initialParams={{ path: 'chat' }}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

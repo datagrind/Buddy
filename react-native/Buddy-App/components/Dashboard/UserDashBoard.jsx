@@ -1,5 +1,5 @@
 // UserDashboard.js
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Image, Platform, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -39,9 +39,11 @@ const UserDashboard = ({ userData, onLogout }) => {
     navigation.navigate('Profile', { data: userData });
   };
 
+
   return (
     <Drawer.Navigator
       drawerContent={(props) => <Sidebar {...props} userData={userData} onLogout={onLogout} />}
+      gestureEnabled={false}
       screenOptions={{
         // headerTitle: (props) => <LogoHeader {...props} />,
         headerTitle: () => null,

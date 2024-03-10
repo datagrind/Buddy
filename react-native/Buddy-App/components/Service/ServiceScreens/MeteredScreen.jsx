@@ -1,70 +1,73 @@
-
-import { Text, Box, Button, Checkbox, Slider, Stack } from "native-base";
-import { useEffect, useState } from "react";
-
+import { Text, Box, Slider, VStack } from "native-base";
+import React, { useEffect, useState } from "react";
 
 const MeteredScreen = () => {
+  const rate = 50;
+//   const [onChangeValue, setOnChangeValue] = useState(2);
+  const [hours, setHours] = useState(2);
+  const [price, setPrice] = useState(hours*rate);
 
-    const [onChangeValue, setOnChangeValue] = useState(20);
-    const [hours, setHours] = useState(2)
-    const [price, setPrice] = useState(50)
-    const rate = 50
-    const hour = {
-        '1': 0,
-        '2': 12.5,
-        '3': 25,
-        '4': 37.5,
-        '5': 50,
-        '6': 62.5,
-        '7': 75,
-        '8': 87.5,
-    }
-    const calculatePriceHour = () => {
+//   const hour = {
+//     '1': 0,
+//     '2': 12.5,
+//     '3': 25,
+//     '4': 37.5,
+//     '5': 50,
+//     '6': 62.5,
+//     '7': 75,
+//     '8': 87.5,
+//   };
 
-        if (onChangeValue >= hour[8]){
-            setHours(8)
-            setPrice(hours*rate)
-        } else if (onChangeValue >= hour[7] < hour[8]){
-            setHours(7)
-            setPrice(hours*rate)
-        } else if (onChangeValue >= hour[6] < hour[7]){
-            setHours(6)
-            setPrice(hours*rate)
-        } else if (onChangeValue >= hour[5] < hour[6]){
-            setHours(5)
-            setPrice(hours*rate)
-        } else if (onChangeValue >= hour[4] < hour[5]){
-            setHours(4)
-            setPrice(hours*rate)
-        } else if (onChangeValue >= hour[3] < hour[4]){
-            setHours(3)
-            setPrice(hours*rate)
-        } else if (onChangeValue >= hour[2] < hour[3]){
-            setHours(2)
-            setPrice(hours*rate)
-        }
-    }
+//   const calculatePriceHour = () => {
+//     if (hours === 8) {
+//       setPrice(hours * rate);
+//     } else if (hours === 7) {
+//       setPrice(hours * rate);
+//     } else if (hours === 6) {
+//       setPrice(hours * rate);
+//     } else if (hours === 5 ) {
+//       setPrice(hours * rate);
+//     } else if (hours === 4 ) {
+//       setPrice(hours * rate);
+//     } else if (hours === 3) {
+//       setPrice(hours * rate);
+//     } else{
+//       setPrice(hours * rate);
+//     }
+//   };
 
-    useEffect(() => {
-        calculatePriceHour()
-    },[onChangeValue])
-    
-    return <>
-        <Box alignItems="center" w="100%">
-            <Stack space={4} alignItems="center" w="75%" maxW="300">
-                <Text textAlign="center">{hours} hrs</Text>
-                <Text textAlign="center">${price}</Text>
-                <Slider defaultValue={25} minValue={25} colorScheme="red" onChange={v => {
-                setOnChangeValue(Math.floor(v));
-            }}>
-                <Slider.Track>
-                    <Slider.FilledTrack />
-                </Slider.Track>
-                <Slider.Thumb />
-                </Slider>
-            </Stack>
-        </Box>
+  useEffect(()=>{
+    setPrice((hours/12.5) * rate)
+  },[hours])
+
+  return (
+    <>
+      <Box alignItems="center" w="100%" h={200} >
+        <VStack space={4} alignItems="center" w="75%" maxW="300">
+          <Text textAlign="center">{hours/12.5} hrs</Text>
+          <Text textAlign="center">${price}</Text>
+          <Slider
+            size="lg"
+            w={300}
+            minValue={25}
+            value={hours}
+            onChange={(v) => {
+              setHours(v);
+            }}
+            max={8}
+            min={2}
+            step={12.5}
+            colorScheme="red"
+          >
+            <Slider.Track>
+              <Slider.FilledTrack />
+            </Slider.Track>
+            <Slider.Thumb />
+          </Slider>
+        </VStack>
+      </Box>
     </>
-}
+  );
+};
 
-export default MeteredScreen
+export default MeteredScreen;
