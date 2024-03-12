@@ -7,44 +7,51 @@ import { StatusBar } from 'expo-status-bar';
 import Login from './components/Login/Login'
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider } from 'native-base';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+// import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SignUp from './components/SignUp/SignUp';
+import { Amplify } from 'aws-amplify';
+import amplifyconfig from './amplifyconfiguration.json'
+import { withAuthenticator, useAuthenticator, Authenticator } from '@aws-amplify/ui-react-native';
+Amplify.configure(amplifyconfig);
 
 
-export default function App() {
+
+
+const App = () =>  {
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState(null);
   const [isSignUp, setIsSignUp] = useState(false)
 
 
   useEffect(() => {
     // Simulate some asynchronous operation (e.g., fetching data)
     setTimeout(() => {
-      setIsLoading(false); // Set loading to false after the operation is complete
+      setIsLoading((prev) => prev = false); // Set loading to false after the operation is complete
     }, 4000); // Simulating a 4-second loading time
   }, [handleSetLogin,handleLogout, handleIsSignUp]);
 
   function handleSetLogin(data) {
-    setIsLogin(true)
-    setUserData(data)
-    setIsLoading(true)
-    setIsSignUp(false)
+    setIsLogin((prev) => prev = true)
+    setUserData((prev) => prev = data)
+    setIsLoading((prev) => prev = true)
+    setIsSignUp((prev) => prev = false)
   }
 
   function handleIsSignUp(bool) {
-    setIsSignUp(bool)
+    setIsSignUp((prev) => prev = bool)
     // setIsLoading(true)
   }
 
   function handleLogout(){
-    setIsLogin(false);
-    setUserData([]);
-    setIsLoading(true)
+    setIsLogin((prev) => prev = false);
+    setUserData((prev) => prev = []);
+    setIsLoading((prev) => prev = true)
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    // <GestureHandlerRootView style={{ flex: 1 }}>
+    <Authenticator.Provider>
       <NativeBaseProvider >
         <NavigationContainer>
           { isLoading ? <LoadingScreen login={isLogin} /> : (
@@ -62,7 +69,8 @@ export default function App() {
           }
         </NavigationContainer>
       </NativeBaseProvider>
-    </GestureHandlerRootView>
+    </Authenticator.Provider>
+    // </GestureHandlerRootView>
   );
 }
 
@@ -75,3 +83,47 @@ const styles = StyleSheet.create({
     width: '100%'
   },
 })
+
+// const signUpConfig = {
+//   header: 'Custom Sign Up',
+//   hideAllDefaults: true,
+//   signUpFields: [
+//     {
+//       label: 'Firstname',
+//       key: 'firstname',
+//       required: true,
+//       displayOrder: 1,
+//       type: 'string',
+//     },
+//     {
+//       label: 'Lastname',
+//       key: 'lasstname',
+//       required: true,
+//       displayOrder: 2,
+//       type: 'string',
+//     },
+//     {
+//       label: 'Email',
+//       key: 'email',
+//       required: true,
+//       displayOrder: 3,
+//       type: 'string',
+//     },
+//     {
+//       label: 'Password',
+//       key: 'password',
+//       required: true,
+//       displayOrder: 4,
+//       type: 'string',
+//     },
+//     {
+//       label: 'Confirm Password',
+//       key: 'confirmpassword',
+//       required: true,
+//       displayOrder: 5,
+//       type: 'string',
+//     },
+//   ]
+// }
+
+export default App

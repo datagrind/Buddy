@@ -1,22 +1,48 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center } from "native-base";
+import { signIn } from '@aws-amplify/auth';
 
 
 const LoginScreen = ({ login, signup }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // console.log("LoginScreen.username: ", username)
+  // console.log("LoginScreen.password: ", password)
 
-  const handleLogin = () => {
-    login(username)
-    console.log('Logging in with:', { username, password });
-  };
+  
+  // const onSignInPressed = async data => {
+  //   console.log("onSignInPressed.data: ", data.nativeEvent.text)
+  //   const response = await signIn({username: data.username, password: data.password});
+  //   console.log("onSignInPressed.response: ", response)
+  // }
+
+  async function handleSignIn() {
+    try {
+      const { isSignedIn, nextStep } = await signIn({username, password,   options: {
+        authFlowType: 'USER_PASSWORD_AUTH'
+    }});
+      if (isSignedIn) {
+        console.log("signIn.isSignedIn: ", isSignedIn);
+        login(username)
+        // setIsConfirmed(true);
+      }
+    } catch (error) {
+      console.log('signIn: error signing in:', error);
+    }
+  }
 
   const handleSignUp = () => {
     signup(true)
     console.log('Signing up...');
   };
+
+  const onLogin = () => {
+    console.log("Logging in with username:", username, "and password:", password);
+    handleSignIn(username, password);
+  };
+  
 
   return (
     // <View style={styles.container}>
@@ -71,11 +97,11 @@ const LoginScreen = ({ login, signup }) => {
         <VStack space={3} mt="5">
           <FormControl>
             <FormControl.Label>Email ID</FormControl.Label>
-            <Input />
+            <Input value={username} type="email" onChange={(e) => { e.persist(); setUsername( e.nativeEvent.text); console.log("Email:", e.nativeEvent.text);}}  />
           </FormControl>
           <FormControl>
             <FormControl.Label>Password</FormControl.Label>
-            <Input type="password" />
+            <Input value={password} type="password" onChange={(e) => { e.persist(); setPassword(e.nativeEvent.text); console.log("Password:", e.nativeEvent.text);}} />
             <Link _text={{
             fontSize: "xs",
             fontWeight: "500",
@@ -84,7 +110,7 @@ const LoginScreen = ({ login, signup }) => {
               Forget Password?
             </Link>
           </FormControl>
-          <Button mt="2" colorScheme="red">
+          <Button mt="2" colorScheme="red" onPress={handleSignIn}>
             Sign in
           </Button>
           <HStack mt="6" justifyContent="center">

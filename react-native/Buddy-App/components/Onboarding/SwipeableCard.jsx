@@ -6,7 +6,7 @@ import {  Box, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
 
-const SwipeableCard = ({ card, login, form }) => {
+const SwipeableCard = ({ card, login, name }) => {
 
   const navigation = useNavigation()
 
@@ -29,7 +29,7 @@ const SwipeableCard = ({ card, login, form }) => {
   }
 
   const handleLogin = () => {
-    login(form)
+    login(name)
   }
 
   

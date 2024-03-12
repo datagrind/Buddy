@@ -134,8 +134,6 @@ const Card = ({ img }) => {
                             </Text>
                             <Stack flex={1} alignItems={'flex-end'} h={100} borderWidth={0}>
                                 <Text>Rate:            $40/HR</Text>
-                                <Text>Rate:            $300/7HR</Text>
-                                <Text>Rate:            $40/HR</Text>
                             </Stack>
                             <Stack flex={1} alignItems={'flex-end'} h={100} >
                                 <Pressable onPress={toggleBookMe} justifyContent={'center'} alignItems={'center'} borderRadius={50} w={100} h={50} bg={'red.600'}>
