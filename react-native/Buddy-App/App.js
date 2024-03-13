@@ -20,7 +20,7 @@ Amplify.configure(amplifyconfig);
 const App = () =>  {
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState('');
   const [isSignUp, setIsSignUp] = useState(false)
 
 

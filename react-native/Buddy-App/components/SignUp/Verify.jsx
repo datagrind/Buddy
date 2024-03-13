@@ -27,9 +27,9 @@ const Verify = ( { username, login, name, password }) => {
                 console.log("User is signed up completely");
     
                 // Wait for autoSignIn to complete before proceeding to the next step
-                setTimeout(async()=>{
-                    await handleAutoSignIn();
-                },2000)
+                // await handleAutoSignIn();
+                login(username ? username : 'Friend')
+
     
                 // Navigate to the next step or perform any action accordingly
             } else if (nextStep) {
@@ -42,19 +42,23 @@ const Verify = ( { username, login, name, password }) => {
         }
     }
 
-    async function handleSignIn(username, password ) {
-        // const response = await signIn({ username: username, password: password })
-        // console.log("Verify.signIn.response: ", response)
+    async function handleSignIn() {
+        // setIsConfirmed(true);
+        console.log("handleSIgnIn.password: ", password)
+        console.log("handleSIgnIn.username: ", username)
         try {
-            const { isSignedIn, nextStep } = await signIn({ username: username, password: password });
-            if (isSignedIn){
-                console.log("sigIn.isSignedIn: ", isSignedIn)
-                setIsConfirmed(true);
-            }
+          const { isSignedIn, nextStep } = await signIn({username, password,   options: {
+            authFlowType: 'USER_PASSWORD_AUTH'
+        }});
+          if (isSignedIn) {
+            console.log("signIn.isSignedIn: ", isSignedIn);
+            login(username)
+            setIsConfirmed(true);
+          }
         } catch (error) {
-            console.log('signIn: error signing in:', error);
+          console.log('signIn: error signing in:', error);
         }
-    }
+      }
 
     async function handleAutoSignIn() {
         // const signInOutput = await autoSignIn(username, password);
@@ -67,12 +71,11 @@ const Verify = ( { username, login, name, password }) => {
             // Check if the user is signed in successfully
             if (signInOutput.isSignedIn) {
                 console.log("User is signed in successfully");
-                
+                login(username ? username : 'Friend')
                 // Handle any additional steps after successful sign-in
                 // For example, you can call your own `signIn` function here if needed
-                setTimeout(async()=> {
-                    await handleSignIn(username, password);
-                },2000)
+                // await handleSignIn();
+
             }
     
             // Log the signInOutput for debugging purposes
@@ -90,10 +93,6 @@ const Verify = ( { username, login, name, password }) => {
         handleSignUpConfirmation(username, confirmation);
     };
 
-    useEffect(() => {
-
-    },[])
-
     return ( !isConfirmed ? <View style={styles.container}>
         <Text> Verify </Text>
         <FormControl>
@@ -101,7 +100,7 @@ const Verify = ( { username, login, name, password }) => {
             <Input type='string' onChangeText={(text) => setConfirmation(text)}/>
         </FormControl>
         <Button onPress={handleConfirm}> Confirm </Button>
-        <Button onPress={handleAutoSignIn}> autoSignIn </Button>
+        <Button onPress={handleSignIn}> autoSignIn </Button>
     </View> :
     <Onboarding1 login={login} name={name}/>
     )

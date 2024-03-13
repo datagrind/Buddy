@@ -19,6 +19,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { logVariables } from "../../logVariables";
 import Service from "../Service/Service";
 import { useState } from "react";
+import { Linking } from "react-native";
 
 
 
@@ -37,8 +38,19 @@ const Card = ({ img }) => {
     const imageSource = {uri: img.picture.large }  
 
 
-    const toggleBookMe = () => {
+    const toggleBookMe = async () => {
         !bookMe ? setBookMe(true) : setBookMe(false)
+        const url = 'https://book.stripe.com/test_28oeXd8PDefcgbmcMM';
+
+        // Check if the device can open the given URL
+        const supported = await Linking.canOpenURL(url);
+
+        if (supported) {
+        // Open the URL
+        await Linking.openURL(url);
+        } else {
+        console.error("Don't know how to open URI: " + url);
+        }
     }
 
   return <Box alignItems="center" h={'100%'} w={'100%'}  overflow={'hidden'}>

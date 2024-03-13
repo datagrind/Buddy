@@ -20,16 +20,22 @@ const LoginScreen = ({ login, signup }) => {
 
   async function handleSignIn() {
     try {
-      const { isSignedIn, nextStep } = await signIn({username, password,   options: {
-        authFlowType: 'USER_PASSWORD_AUTH'
-    }});
+      const { isSignedIn, nextStep } = await signIn({
+        username, 
+        password,   
+        options: {
+          authFlowType: 'USER_PASSWORD_AUTH',
+          clientMetadata: {},
+      }});
       if (isSignedIn) {
         console.log("signIn.isSignedIn: ", isSignedIn);
-        login(username)
+        login('Friend')
         // setIsConfirmed(true);
       }
     } catch (error) {
-      console.log('signIn: error signing in:', error);
+
+        console.log('LoginScreen.signIn: error signing in:', error.message);
+        error.message === 'There is already a signed in user.' && login('Friend')
     }
   }
 

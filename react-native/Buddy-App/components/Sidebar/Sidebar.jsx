@@ -7,9 +7,10 @@ import SignOutButton from '../UI/SignOut/SignOutButton';
 
 const userSelector = (context) => [context.user];
 
-const Sidebar = ({ navigation, userData, onLogout }) => {
+const Sidebar = ({ navigation, userData, onLogout, route }) => {
 
   console.log("Sidebar.userData: ", userData)
+  // console.log("Sidebar.onLogout: ", onLogout)
   const { user, signOut } = useAuthenticator(userSelector);
 
   return (
@@ -36,7 +37,7 @@ const Sidebar = ({ navigation, userData, onLogout }) => {
       {/* <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity> */}
-      <SignOutButton userData={userData} />
+      <SignOutButton userData={userData} onLogOut={onLogout} />
     </View>
   );
 };
