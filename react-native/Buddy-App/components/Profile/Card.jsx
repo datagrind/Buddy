@@ -40,7 +40,7 @@ const Card = ({ img }) => {
 
     const toggleBookMe = async () => {
         !bookMe ? setBookMe(true) : setBookMe(false)
-        const url = 'https://book.stripe.com/test_28oeXd8PDefcgbmcMM';
+        const url = 'https://buy.stripe.com/5kA9EE5bW8vq3fO289';
 
         // Check if the device can open the given URL
         const supported = await Linking.canOpenURL(url);
