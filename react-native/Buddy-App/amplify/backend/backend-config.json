@@ -173,5 +173,12 @@
         }
       ]
     }
+  },
+  "storage": {
+    "userFileUpload": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

@@ -1,6 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Button } from "react-native"
 import NoPhotoProfile from "./NoPhotoProfile";
 import { AntDesign } from '@expo/vector-icons';
+import { upload } from "../../logic/upload";
+import { Input } from "native-base";
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from "react";
 
 const Profile = ({ route }) => {
     const profileData = [
@@ -32,23 +36,38 @@ const Profile = ({ route }) => {
             type: [ 'gay', 'straight', 'bisexual']
         },
     ]
+    const [image, setImage] = useState(null);
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+          setImage(result.uri); // Accessing the URI directly
+        }
+    };
+    
 
     const staticHeader = () =>{
         return <View style={styles.itemm}>
             <NoPhotoProfile factor='med' size={100} style={styles.subItem}/>    
-            <TouchableOpacity onPress={handlePhotoUpload} style={[styles.flexRow]}>
-                <Text style={[styles.subItem, styles.underline]}>Upload Profile Photo(s)</Text>
-                <AntDesign name="upload" size={20} color="black" style={styles.subItem}/>
-            </TouchableOpacity>
             <Text style={[styles.subItem, styles.textLarge]}> { route.params.data[0] } { route.params.data[1] }</Text>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <TouchableOpacity onPress={pickImage} style={[styles.flexRow]}>
+                    <Text style={[styles.subItem, styles.underline]}>Upload Profile Photo(s)</Text>
+                    <AntDesign name="upload" size={20} color="black" style={styles.subItem}/>
+                </TouchableOpacity>
+                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+            </View>
         </View>
     }
-
-    const handlePhotoUpload = () => {
-      // Implement logic for photo upload here
-      // This could involve using libraries like react-native-image-picker or react-native-camera
-      // For simplicity, we are using a default image in this example
-    };
 
     return (
         <>

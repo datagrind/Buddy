@@ -6,30 +6,30 @@ import { useState, useEffect } from 'react';
 import { logVariables } from '../../logVariables';
 
 
-const Requests = ( { handleSetPath }) => {
+const Requests = ( { users, handleHeader }) => {
 
   
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   
-  const fetchData = async () => {
-    try {
-      const retrievedUser = await getUsers(11);
-      setUsers(retrievedUser.results);
-    } catch (error) {
-      console.error('Error:', error);
+  // const fetchData = async () => {
+  //   try {
+  //     const retrievedUser = await getUsers(11);
+  //     setUsers(retrievedUser.results);
+  //   } catch (error) {
+  //     console.error('Error:', error);
       
-      if (error.response && error.response.status === 429) {
-        console.log('Retrying after 5 seconds...');
-        setTimeout(() => {
-          fetchData();
-        }, 5000);
-      }
-    }
-  };
+  //     if (error.response && error.response.status === 429) {
+  //       console.log('Retrying after 5 seconds...');
+  //       setTimeout(() => {
+  //         fetchData();
+  //       }, 5000);
+  //     }
+  //   }
+  // };
   
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
   
   // const debug = {
   //   users: users && users
@@ -59,11 +59,11 @@ const Requests = ( { handleSetPath }) => {
       renderedCards.push(
         <HStack space={3} {...hStackStyles} borderWidth={0} key={i}>
           <Center flex={1} >
-              <ImageCard img={users[i]} status={'PENDING'} handleSetPath={handleSetPath} />
+              <ImageCard img={users[i]} status={'PENDING'} handleHeader={handleHeader} />
           </Center>
           {!isLastCard && (
             <Center flex={1}>
-                <ImageCard img={users[i + 1]} status={'PENDING'} handleSetPath={handleSetPath} />
+                <ImageCard img={users[i + 1]} status={'PENDING'} handleHeader={handleHeader} />
             </Center>
           )}
           {isLastCard && totalUsers % 2 !== 0 && (

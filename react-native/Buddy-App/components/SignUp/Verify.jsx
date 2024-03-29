@@ -28,7 +28,6 @@ const Verify = ( { username, login, name, password }) => {
     
                 // Wait for autoSignIn to complete before proceeding to the next step
                 // await handleAutoSignIn();
-                login(username ? username : 'Friend')
 
     
                 // Navigate to the next step or perform any action accordingly
@@ -91,6 +90,7 @@ const Verify = ( { username, login, name, password }) => {
     const handleConfirm = (event) => {
         event.persist();
         handleSignUpConfirmation(username, confirmation);
+        setIsConfirmed(true)
     };
 
     return ( !isConfirmed ? <View style={styles.container}>
@@ -102,7 +102,7 @@ const Verify = ( { username, login, name, password }) => {
         <Button onPress={handleConfirm}> Confirm </Button>
         <Button onPress={handleSignIn}> autoSignIn </Button>
     </View> :
-    <Onboarding1 login={login} name={name}/>
+    <Onboarding1 login={login} name={name} username={username}/>
     )
  
 }

@@ -9,11 +9,8 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = ({ route }) => {
 
   const isIos = Platform.OS === 'ios';
+  const { handleHeader } = route.params
 
-  // const BecomeABuddyScreen = () => <SharedScreen path="host" handleSetPath={handleSetPath} />;
-  // const FindABuddyScreen = () => <SharedScreen path="search" handleSetPath={handleSetPath} />;
-  // const RequestsScreen = () => <SharedScreen path="requests" handleSetPath={handleSetPath} />;
-  // const ChatScreen = () => <SharedScreen path="chat" handleSetPath={handleSetPath} />;
 
   const tabBarIcon = (route, focused, color, size) => {
     let iconName;
@@ -79,15 +76,15 @@ const BottomTabNavigator = ({ route }) => {
       })}
     >
       <Tab.Screen
-        name="Become a Buddy"
+        name="Find a Buddy"
         component={SharedScreen}
-        initialParams={{ path: 'host'}}
+        initialParams={{ path: 'search', handleHeader: handleHeader}}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Find a Buddy"
+        name="Become a Buddy"
         component={SharedScreen}
-        initialParams={{ path: 'search'}}
+        initialParams={{ path: 'host'}}
         options={{ headerShown: false }}
       />
       <Tab.Screen
@@ -96,12 +93,12 @@ const BottomTabNavigator = ({ route }) => {
         initialParams={{ path: 'requests'}}
         options={{ headerShown: false }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Chat"
         component={SharedScreen}
         initialParams={{ path: 'chat' }}
         options={{ headerShown: false }}
-      />
+      /> */}
     </Tab.Navigator>
   // );
 

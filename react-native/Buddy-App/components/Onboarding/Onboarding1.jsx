@@ -11,7 +11,7 @@ import Swiper from "react-native-swiper";
 import { StyleSheet, View } from "react-native";
 
 
-const Onboarding1 = ( { login, name } ) => {
+const Onboarding1 = ( { login, name, username } ) => {
 
     const handleSwipe = () => {
         console.log('Card swiped!');
@@ -41,7 +41,7 @@ const Onboarding1 = ( { login, name } ) => {
                 >
                     <SwipeableCard card={'card1'} />
                     <SwipeableCard card={'card2'} />
-                    <SwipeableCard card={'card3'} login={login} name={name} />
+                    <SwipeableCard card={'card3'} login={login} name={name} username={username} />
                 </Swiper>
             </Box>
 

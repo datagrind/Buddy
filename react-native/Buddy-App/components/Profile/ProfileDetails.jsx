@@ -4,9 +4,12 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useRef } from "react";
 import { useNavigation } from '@react-navigation/native';
 
+
 const ProfileDetails = ({ route }) => {
 
-  const { img } = route.params
+  const { img, handleHeader } = route.params
+
+  console.log("profiledetails.handleHeader: ", handleHeader)
 
 
   if (!img) {
@@ -25,6 +28,7 @@ const ProfileDetails = ({ route }) => {
 
   
   const handleBackButtonPress = () => {
+    handleHeader(true)
     navigation.navigate('Dashboard');
     // handleResetScroll();
   };
@@ -37,11 +41,11 @@ const ProfileDetails = ({ route }) => {
   })
 
   return (
-    <Box w={'100%'} h={'100%'} px={3} flex={1} alignItems={'center'} justifyContent={'center'}>
-      <Pressable onPress={handleBackButtonPress} top={0} left={-25} m={10} position={'absolute'} zIndex={1} w={50} h={50} borderRadius={25} bg={'red.600'} alignItems={'center'} justifyContent={'center'}>
+    <Box w={'100%'} h={'100%'} borderWidth={0} mt={125} px={3} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+      <Pressable onPress={handleBackButtonPress} top={-110} left={-20} m={10} position={'absolute'} zIndex={2} w={50} h={50} borderRadius={25} bg={'red.600'} alignItems={'center'} justifyContent={'center'}>
         <Ionicons name="chevron-back" size={35} color="white" />
       </Pressable>
-      <Box marginTop={100} w={'100%'} h={'100%'} flex={1} overflow={'hidden'} borderRadius={30}>
+      <Box marginTop={0} w={'100%'} h={'100%'} flex={1} overflow={'hidden'} borderRadius={30}>
         <ScrollView ref={scrollViewRef}  w={"100%"} h="100%" showsVerticalScrollIndicator={false} >
           <VStack w={"100%"} h="100%" >
             <Card img={img} />

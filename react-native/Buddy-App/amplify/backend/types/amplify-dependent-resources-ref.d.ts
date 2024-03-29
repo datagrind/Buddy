@@ -8,6 +8,9 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
+    },
+    "userPoolGroups": {
+      "testGroupRole": "string"
     }
   },
   "function": {
@@ -23,6 +26,12 @@ export type AmplifyDependentResourcesAttributes = {
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
+      "Region": "string"
+    }
+  },
+  "storage": {
+    "userFileUpload": {
+      "BucketName": "string",
       "Region": "string"
     }
   }

@@ -1,5 +1,5 @@
 // UserDashboard.js
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useInsertionEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Image, Platform, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -30,7 +30,11 @@ const Drawer = createDrawerNavigator();
 
 const UserDashboard = ({ userData, onLogout }) => {
 
+  const [header, setHeader] = useState(true)
+
+
   console.log("UserDashboard.userData: ", userData)
+  console.log("UserDashboard.header: ", header)
 
 
   const navigation = useNavigation();
@@ -39,7 +43,15 @@ const UserDashboard = ({ userData, onLogout }) => {
     navigation.navigate('Profile', { data: userData });
   };
 
+  const handleHeader = (bool) => {
+    setHeader(bool)
+  }
 
+  useEffect(()=> {
+
+  }, [header])
+  
+   
   return (
     <Drawer.Navigator
       drawerContent={(props) => <Sidebar {...props} userData={userData} onLogout={onLogout} />}
@@ -48,6 +60,7 @@ const UserDashboard = ({ userData, onLogout }) => {
         // headerTitle: (props) => <LogoHeader {...props} />,
         headerTitle: () => null,
         headerTitleAlign: 'center',
+        headerShown: header,
         headerStyle: {
           height: isIos ? 100 : 125,
           borderWidth: 2,
@@ -58,9 +71,10 @@ const UserDashboard = ({ userData, onLogout }) => {
             <NoPhotoProfile factor='small' />
           </TouchableOpacity>
         ),
+        
       }}
     >
-      <Drawer.Screen name='Dashboard' component={BottomTabNavigator} />
+      <Drawer.Screen name='Dashboard' component={BottomTabNavigator} initialParams={ {handleHeader: handleHeader} }/>
       <Drawer.Screen name='Settings' component={appSettings} />
       <Drawer.Screen name='Profile' component={Profile} />
       <Drawer.Screen name='Sign Up' component={SignUp} />

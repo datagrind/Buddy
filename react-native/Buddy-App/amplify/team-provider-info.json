@@ -36,7 +36,11 @@
       },
       "auth": {
         "buddyappccdaed1d": {},
-        "buddyapp91b8af82": {}
+        "buddyapp91b8af82": {},
+        "userPoolGroups": {}
+      },
+      "storage": {
+        "userFileUpload": {}
       }
     }
   }

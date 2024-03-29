@@ -6,36 +6,36 @@ import { useState, useEffect } from 'react';
 import { logVariables } from '../../logVariables';
 
 
-const Search = ( { handleSetPath }) => {
+const Search = ( { users, handleHeader }) => {
 
   
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   
-  const fetchData = async () => {
-    try {
-      const retrievedUser = await getUsers(11);
-      setUsers(retrievedUser.results);
-    } catch (error) {
-      console.error('Error:', error);
+  // const fetchData = async () => {
+  //   try {
+  //     const retrievedUser = await getUsers(11);
+  //     setUsers(retrievedUser.results);
+  //   } catch (error) {
+  //     console.error('Error:', error);
       
-      if (error.response && error.response.status === 429) {
-        console.log('Retrying after 5 seconds...');
-        setTimeout(() => {
-          fetchData();
-        }, 5000);
-      }
-    }
-  };
+  //     if (error.response && error.response.status === 429) {
+  //       console.log('Retrying after 5 seconds...');
+  //       setTimeout(() => {
+  //         fetchData();
+  //       }, 5000);
+  //     }
+  //   }
+  // };
   
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
   
-  const debug = {
-    users: users && users
-  }
+  // const debug = {
+  //   users: users && users
+  // }
 
-  logVariables(debug, 'debug')
+  // logVariables(debug, 'Search.debug')
 
 
   const renderTwoCardsPerRow = () => {
@@ -59,11 +59,11 @@ const Search = ( { handleSetPath }) => {
       renderedCards.push(
         <HStack space={3} {...hStackStyles} key={i}>
           <Center flex={1} >
-              <ImageCard img={users[i]} status={'AVAILABLE'}  />
+              <ImageCard img={users[i]} status={'AVAILABLE'} handleHeader={handleHeader}  />
           </Center>
           {!isLastCard && (
             <Center flex={1}>
-                <ImageCard img={users[i + 1]} status={'AVAILABLE'} />
+                <ImageCard img={users[i + 1]} status={'AVAILABLE'} handleHeader={handleHeader}  />
             </Center>
           )}
           {isLastCard && totalUsers % 2 !== 0 && (

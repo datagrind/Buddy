@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 
+
 const SharedScreen = ({ route }) => {
 
     if (!route || !route.params) {
@@ -25,7 +26,7 @@ const SharedScreen = ({ route }) => {
       }
 
     const isIos = Platform.OS === 'ios'
-    const { path, handleSetPath } = route.params
+    const { path, handleHeader } = route.params
     const navigation = useNavigation();
     const [searchHubPath, setSearchHubPath] = useState(path);
     console.log("ShardeScreen prop: ", path) 
@@ -36,7 +37,7 @@ const SharedScreen = ({ route }) => {
         } else if (path === 'profile'){
             return <Profile />
         } else if (path === 'requests'){
-            return <Requests handleSetPath={handleSetPath}/>
+            return <Host />
         } else if (path === 'chat'){
             return <Chat />
         } else if (path === 'host'){
@@ -45,7 +46,7 @@ const SharedScreen = ({ route }) => {
             // return <Search handleSetPath={handleSetPath}/>
         // } else if (path === 'search' || path === 'requests'){
         // return <ProfileDetails handleSetPath={handleSetPath} />
-        return <SearchHub handleSetPath={handleSetPath} path={searchHubPath}/>
+        return <SearchHub path={searchHubPath} handleHeader={handleHeader}/>
         }else{
             return <DefaultPath />
         }
