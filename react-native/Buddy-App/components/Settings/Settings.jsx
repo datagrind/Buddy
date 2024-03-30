@@ -1,4 +1,5 @@
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native"
+import { View, Text, FlatList, StyleSheet } from "react-native"
+import BackButton from "../UI/BackButton/BackButton"
 
 const Settings = () => {
 
@@ -28,6 +29,7 @@ const Settings = () => {
     return (
         <>
             <View style={styles.container}>        
+                <BackButton topPos={-150} padL={-30} />
                 <FlatList  
                     data={settingsData} 
                     renderItem={({item}) =>
@@ -59,7 +61,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // alignItems: 'center',
         flexGrow: 1, // Allows the container to take up the full available space
-        padding: 5,
+        padding: 10,
+        marginTop: 150,
     },
     itemm: {
         padding: 0,

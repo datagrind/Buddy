@@ -26,7 +26,7 @@ const SharedScreen = ({ route }) => {
       }
 
     const isIos = Platform.OS === 'ios'
-    const { path, handleHeader } = route.params
+    const { path } = route.params
     const navigation = useNavigation();
     const [searchHubPath, setSearchHubPath] = useState(path);
     console.log("ShardeScreen prop: ", path) 
@@ -46,7 +46,7 @@ const SharedScreen = ({ route }) => {
             // return <Search handleSetPath={handleSetPath}/>
         // } else if (path === 'search' || path === 'requests'){
         // return <ProfileDetails handleSetPath={handleSetPath} />
-        return <SearchHub path={searchHubPath} handleHeader={handleHeader}/>
+        return <SearchHub path={searchHubPath} />
         }else{
             return <DefaultPath />
         }

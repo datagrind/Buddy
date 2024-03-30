@@ -3,7 +3,7 @@ import { Box, Heading, AspectRatio, Image, Text, Center } from "native-base";
 import { TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
-const ImageCard = ({ img, status, handleHeader }) => {
+const ImageCard = ({ img, status }) => {
 
   var debugText = "ImageCard: Received undefined or empty img prop"
   if (!img) {
@@ -11,28 +11,18 @@ const ImageCard = ({ img, status, handleHeader }) => {
     return 
   }
 
+
+
   const navigation = useNavigation()
 
   const imageSource = { uri: img.picture.large };
 
   const handleNavigate = () => {
-    handleHeader(false)
-    navigation.navigate('ProfileDetails', {img: img, handleHeader: handleHeader})
+    navigation.navigate('ProfileDetails', {img: img})
   }
 
   return (
-    <TouchableWithoutFeedback onPress={() => handleNavigate() }
-      //   style={{
-      //   shadowColor: '#000',
-      //   shadowOffset: {
-      //     width: 0,
-      //     height: 2,
-      //   },
-      //   shadowOpacity: 0.25,
-      //   shadowRadius: 8.84,
-      //   elevation: 5, // for Android
-      // }}
-    >
+    <TouchableWithoutFeedback onPress={() => handleNavigate() } >
       <Box
         width="100%"
         borderWidth="1"
@@ -77,11 +67,12 @@ const ImageCard = ({ img, status, handleHeader }) => {
             bottom="0"
             px="3"
             py="1.5"
+            borderTopRightRadius={15}
           >
             {status}
           </Center>
         </Box>
-        <Box p="4" space={3} bg={'white'} borderBottomRadius={15}>
+        <Box p="4" space={3} bg={'white'} borderBottomRadius={15} height={100}>
           <Heading size="md" ml="-1">
             {`${img.name.first} ${img.name.last}`}
           </Heading>

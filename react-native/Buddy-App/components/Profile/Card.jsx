@@ -53,7 +53,7 @@ const Card = ({ img }) => {
         }
     }
 
-  return <Box alignItems="center" h={'100%'} w={'100%'}  overflow={'hidden'}>
+  return <Box alignItems="center" h={'2000'} w={'100%'}  overflow={'hidden'}>
         <Box  maxW="full"    _dark={{
         borderColor: "coolGray.600",
         backgroundColor: "gray.700"

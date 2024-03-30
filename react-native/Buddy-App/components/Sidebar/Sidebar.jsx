@@ -7,7 +7,7 @@ import SignOutButton from '../UI/SignOut/SignOutButton';
 
 const userSelector = (context) => [context.user];
 
-const Sidebar = ({ navigation, userData, onLogout, route }) => {
+const Sidebar = ({ navigation, userData, onLogout }) => {
 
   console.log("Sidebar.userData: ", userData)
   // console.log("Sidebar.onLogout: ", onLogout)
