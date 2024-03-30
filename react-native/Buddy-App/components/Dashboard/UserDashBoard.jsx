@@ -1,5 +1,5 @@
 // UserDashboard.js
-import React, { useState, useRef, useEffect, useCallback, useInsertionEffect } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 import { View, Image, Platform, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -7,7 +7,6 @@ import Sidebar from '../Sidebar/Sidebar';
 import appSettings from '../Settings/Settings';
 import NoPhotoProfile from '../Profile/NoPhotoProfile';
 import Profile from '../Profile/Profile';
-import ScreenHub from '../MainScreen/ScreenHub';
 import SignUp from '../SignUp/SignUp'
 import Onboarding1 from '../Onboarding/Onboarding1';
 import BottomTabNavigator from '../Navigation/BottomTabNavigator';
@@ -30,11 +29,8 @@ const Drawer = createDrawerNavigator();
 
 const UserDashboard = ({ userData, onLogout }) => {
 
-  const [header, setHeader] = useState(true)
-
 
   console.log("UserDashboard.userData: ", userData)
-  console.log("UserDashboard.header: ", header)
 
 
   const navigation = useNavigation();
@@ -42,14 +38,6 @@ const UserDashboard = ({ userData, onLogout }) => {
   const navigateToProfile = () => {
     navigation.navigate('Profile', { data: userData });
   };
-
-  const handleHeader = (bool) => {
-    setHeader(bool)
-  }
-
-  useEffect(()=> {
-
-  }, [header])
   
    
   return (
@@ -57,13 +45,10 @@ const UserDashboard = ({ userData, onLogout }) => {
       drawerContent={(props) => <Sidebar {...props} userData={userData} onLogout={onLogout} />}
       gestureEnabled={false}
       screenOptions={{
-        // headerTitle: (props) => <LogoHeader {...props} />,
         headerTitle: () => null,
         headerTitleAlign: 'center',
-        headerShown: header,
         headerStyle: {
           height: isIos ? 100 : 125,
-          borderWidth: 2,
         },
         headerTransparent: 'transparent',
         headerRight: () => (
@@ -74,7 +59,7 @@ const UserDashboard = ({ userData, onLogout }) => {
         
       }}
     >
-      <Drawer.Screen name='Dashboard' component={BottomTabNavigator} initialParams={ {handleHeader: handleHeader} }/>
+      <Drawer.Screen name='Dashboard' component={BottomTabNavigator} />
       <Drawer.Screen name='Settings' component={appSettings} />
       <Drawer.Screen name='Profile' component={Profile} />
       <Drawer.Screen name='Sign Up' component={SignUp} />

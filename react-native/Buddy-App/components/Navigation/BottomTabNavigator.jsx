@@ -6,10 +6,10 @@ import { View, Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = ({ route }) => {
+const BottomTabNavigator = () => {
 
   const isIos = Platform.OS === 'ios';
-  const { handleHeader } = route.params
+
 
 
   const tabBarIcon = (route, focused, color, size) => {
@@ -78,7 +78,7 @@ const BottomTabNavigator = ({ route }) => {
       <Tab.Screen
         name="Find a Buddy"
         component={SharedScreen}
-        initialParams={{ path: 'search', handleHeader: handleHeader}}
+        initialParams={{ path: 'search'}}
         options={{ headerShown: false }}
       />
       <Tab.Screen

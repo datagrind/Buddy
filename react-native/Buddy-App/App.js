@@ -7,11 +7,10 @@ import { StatusBar } from 'expo-status-bar';
 import Login from './components/Login/Login'
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider } from 'native-base';
-// import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SignUp from './components/SignUp/SignUp';
 import { Amplify } from 'aws-amplify';
 import amplifyconfig from './amplifyconfiguration.json'
-import { withAuthenticator, useAuthenticator, Authenticator } from '@aws-amplify/ui-react-native';
+import { Authenticator } from '@aws-amplify/ui-react-native';
 Amplify.configure(amplifyconfig);
 
 
@@ -40,7 +39,6 @@ const App = () =>  {
 
   function handleIsSignUp(bool) {
     setIsSignUp((prev) => prev = bool)
-    // setIsLoading(true)
   }
 
   function handleLogout(){
@@ -50,7 +48,6 @@ const App = () =>  {
   };
 
   return (
-    // <GestureHandlerRootView style={{ flex: 1 }}>
     <Authenticator.Provider>
       <NativeBaseProvider >
         <NavigationContainer>
@@ -64,13 +61,11 @@ const App = () =>  {
                   </View>
                   ) : 
                     <UserDashboard userData={userData} onLogout={handleLogout} onLogin={handleSetLogin} isLogin={isLogin} isLoading={isLoading}/>
-                  
               )
           }
         </NavigationContainer>
       </NativeBaseProvider>
     </Authenticator.Provider>
-    // </GestureHandlerRootView>
   );
 }
 

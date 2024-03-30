@@ -50,7 +50,7 @@ const SearchHub = ({ handleHeader, path }) => {
     return (
         <Box w={'100%'} h={'100%'} p={5}>
             <Box w={'100%'} h={'100%'} flex={1} overflow={'hidden'} borderRadius={30}>
-                {path === 'search' ? <Search users={users && users} handleHeader={handleHeader}  /> : <Requests users={requests && requests} handleHeader={handleHeader}/>}
+                {path === 'search' ? <Search users={users && users}  /> : <Requests users={requests && requests} />}
             </Box>
         </Box>
     );

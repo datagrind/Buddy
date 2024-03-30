@@ -19,6 +19,8 @@ const NoPhotoProfile = ( {focused, size = 25, color, factor}) => {
   useEffect(() => {
     fetchData()
   }, []);
+
+  
   return <View style={!userImage && styles[factor+"Circle"]}>
         {!userImage && <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={factor === 'small' ? 'white' : color}/>}
         {userImage && <Image source={{uri: userImage} || userImage} style={styles[factor+"Circle"]} />}
