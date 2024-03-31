@@ -1,0 +1,8 @@
+type SignUpData @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  firstname: String!
+  lastname: String!
+  email: AWSEmail!
+  provider: Boolean
+}
+ 

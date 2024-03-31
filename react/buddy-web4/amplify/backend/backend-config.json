@@ -1,0 +1,235 @@
+{
+  "api": {
+    "buddyapp": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "buddyapp91b8af82"
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authbuddyapp91b8af82"
+            }
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "buddyapp91b8af82": {
+      "customAuth": false,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "buddyapp91b8af82CustomMessage",
+          "triggerProvider": "Cognito"
+        }
+      ],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL",
+          "FAMILY_NAME",
+          "GIVEN_NAME"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL",
+          "PHONE_NUMBER"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    },
+    "userPoolGroups": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "buddyapp91b8af82"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito-UserPool-Groups"
+    }
+  },
+  "function": {
+    "buddyapp91b8af82CustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "buddyappc51c8dbaCustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "graphQlLambdaAuthorizer12081c25": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_buddyapp91b8af82CustomMessage_EMAILMESSAGE": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyapp91b8af82CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyapp91b8af82CustomMessage_EMAILSUBJECT": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyapp91b8af82CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyapp91b8af82CustomMessage_REDIRECTURL": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyapp91b8af82CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyapp91b8af82CustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyapp91b8af82CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyapp91b8af82CustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyapp91b8af82CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappc51c8dbaCustomMessage_EMAILMESSAGE": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappc51c8dbaCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappc51c8dbaCustomMessage_EMAILSUBJECT": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappc51c8dbaCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappc51c8dbaCustomMessage_REDIRECTURL": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappc51c8dbaCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappc51c8dbaCustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappc51c8dbaCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappc51c8dbaCustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappc51c8dbaCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappccdaed1dCustomMessage_EMAILMESSAGE": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappccdaed1dCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappccdaed1dCustomMessage_EMAILSUBJECT": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappccdaed1dCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappccdaed1dCustomMessage_REDIRECTURL": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappccdaed1dCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_graphQlLambdaAuthorizer12081c25_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "graphQlLambdaAuthorizer12081c25"
+        }
+      ]
+    },
+    "AMPLIFY_function_graphQlLambdaAuthorizer12081c25_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "graphQlLambdaAuthorizer12081c25"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "userFileUpload": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-buddyapp-dev-21905-authRole",
+      "UnauthRoleArn": "arn:aws:iam::396495691727:role/amplify-buddyapp-dev-21905-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::396495691727:role/amplify-buddyapp-dev-21905-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-buddyapp-dev-21905-deployment",
+      "UnauthRoleName": "amplify-buddyapp-dev-21905-unauthRole",
+      "StackName": "amplify-buddyapp-dev-21905",
+      "StackId": "arn:aws:cloudformation:us-west-1:396495691727:stack/amplify-buddyapp-dev-21905/a6d0ad20-df77-11ee-aed5-026763946fc1",
+      "AmplifyAppId": "dth9wrf6bkj2c",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-buddyapp-dev-21905-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "function": {
+        "buddyapp91b8af82CustomMessage": {
+          "EMAILMESSAGE": "Please click link below for confirmation: ",
+          "EMAILSUBJECT": "Buddy - Email Confirmation",
+          "REDIRECTURL": "",
+          "deploymentBucketName": "amplify-buddyapp-dev-21905-deployment",
+          "s3Key": "amplify-builds/buddyapp91b8af82CustomMessage-6b71716237453230534b-build.zip"
+        },
+        "buddyappc51c8dbaCustomMessage": {
+          "EMAILMESSAGE": "Please click the link below to confirm your email:",
+          "EMAILSUBJECT": "Buddy - Email Confirmation",
+          "REDIRECTURL": "",
+          "deploymentBucketName": "amplify-buddyapp-dev-21905-deployment",
+          "s3Key": "amplify-builds/buddyappc51c8dbaCustomMessage-79546b30684850445256-build.zip"
+        },
+        "buddyappccdaed1dCustomMessage": {
+          "EMAILMESSAGE": "Please click the link below to verify your email: ",
+          "EMAILSUBJECT": "Buddy - Email Confirmation",
+          "REDIRECTURL": ""
+        },
+        "graphQlLambdaAuthorizer12081c25": {
+          "deploymentBucketName": "amplify-buddyapp-dev-21905-deployment",
+          "s3Key": "amplify-builds/graphQlLambdaAuthorizer12081c25-716c777559555a43534c-build.zip"
+        }
+      },
+      "auth": {
+        "buddyapp91b8af82": {},
+        "userPoolGroups": {}
+      },
+      "storage": {
+        "userFileUpload": {}
+      }
+    }
+  }
+}
