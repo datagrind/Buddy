@@ -1,4 +1,4 @@
-type SignUpData @model @auth(rules: [{allow: private}]) {
+type SignUpData @model @auth(rules: [{allow: public}]) {
   id: ID!
   firstname: String!
   lastname: String!

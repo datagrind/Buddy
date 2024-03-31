@@ -49,7 +49,7 @@ export default function SignUpDataCreateForm(props) {
   const validations = {
     firstname: [{ type: "Required" }],
     lastname: [{ type: "Required" }],
-    email: [{ type: "Required" }, { type: "Email" }],
+    email: [{ type: "Required" }],
     provider: [],
   };
   const runValidationTasks = async (
