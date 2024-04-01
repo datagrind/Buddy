@@ -2,10 +2,9 @@ import { Button, Input, FormControl } from "native-base"
 import { Text, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { confirmSignUp } from 'aws-amplify/auth';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Onboarding1 from "../Onboarding/Onboarding1";
-import { autoSignIn } from "aws-amplify/auth";
-import { signIn } from 'aws-amplify/auth';
+
 
 
 
@@ -27,7 +26,6 @@ const Verify = ( { username, login, name, password }) => {
                 console.log("User is signed up completely");
     
                 // Wait for autoSignIn to complete before proceeding to the next step
-                // await handleAutoSignIn();
 
     
                 // Navigate to the next step or perform any action accordingly
@@ -41,51 +39,6 @@ const Verify = ( { username, login, name, password }) => {
         }
     }
 
-    async function handleSignIn() {
-        // setIsConfirmed(true);
-        console.log("handleSIgnIn.password: ", password)
-        console.log("handleSIgnIn.username: ", username)
-        try {
-          const { isSignedIn, nextStep } = await signIn({username, password,   options: {
-            authFlowType: 'USER_PASSWORD_AUTH'
-        }});
-          if (isSignedIn) {
-            console.log("signIn.isSignedIn: ", isSignedIn);
-            login(username)
-            setIsConfirmed(true);
-          }
-        } catch (error) {
-          console.log('signIn: error signing in:', error);
-        }
-      }
-
-    async function handleAutoSignIn() {
-        // const signInOutput = await autoSignIn(username, password);
-        // console.log("Verify.handleAutoSignIn.signInOutput:", signInOutput);
-        try {
-            const signInOutput = await autoSignIn();
-            console.log("Verify.handleAutoSignIn.signInOutput:", signInOutput);
-            
-            
-            // Check if the user is signed in successfully
-            if (signInOutput.isSignedIn) {
-                console.log("User is signed in successfully");
-                login(username ? username : 'Friend')
-                // Handle any additional steps after successful sign-in
-                // For example, you can call your own `signIn` function here if needed
-                // await handleSignIn();
-
-            }
-    
-            // Log the signInOutput for debugging purposes
-        } catch (error) {
-            console.log("handleAutoSignIn:", error);
-        }
-    }
-
-    const falseSignUp = () => {
-        return <Text> Failed Sign Up ....</Text>
-    }
 
     const handleConfirm = (event) => {
         event.persist();
@@ -100,7 +53,6 @@ const Verify = ( { username, login, name, password }) => {
             <Input type='string' onChangeText={(text) => setConfirmation(text)}/>
         </FormControl>
         <Button onPress={handleConfirm}> Confirm </Button>
-        <Button onPress={handleSignIn}> autoSignIn </Button>
     </View> :
     <Onboarding1 login={login} name={name} username={username}/>
     )

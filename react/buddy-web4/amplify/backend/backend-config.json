@@ -21,5 +21,38 @@
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
     }
+  },
+  "function": {
+    "buddyprelaunchsignupdata": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_buddyprelaunchsignupdata_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyprelaunchsignupdata"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyprelaunchsignupdata_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyprelaunchsignupdata"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyprelaunchsignupdata_sesEmail": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyprelaunchsignupdata"
+        }
+      ]
+    }
   }
 }
