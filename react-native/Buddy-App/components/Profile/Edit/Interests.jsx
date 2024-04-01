@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput, TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 
-const AboutMe = ({ initialValue, aboutMeEdit, setAboutMe }) => {
+const Interests = ({ initialValue, interestsEdit, setInterests }) => {
   const [text, setText] = useState(initialValue);
 
+
   const handleSaveClick = () => {
-    setAboutMe(false)
+    setInterests(false)
   };
 
   const handleKeyPress = (event) => {
@@ -16,7 +17,7 @@ const AboutMe = ({ initialValue, aboutMeEdit, setAboutMe }) => {
 
   return (
     <View style={styles.container}>
-      {aboutMeEdit ? (
+      {interestsEdit ? (
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -25,9 +26,8 @@ const AboutMe = ({ initialValue, aboutMeEdit, setAboutMe }) => {
             onBlur={handleSaveClick}
             onKeyPress={handleKeyPress}
             multiline={true}
-            autoFocus
           />
-          <TouchableOpacity onPress={handleSaveClick}>
+          <TouchableOpacity onPress={()=>handleSaveClick()}>
             <Text style={styles.saveButton}>Save</Text>
           </TouchableOpacity>
         </View>
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AboutMe;
+export default Interests;

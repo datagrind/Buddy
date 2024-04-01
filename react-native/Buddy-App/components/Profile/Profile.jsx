@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
-import { Pressable } from "native-base";
+import { Pressable, Spacer } from "native-base";
 import NoPhotoProfile from "./NoPhotoProfile";
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -7,24 +7,28 @@ import * as ImagePicker from 'expo-image-picker';
 import { useState, useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
 import AboutMe from './Edit/AboutMe';
+import Interests from "./Edit/Interests";
 
 const Profile = ({ route }) => {
 
     const [aboutMe, setAboutMe] = useState(false)
-
+    const [interests, setInterests] = useState(false)
+    
+    console.log("Profile.interests: ", interests)
     console.log("Profile.aboutMe: ", aboutMe)
-
-    const handleEdit = (setStateFunction, bool) => {
-        setStateFunction(bool)
-    }
-
     const profileData = [
         {
             sectionType: 'About Me',
-            state: setAboutMe,
-            component: <AboutMe aboutMeEdit={aboutMe} handleEdit={handleEdit} setAboutMe={setAboutMe} />
+            state: aboutMe,
+            setState: setAboutMe,
+            component: <AboutMe aboutMeEdit={aboutMe} setAboutMe={setAboutMe} />
         },
-        // Other sections...
+        {
+            sectionType: 'Interests',
+            state: interests,
+            setState: setInterests,
+            component: <Interests interestsEdit={interests} setInterests={setInterests} />
+        },
     ];
 
     const [image, setImage] = useState(null);
@@ -70,6 +74,10 @@ const Profile = ({ route }) => {
         );
     }
 
+    const staticFooter = () => {
+        return <Spacer height={1000} />
+    }
+
     return (
         <View style={styles.container}>
             <Pressable onPress={handleBackButtonPress} top={-90} left={-20} m={10} position={'absolute'} zIndex={2} w={50} h={50} borderRadius={25} bg={'red.600'} alignItems={'center'} justifyContent={'center'}>
@@ -82,7 +90,7 @@ const Profile = ({ route }) => {
                     <View style={styles.section}>
                         <View style={[styles.flexRow]} >
                             <Text style={styles.textMedium}>{item?.sectionType}</Text>
-                            <TouchableOpacity onPress={() => handleEdit(item.state, true)} style={[styles.flexRow]}>
+                            <TouchableOpacity onPress={() => {item.setState(true), console.log(item.sectionType , item.state)}} style={[styles.flexRow]}>
                                 <Text style={[styles.underline, { margin: 11 }]}>Edit</Text>
                             </TouchableOpacity>
                         </View>
@@ -90,6 +98,7 @@ const Profile = ({ route }) => {
                     </View>
                 }
                 ListHeaderComponent={staticHeader}
+                ListFooterComponent={staticFooter}
             />
         </View>
     );
@@ -101,8 +110,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexGrow: 1,
         padding: 20,
-        marginTop: 100
+        marginTop: 100,
     },
+      scrollViewContent: {
+    flexGrow: 1,
+  },
     itemm: {
         padding: 0,
         margin: 20,

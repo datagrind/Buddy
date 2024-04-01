@@ -1,46 +1,35 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-buddyapp-dev-21905-authRole",
-      "UnauthRoleArn": "arn:aws:iam::396495691727:role/amplify-buddyapp-dev-21905-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::396495691727:role/amplify-buddyapp-dev-21905-authRole",
+      "AuthRoleName": "amplify-buddyapp-dev-e63dd-authRole",
+      "UnauthRoleArn": "arn:aws:iam::396495691727:role/amplify-buddyapp-dev-e63dd-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::396495691727:role/amplify-buddyapp-dev-e63dd-authRole",
       "Region": "us-west-1",
-      "DeploymentBucketName": "amplify-buddyapp-dev-21905-deployment",
-      "UnauthRoleName": "amplify-buddyapp-dev-21905-unauthRole",
-      "StackName": "amplify-buddyapp-dev-21905",
-      "StackId": "arn:aws:cloudformation:us-west-1:396495691727:stack/amplify-buddyapp-dev-21905/a6d0ad20-df77-11ee-aed5-026763946fc1",
-      "AmplifyAppId": "dth9wrf6bkj2c",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-buddyapp-dev-21905-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "DeploymentBucketName": "amplify-buddyapp-dev-e63dd-deployment",
+      "UnauthRoleName": "amplify-buddyapp-dev-e63dd-unauthRole",
+      "StackName": "amplify-buddyapp-dev-e63dd",
+      "StackId": "arn:aws:cloudformation:us-west-1:396495691727:stack/amplify-buddyapp-dev-e63dd/89ddb160-efc4-11ee-9219-06711cb2833b",
+      "AmplifyAppId": "d21u6v9gydh3do",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-buddyapp-dev-e63dd-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "function": {
-        "buddyappc51c8dbaCustomMessage": {
-          "REDIRECTURL": "",
-          "EMAILSUBJECT": "Buddy - Email Confirmation",
-          "EMAILMESSAGE": "Please click the link below to confirm your email:",
-          "deploymentBucketName": "amplify-buddyapp-dev-21905-deployment",
-          "s3Key": "amplify-builds/buddyappc51c8dbaCustomMessage-79546b30684850445256-build.zip"
+        "buddyappauthCustomMessage": {
+          "REDIRECTURL": "https://www.usebuddyapp.io/confirmed/",
+          "EMAILSUBJECT": "Buddy - Confirmation",
+          "EMAILMESSAGE": "Thank you for signing up. Please confirm your account with the link below. ",
+          "deploymentBucketName": "amplify-buddyapp-dev-e63dd-deployment",
+          "s3Key": "amplify-builds/buddyappauthCustomMessage-73496a426853747a6a77-build.zip"
         },
-        "buddyappccdaed1dCustomMessage": {
-          "REDIRECTURL": "",
-          "EMAILSUBJECT": "Buddy - Email Confirmation",
-          "EMAILMESSAGE": "Please click the link below to verify your email: "
-        },
-        "buddyapp91b8af82CustomMessage": {
-          "REDIRECTURL": "",
-          "EMAILSUBJECT": "Buddy - Email Confirmation",
-          "EMAILMESSAGE": "Please click link below for confirmation: ",
-          "deploymentBucketName": "amplify-buddyapp-dev-21905-deployment",
-          "s3Key": "amplify-builds/buddyapp91b8af82CustomMessage-6850704a6967656b4934-build.zip"
+        "buddyappauthPostConfirmation": {
+          "GROUP": "buddyusers",
+          "deploymentBucketName": "amplify-buddyapp-dev-e63dd-deployment",
+          "s3Key": "amplify-builds/buddyappauthPostConfirmation-364b6c365678726e546b-build.zip"
         }
       },
       "auth": {
-        "buddyappccdaed1d": {},
-        "buddyapp91b8af82": {},
+        "BuddyApp": {},
         "userPoolGroups": {}
-      },
-      "storage": {
-        "userFileUpload": {}
       }
     }
   }

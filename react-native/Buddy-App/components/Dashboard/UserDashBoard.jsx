@@ -11,6 +11,11 @@ import SignUp from '../SignUp/SignUp'
 import Onboarding1 from '../Onboarding/Onboarding1';
 import BottomTabNavigator from '../Navigation/BottomTabNavigator';
 import ProfileDetails from '../Profile/ProfileDetails';
+import Account from '../Settings/Account';
+import ContactSupport from '../Settings/ContactSupport'
+import TermConditions from '../Settings/TermConditions'
+import SecurityPrivacy from '../Settings/SecurityPrivacy'
+
 
 const isIos = Platform.OS === 'ios';
 
@@ -65,6 +70,10 @@ const UserDashboard = ({ userData, onLogout }) => {
       <Drawer.Screen name='Sign Up' component={SignUp} />
       <Drawer.Screen name='Onboarding' component={Onboarding1} />
       <Drawer.Screen name='ProfileDetails' component={ProfileDetails} />
+      <Drawer.Screen name='Account' component={Account} />
+      <Drawer.Screen name='ContactSupport' component={ContactSupport} />
+      <Drawer.Screen name='TermsConditions' component={TermConditions} />
+      <Drawer.Screen name='SecurityPrivacy' component={SecurityPrivacy} />
     </Drawer.Navigator>
   );
 };

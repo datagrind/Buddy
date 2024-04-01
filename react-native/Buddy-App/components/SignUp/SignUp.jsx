@@ -1,6 +1,7 @@
 
 import Onboarding1 from "../Onboarding/Onboarding1"
 import { Box, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider, Text } from "native-base";
+import { Alert, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import LoadingScreen from "../Loading/LoadingScreen";
 import { signUp } from "aws-amplify/auth";
@@ -20,6 +21,9 @@ const SignUp = ( { login } ) => {
     const [lastname, setLastname] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [validationMessage, setValidationMessage] = useState('');
+    const [confirmValidationMessage, setConfirmValidationMessage] = useState('');
+    const [isPhoneValid, setIsPhoneValid] = useState(true);
 
 
     const errorSignUp = () => {
@@ -29,13 +33,67 @@ const SignUp = ( { login } ) => {
     const handleLogin = () => {
         setIsLoading((prev) => prev = true)
         if (firstname.length > 0 && lastname.length > 0 && password.length > 0 && password === confirmPassword){
-            handleSignUp(password, email, phoneNumber, firstname, lastname )
+            validatePassword()
+            handleSignUp(password, email, `+1${phoneNumber}`, firstname, lastname )
         } else {
             setIsLoading((prev) => prev = false)
             return errorSignUp()
         }
-        // login({ firstname, lastname })   
     }
+
+    const validatePassword = () => {
+        const lengthRegex = /.{8,}/;
+        const lowercaseRegex = /[a-z]/;
+        const uppercaseRegex = /[A-Z]/;
+        const numeralRegex = /\d/;
+        const symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    
+        if (!lengthRegex.test(password)) {
+          setValidationMessage('Password must be at least 8 characters long.');
+          return;
+        }
+    
+        if (!lowercaseRegex.test(password)) {
+          setValidationMessage('Password must contain at least one lowercase character.');
+          return;
+        }
+    
+        if (!uppercaseRegex.test(password)) {
+          setValidationMessage('Password must contain at least one uppercase character.');
+          return;
+        }
+    
+        if (!numeralRegex.test(password)) {
+          setValidationMessage('Password must contain at least one numeral.');
+          return;
+        }
+    
+        if (!symbolRegex.test(password)) {
+          setValidationMessage('Password must contain at least one symbol.');
+          return;
+        }
+    
+        setValidationMessage('Password meets the password policy requirements.');
+      };
+
+    const handleBlur = () => {
+        validatePassword(password);
+    };
+
+    const validatePasswordsMatch = () => {
+        if (password !== confirmPassword) {
+            setConfirmValidationMessage('Passwords do not match.');
+        } else {
+            setConfirmValidationMessage('Passwords match.');
+        }
+    };
+
+    const handlePhoneNumberChange = () => {
+        // Check if the input contains only numbers
+        const isValidPhoneNumber = /^\d+$/.test(phoneNumber);
+        setIsPhoneValid(isValidPhoneNumber);
+      };
+    
 
     async function handleSignUp(password, email, phone_number, given_name, family_name ) {
         try {
@@ -63,7 +121,7 @@ const SignUp = ( { login } ) => {
         }
       }
     // console.log(firstname)
-  
+
     useEffect(() => {
         // Simulate some asynchronous operation (e.g., fetching data)
         setTimeout(() => {
@@ -96,8 +154,12 @@ const SignUp = ( { login } ) => {
                     <Input type='username' onChangeText={(text) => setUsername(text)}/>
                 </FormControl> */}
                 <FormControl>
-                    <FormControl.Label>Phone Number *</FormControl.Label>
-                    <Input placeholder="+19991234567" type='phonenumber' onChangeText={(text) => setPhoneNumber(text)}/>
+                    <FormControl.Label>
+                    <Text style={[styles.validationMessage, phoneNumber.length > 0 && (!isPhoneValid ? styles.failure : styles.success)]}>
+                        Phone Number *
+                    </Text>
+                    </FormControl.Label>
+                    <Input placeholder="(999)1234567" type='phonenumber' onChangeText={(text) => setPhoneNumber(text)} onBlur={handlePhoneNumberChange}/>
                 </FormControl>
                 <FormControl>
                     <FormControl.Label>Firstname *</FormControl.Label>
@@ -108,12 +170,20 @@ const SignUp = ( { login } ) => {
                     <Input type='lastname' onChangeText={(text) => setLastname(text)}/>
                 </FormControl>
                 <FormControl>
-                    <FormControl.Label>Password *</FormControl.Label>
-                    <Input type="password" onChangeText={(text) => setPassword(text)}/>
+                    <FormControl.Label>
+                    <Text style={[styles.validationMessage, password.length > 0 && (!validationMessage.includes('meets') ? styles.failure : styles.success)]}>
+                        Password *
+                    </Text>
+                    </FormControl.Label>
+                    <Input type="password" onChangeText={(text) => setPassword(text)} onBlur={handleBlur} />
                 </FormControl>
                 <FormControl>
-                    <FormControl.Label>Confirm Password *</FormControl.Label>
-                    <Input type="password" onChangeText={(text) => setConfirmPassword(text)}/>
+                    <FormControl.Label> 
+                    <Text style={[styles.validationMessage,  confirmPassword.length > 0 && (confirmValidationMessage === 'Passwords match.' ?  styles.success : styles.failure)]}>
+                        Confirm Password *
+                    </Text>
+                    </FormControl.Label>
+                    <Input type="password" onChangeText={(text) => setConfirmPassword(text)} onBlur={validatePasswordsMatch}  />
                 </FormControl>
                 <Button onPress={handleLogin} mt="2" colorScheme="red">
                     Sign up
@@ -128,5 +198,18 @@ const SignUp = ( { login } ) => {
         </>)
 
 }
+
+const styles = StyleSheet.create({
+    validationMessage: {
+      color: 'black',
+      marginVertical: 10,
+    },
+    success: {
+      color: 'green',
+    },
+    failure: {
+      color: 'red',
+    }
+  });
 
 export default SignUp

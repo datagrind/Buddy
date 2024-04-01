@@ -47,6 +47,8 @@ const SearchHub = ({ handleHeader, path }) => {
       fetchDataRequests();
     }, []);
 
+    // console.log(users)
+
     return (
         <Box w={'100%'} h={'100%'} p={5}>
             <Box w={'100%'} h={'100%'} flex={1} overflow={'hidden'} borderRadius={30}>
