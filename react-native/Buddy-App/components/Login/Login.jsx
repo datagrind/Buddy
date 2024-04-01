@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {Alert, StyleSheet, Image } from 'react-native';
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center } from "native-base";
 import { signIn } from '@aws-amplify/auth';
 
@@ -35,6 +35,7 @@ const LoginScreen = ({ login, signup }) => {
     } catch (error) {
 
         console.log('LoginScreen.signIn: error signing in:', error.message);
+        Alert.alert(error.message)
         error.message === 'There is already a signed in user.' && login('Friend')
     }
   }
@@ -102,7 +103,7 @@ const LoginScreen = ({ login, signup }) => {
 
         <VStack space={3} mt="5">
           <FormControl>
-            <FormControl.Label>Email ID</FormControl.Label>
+            <FormControl.Label>Email</FormControl.Label>
             <Input value={username} type="email" onChange={(e) => { e.persist(); setUsername( e.nativeEvent.text); console.log("Email:", e.nativeEvent.text);}}  />
           </FormControl>
           <FormControl>

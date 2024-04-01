@@ -2,7 +2,7 @@ import {
     useAuthenticator
   } from '@aws-amplify/ui-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Pressable, Text, StyleSheet } from 'react-native';
+import { View, Pressable, Text, StyleSheet, Platform } from 'react-native';
 import { signOut } from 'aws-amplify/auth';
 
   // retrieves only the current value of 'user' from 'useAuthenticator'
@@ -51,8 +51,7 @@ export default SignOutButton
       width: '200',
       backgroundColor: 'red',
       borderRadius: 50,
-      marginTop: 475,
-      display: 'flex',
+      marginTop: Platform.OS === 'ios' ? 525 : 475,
 
     },
     buttonText: {
@@ -62,6 +61,7 @@ export default SignOutButton
       textAlign: 'center',
       textAlignVertical: 'center',
       fontSize: 16,
+      marginTop: Platform.OS === 'ios' && 25,
     },
     button: {
       // position: 'absolute',

@@ -10,6 +10,18 @@
       "StackName": "amplify-amplifyd084252db69e4-staging-231853",
       "StackId": "arn:aws:cloudformation:us-east-1:396495691727:stack/amplify-amplifyd084252db69e4-staging-231853/0c3bea30-eafe-11ee-8a56-12d88113ece1",
       "AmplifyAppId": "d12yxbcby06wj7"
+    },
+    "categories": {
+      "function": {
+        "buddyprelaunchsignupdata": {
+          "sesEmail": "xiongbenjamin@gmail.com",
+          "deploymentBucketName": "amplify-amplifyd084252db69e4-staging-231853-deployment",
+          "s3Key": "amplify-builds/buddyprelaunchsignupdata-615a7a4552316f2b4246-build.zip"
+        }
+      },
+      "api": {
+        "buddylanding4": {}
+      }
     }
   }
 }

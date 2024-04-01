@@ -24,6 +24,7 @@ const SignUp = ( { login } ) => {
     const [validationMessage, setValidationMessage] = useState('');
     const [confirmValidationMessage, setConfirmValidationMessage] = useState('');
     const [isPhoneValid, setIsPhoneValid] = useState(true);
+    const [isEmailValid, setIsEmailValid] = useState(true);
 
 
     const errorSignUp = () => {
@@ -34,12 +35,23 @@ const SignUp = ( { login } ) => {
         setIsLoading((prev) => prev = true)
         if (firstname.length > 0 && lastname.length > 0 && password.length > 0 && password === confirmPassword){
             validatePassword()
+            validatePasswordsMatch()
+            validateEmail()
+            handlePhoneNumberChange()
             handleSignUp(password, email, `+1${phoneNumber}`, firstname, lastname )
         } else {
             setIsLoading((prev) => prev = false)
             return errorSignUp()
         }
     }
+
+    const validateEmail = () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        setIsEmailValid(emailRegex.test(email));
+        if (!emailRegex){
+            Alert.alert('Invalid Email')
+        }
+      };
 
     const validatePassword = () => {
         const lengthRegex = /.{8,}/;
@@ -50,35 +62,36 @@ const SignUp = ( { login } ) => {
     
         if (!lengthRegex.test(password)) {
           setValidationMessage('Password must be at least 8 characters long.');
+          Alert.alert('Password must be at least 8 characters long.')
           return;
         }
     
         if (!lowercaseRegex.test(password)) {
           setValidationMessage('Password must contain at least one lowercase character.');
+          Alert.alert('Password must contain at least one lowercase character.')
           return;
         }
     
         if (!uppercaseRegex.test(password)) {
           setValidationMessage('Password must contain at least one uppercase character.');
+          Alert.alert('Password must contain at least one uppercase character.')
           return;
         }
     
         if (!numeralRegex.test(password)) {
           setValidationMessage('Password must contain at least one numeral.');
+          Alert.alert('Password must contain at least one numeral.')
           return;
         }
     
         if (!symbolRegex.test(password)) {
           setValidationMessage('Password must contain at least one symbol.');
+          Alert.alert('Password must contain at least one symbol.')
           return;
         }
     
         setValidationMessage('Password meets the password policy requirements.');
       };
-
-    const handleBlur = () => {
-        validatePassword(password);
-    };
 
     const validatePasswordsMatch = () => {
         if (password !== confirmPassword) {
@@ -90,9 +103,22 @@ const SignUp = ( { login } ) => {
 
     const handlePhoneNumberChange = () => {
         // Check if the input contains only numbers
-        const isValidPhoneNumber = /^\d+$/.test(phoneNumber);
+        const isValidPhoneNumber = /^\d{1,10}$/.test(phoneNumber);
+        if ( phoneNumber.length < 10 && phoneNumber.length >= 1){
+            Alert.alert('Please provide your full 10 digit number')
+        } else if( phoneNumber.length > 10) {
+            Alert.alert('Please provide no more than 10 numbers')
+        }else if(!isValidPhoneNumber && phoneNumber.length >= 1){
+            Alert.alert('Number characters only')
+        }
         setIsPhoneValid(isValidPhoneNumber);
       };
+    
+      const handlePassword = () => {
+        if(password.length > 0){
+            validatePassword(password)
+        }
+      }
     
 
     async function handleSignUp(password, email, phone_number, given_name, family_name ) {
@@ -136,18 +162,21 @@ const SignUp = ( { login } ) => {
                 <Heading size="lg" color="coolGray.800" _dark={{
                 color: "warmGray.50"
             }} fontWeight="semibold">
-                Welcome
+                Sign Up
                 </Heading>
                 <Heading mt="1" color="coolGray.600" _dark={{
                 color: "warmGray.200"
             }} fontWeight="medium" size="xs">
-                Sign up to continue!
+                (* Required)
                 </Heading>
-                <Text>(* Required)</Text>
                 <VStack space={3} mt="5">
                 <FormControl>
-                    <FormControl.Label>Email *</FormControl.Label>
-                    <Input type='email' onChangeText={(text) => setEmail(text)}/>
+                    <FormControl.Label>
+                    <Text style={[styles.validationMessage, email.length >= 1 && (!isEmailValid && styles.failure)]}>
+                        Email *
+                    </Text>
+                    </FormControl.Label>
+                    <Input type='email' onChangeText={(text) => setEmail(text)} onBlur={validateEmail}/>
                 </FormControl>
                 {/* <FormControl>
                     <FormControl.Label>Username *</FormControl.Label>
@@ -155,7 +184,7 @@ const SignUp = ( { login } ) => {
                 </FormControl> */}
                 <FormControl>
                     <FormControl.Label>
-                    <Text style={[styles.validationMessage, phoneNumber.length > 0 && (!isPhoneValid ? styles.failure : styles.success)]}>
+                    <Text style={[styles.validationMessage, phoneNumber.length >= 1 && (!isPhoneValid && styles.failure)]}>
                         Phone Number *
                     </Text>
                     </FormControl.Label>
@@ -171,15 +200,15 @@ const SignUp = ( { login } ) => {
                 </FormControl>
                 <FormControl>
                     <FormControl.Label>
-                    <Text style={[styles.validationMessage, password.length > 0 && (!validationMessage.includes('meets') ? styles.failure : styles.success)]}>
+                    <Text style={[styles.validationMessage, password.length >= 1 && (!validationMessage.includes('meets') ? styles.failure : styles.success)]}>
                         Password *
                     </Text>
                     </FormControl.Label>
-                    <Input type="password" onChangeText={(text) => setPassword(text)} onBlur={handleBlur} />
+                    <Input type="password" onChangeText={(text) => setPassword(text)} onBlur={handlePassword} />
                 </FormControl>
                 <FormControl>
                     <FormControl.Label> 
-                    <Text style={[styles.validationMessage,  confirmPassword.length > 0 && (confirmValidationMessage === 'Passwords match.' ?  styles.success : styles.failure)]}>
+                    <Text style={[styles.validationMessage,  confirmPassword.length >= 1 && (confirmValidationMessage === 'Passwords match.' ?  styles.success : styles.failure)]}>
                         Confirm Password *
                     </Text>
                     </FormControl.Label>

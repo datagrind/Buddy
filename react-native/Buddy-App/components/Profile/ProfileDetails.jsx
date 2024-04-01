@@ -17,14 +17,14 @@ const ProfileDetails = ({ route }) => {
   const navigation = useNavigation()
   const scrollViewRef = useRef(null);
 
-  const resetView = () => scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
+  const resetView = () => scrollViewRef?.current.scrollTo({ x: 0, y: 0, animated: true });
   
   
   useEffect(()=>{
       resetView()
       navigation.setOptions({
         headerShown: false, // Example of setting options dynamically
-    });
+    }, []);
     return resetView
   })
 
