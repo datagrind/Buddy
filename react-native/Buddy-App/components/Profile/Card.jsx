@@ -13,6 +13,7 @@ import {
     Pressable,
     AddIcon,
     VStack,
+    Spacer,
 
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
@@ -53,7 +54,8 @@ const Card = ({ img }) => {
         }
     }
 
-  return <Box alignItems="center" h={'2000'} w={'100%'}  overflow={'hidden'}>
+    return <>
+    <Box alignItems="center" h={'2000'} w={'100%'}  overflow={'hidden'}>
         <Box  maxW="full"    _dark={{
         borderColor: "coolGray.600",
         backgroundColor: "gray.700"
@@ -63,7 +65,7 @@ const Card = ({ img }) => {
         backgroundColor: "gray.50",
         borderColor: "coolGray.600",
         }} w={'100%'}>
-            <Box w={'100%'}  >
+            <Box w={'100%'}   >
             <AspectRatio w="100%" ratio={1}>
                 <Image 
                 source={imageSource} 
@@ -104,7 +106,7 @@ const Card = ({ img }) => {
                         }} _dark={{
                             color: "black"
                         }} fontWeight="500" ml="-0.5" mt="-1">
-                            Location
+                            {img.location.city}, {img.location.state}
                         </Text>
                         <View style={{ flexDirection: 'row' }}>
                             {Array.from({ length: 5 }).map((_, index) => (
@@ -141,9 +143,15 @@ const Card = ({ img }) => {
                 <VStack h={'40%'} w={'100%'} borderWidth={0}>
                     { !bookMe ? 
                         <>
+                            <Spacer height={25}/>
+                            <Heading fontSize={18}>About</Heading>
                             <Text  fontWeight="400" >
                             👋 Hey there! I'm [Your Name], your friendly neighborhood explorer of life's adventures! 🌟 I'm passionate about [insert interests/hobbies], a firm believer in kindness, and always up for a good laugh. Join me on this journey as I share snippets of my life, connect with amazing people, and embrace the beauty of everyday moments. Let's create memories together and make this social space a positive and uplifting community. 🌈✨ #LifeIsAnAdventure #PositiveVibesOnly
                             </Text>
+                            <Spacer height={25}/>
+                            <Heading fontSize={18}>Interests</Heading>
+                            <Text>Biking Running Sushi</Text>
+                            <Spacer height={25}/>
                             <Stack flex={1} alignItems={'flex-end'} h={100} borderWidth={0}>
                                 <Text>Rate:            $40/HR</Text>
                             </Stack>
@@ -161,6 +169,7 @@ const Card = ({ img }) => {
             </Stack>
         </Box>
     </Box>
+    </>
 };
 
 export default Card;

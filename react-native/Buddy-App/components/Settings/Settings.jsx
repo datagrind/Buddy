@@ -1,30 +1,29 @@
-import { View, Text, FlatList, StyleSheet } from "react-native"
+import { View, Text, FlatList, StyleSheet, Pressable } from "react-native"
 import BackButton from "../UI/BackButton/BackButton"
+import { useNavigation } from "@react-navigation/native"
 
 const Settings = () => {
 
     const settingsData = [
         {
-            title: 'Account',
-            type: ['Delete Account',]
+            sectionType: 'Account',
+            component: 'Account'
         },
         {
-            title: 'Notification Settings',
-            type: ['',]
+            sectionType: 'Terms & Conditions',
+            component: 'TermsConditions'
         },
         {
-            title: 'Purchases',
-            type: ['',]
+            sectionType: 'Contact Support',
+            component: 'ContactSupport'
         },
         {
-            title: 'Contact & FAQs',
-            type: ['',]
-        },
-        {
-            title: 'Security & Privacy',
-            type: ['Report a Buddy',]
+            sectionType: 'Security & Privacy',
+            component: 'SecurityPrivacy'
         },
     ]
+
+    const navigation = useNavigation();
 
     return (
         <>
@@ -35,9 +34,10 @@ const Settings = () => {
                     renderItem={({item}) =>
                         <View style={styles.section}>
                             <View style={[styles.flexRow]} >
-                                <Text style={styles.textMedium}>{item?.title}</Text>
+                                <Pressable onPress={() => navigation.navigate(item.component)} >
+                                    <Text style={styles.textMedium}>{item?.sectionType}</Text>
+                                </Pressable>
                             </View>
-                            <Text>{item?.description}</Text>
                             {
                                 item.type && item.type.map((item2, index) => {
                                     return (

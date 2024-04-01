@@ -1,6 +1,14 @@
 [
   {
-    "groupName": "test",
+    "groupName": "buddyusers",
     "precedence": 1
+  },
+  {
+    "groupName": "buddyproviders",
+    "precedence": 2
+  },
+  {
+    "groupName": "buddyadmin",
+    "precedence": 3
   }
 ]

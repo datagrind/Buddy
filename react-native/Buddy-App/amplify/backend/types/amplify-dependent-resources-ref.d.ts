@@ -1,8 +1,9 @@
 export type AmplifyDependentResourcesAttributes = {
   "auth": {
-    "buddyapp91b8af82": {
+    "BuddyApp": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
+      "CreatedSNSRole": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
       "UserPoolArn": "string",
@@ -10,28 +11,24 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolName": "string"
     },
     "userPoolGroups": {
-      "testGroupRole": "string"
+      "buddyadminGroupRole": "string",
+      "buddyprovidersGroupRole": "string",
+      "buddyusersGroupRole": "string"
     }
   },
   "function": {
-    "buddyapp91b8af82CustomMessage": {
+    "buddyappauthCustomMessage": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
       "Region": "string"
     },
-    "buddyappc51c8dbaCustomMessage": {
+    "buddyappauthPostConfirmation": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
-      "Region": "string"
-    }
-  },
-  "storage": {
-    "userFileUpload": {
-      "BucketName": "string",
       "Region": "string"
     }
   }

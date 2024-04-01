@@ -74,10 +74,10 @@ const ImageCard = ({ img, status }) => {
         </Box>
         <Box p="4" space={3} bg={'white'} borderBottomRadius={15} height={100}>
           <Heading size="md" ml="-1">
-            {`${img.name.first} ${img.name.last}`}
+            {`${img.name.first} ${img.name.last[0]}.`}
           </Heading>
           <Text color="coolGray.600" fontWeight="400">
-            6 mins ago
+            {img.location.city}, {img.location.state}
           </Text>
         </Box>
       </Box>

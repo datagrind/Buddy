@@ -59,11 +59,11 @@ const Search = ( { users }) => {
       renderedCards.push(
         <HStack space={3} {...hStackStyles} key={i}>
           <Center flex={1} >
-              <ImageCard img={users[i]} status={'AVAILABLE'}  />
+              <ImageCard img={users[i]} status={'VERIFIED'}  />
           </Center>
           {!isLastCard && (
             <Center flex={1}>
-                <ImageCard img={users[i + 1]} status={'AVAILABLE'}   />
+                <ImageCard img={users[i + 1]} status={'SUPERHOST'}   />
             </Center>
           )}
           {isLastCard && totalUsers % 2 !== 0 && (

@@ -3,14 +3,14 @@
   "modules": [
     "verification-link"
   ],
-  "parentResource": "buddyappc51c8dba",
-  "functionName": "buddyappc51c8dbaCustomMessage",
-  "resourceName": "buddyappc51c8dbaCustomMessage",
+  "parentResource": "buddyappauth",
+  "functionName": "buddyappauthCustomMessage",
+  "resourceName": "buddyappauthCustomMessage",
   "parentStack": "auth",
   "triggerEnvs": "[\n  {\n    \"key\": \"RESOURCENAME\",\n    \"value\": \"resourceName\"\n  }\n]",
   "triggerDir": "C:\\snapshot\\amplify-cli\\build\\node_modules\\@aws-amplify\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\CustomMessage",
   "triggerTemplate": "CustomMessage.json.ejs",
   "triggerEventPath": "CustomMessage.event.json",
-  "roleName": "buddyappc51c8dbaCustomMessage",
+  "roleName": "buddyappauthCustomMessage",
   "skipEdit": true
 }
