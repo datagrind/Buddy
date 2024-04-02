@@ -8,16 +8,6 @@ const LoginScreen = ({ login, signup }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // console.log("LoginScreen.username: ", username)
-  // console.log("LoginScreen.password: ", password)
-
-  
-  // const onSignInPressed = async data => {
-  //   console.log("onSignInPressed.data: ", data.nativeEvent.text)
-  //   const response = await signIn({username: data.username, password: data.password});
-  //   console.log("onSignInPressed.response: ", response)
-  // }
-
   async function handleSignIn() {
     try {
       const { isSignedIn, nextStep } = await signIn({
@@ -29,14 +19,11 @@ const LoginScreen = ({ login, signup }) => {
       }});
       if (isSignedIn) {
         console.log("signIn.isSignedIn: ", isSignedIn);
-        login('Friend')
-        // setIsConfirmed(true);
+        login('Friend', true)
       }
     } catch (error) {
+      error.message === 'There is already a signed in user.' ? (login('Friend', true), console.log(error.message)) : (console.log('LoginScreen.signIn: error signing in:', error.message), Alert.alert(error.message));
 
-        console.log('LoginScreen.signIn: error signing in:', error.message);
-        Alert.alert(error.message)
-        error.message === 'There is already a signed in user.' && login('Friend')
     }
   }
 
@@ -52,43 +39,8 @@ const LoginScreen = ({ login, signup }) => {
   
 
   return (
-    // <View style={styles.container}>
-    //   <Image
-    //     source={require('../../assets/logo_white_background.jpg')}
-    //     style={{ width: 150, height: 200 }} // Adjust the width and height as needed
-    //   />
-    //   <Text style={styles.title}>Login</Text>
-
-    //   <TextInput
-    //     style={styles.input}
-    //     placeholder="Username"
-    //     value={username}
-    //     onChangeText={(text) => setUsername(text)}
-    //   />
-
-    //   <TextInput
-    //     style={styles.input}
-    //     placeholder="Password"
-    //     secureTextEntry
-    //     value={password}
-    //     onChangeText={(text) => setPassword(text)}
-    //   />
-
-    //   <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-    //     <Text style={styles.buttonText}>Login</Text>
-    //   </TouchableOpacity>
-
-    //   <TouchableOpacity style={styles.loginButton} onPress={handleSignUp}>
-    //     <Text style={styles.buttonText}>Sign Up</Text>
-    //   </TouchableOpacity>
-    // </View>
     <Center w="100%">
       <Box safeArea p="2" py="8" w="90%" maxW="290">
-        {/* <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
-        color: "warmGray.50"
-      }}>
-          Welcome
-        </Heading> */}
         <Box w={'100%'} h={'30%'} flex={1} justifyContent={'center'} alignItems={'center'}>
           <Image
             source={require('../../assets/logo_white_background.jpg')}

@@ -5,23 +5,16 @@ import { useNavigation } from "@react-navigation/native";
 
 const ImageCard = ({ img, status }) => {
 
-  var debugText = "ImageCard: Received undefined or empty img prop"
-  if (!img) {
-    console.log(debugText);
-    return 
-  }
-
-
-
   const navigation = useNavigation()
 
-  const imageSource = { uri: img.picture.large };
+  const imageSource = { uri: img?.picture.large };
 
   const handleNavigate = () => {
-    navigation.navigate('ProfileDetails', {img: img})
+    navigation.navigate('ProfileDetails', {img: img ?? img})
   }
 
   return (
+    img ?
     <TouchableWithoutFeedback onPress={() => handleNavigate() } >
       <Box
         width="100%"
@@ -74,14 +67,15 @@ const ImageCard = ({ img, status }) => {
         </Box>
         <Box p="4" space={3} bg={'white'} borderBottomRadius={15} height={100}>
           <Heading size="md" ml="-1">
-            {`${img.name.first} ${img.name.last[0]}.`}
+            {`${img?.name.first} ${img?.name.last[0]}.`}
           </Heading>
           <Text color="coolGray.600" fontWeight="400">
-            {img.location.city}, {img.location.state}
+            {img?.location.city}, {img?.location.state}
           </Text>
         </Box>
       </Box>
-    </TouchableWithoutFeedback>
+    </TouchableWithoutFeedback> :
+    null
   );
 };
 

@@ -9,8 +9,7 @@ const userSelector = (context) => [context.user];
 
 const Sidebar = ({ navigation, userData, onLogout }) => {
 
-  console.log("Sidebar.userData: ", userData)
-  // console.log("Sidebar.onLogout: ", onLogout)
+  const data = userData && userData
   const { user, signOut } = useAuthenticator(userSelector);
 
   return (
@@ -21,12 +20,12 @@ const Sidebar = ({ navigation, userData, onLogout }) => {
         color={focused ? 'blue' : 'black'}
       />
     )}>
-      <Text style={styles.username}>Hello, {userData[0]} {userData[1]}!</Text>
+      <Text style={styles.username}>Hello, {data?.payload.given_name} !</Text>
 
       <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Dashboard')}>
         <Text>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Profile', {data: userData})}>
+      <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Profile', {data: userData && userData})}>
         <Text>Profile</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate( 'Settings')}>
@@ -37,7 +36,7 @@ const Sidebar = ({ navigation, userData, onLogout }) => {
       {/* <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity> */}
-      <SignOutButton userData={userData} onLogOut={onLogout} />
+      <SignOutButton userData={data} onLogOut={onLogout} />
     </View>
   );
 };

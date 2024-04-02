@@ -28,7 +28,7 @@ const Settings = () => {
     return (
         <>
             <View style={styles.container}>        
-                <BackButton topPos={-150} padL={-30} />
+                <BackButton topPos={-25} padL={-30} />
                 <FlatList  
                     data={settingsData} 
                     renderItem={({item}) =>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         flexGrow: 1, // Allows the container to take up the full available space
         padding: 10,
-        marginTop: 150,
+        marginTop: 50,
     },
     itemm: {
         padding: 0,

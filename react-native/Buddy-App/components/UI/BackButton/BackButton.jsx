@@ -21,7 +21,7 @@ const BackButton = ( {topPos, padL} ) => {
 
     return (
         <View display={'flex-1'}>
-            <Pressable onPress={handleBackButtonPress} top={topPos} left={padL} m={10} position={'absolute'} zIndex={2} w={50} h={50} borderRadius={25} bg={'red.600'} alignItems={'center'} justifyContent={'center'}>
+            <Pressable onPress={handleBackButtonPress} top={topPos} left={padL} m={10} w={50} h={50} borderRadius={25} bg={'red.600'} alignItems={'center'} justifyContent={'center'}>
                 <Ionicons name="chevron-back" size={35} color="white" />
             </Pressable>
         </View>

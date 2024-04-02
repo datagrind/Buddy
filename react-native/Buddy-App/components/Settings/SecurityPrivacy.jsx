@@ -1,8 +1,11 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Spacer } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
 
 
 const SecurityPrivacy = () => {
+
+    const navigation = useNavigation()
 
     return (
         <View style={styles.container}>
@@ -35,7 +38,10 @@ const SecurityPrivacy = () => {
                 <Text style={styles.sectionTitle}>Privacy Policy</Text>
                 <Text style={styles.paragraph}>
                     For detailed information about how we collect, use, and disclose your
-                    personal information, please refer to our Privacy Policy.
+                    personal information, please refer to our 
+                      <TouchableOpacity  onPress={() => navigation.navigate('PrivacyPolicy')}>
+                        <Text style={styles.link}>  Privacy Policy</Text>
+                      </TouchableOpacity>
                 </Text>
                 <Spacer height={125} />
             </ScrollView>
@@ -61,7 +67,12 @@ const SecurityPrivacy = () => {
       },
       paragraph: {
         fontSize: 16,
-        marginBottom: 15,
+        // marginBottom: 15,
+      },
+      link: {
+        fontSize: 16,
+        color: 'blue', // Change color as needed
+        // textDecorationLine: 'underline',
       },
     });
 

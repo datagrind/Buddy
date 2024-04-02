@@ -13,9 +13,6 @@ const Profile = ({ route }) => {
 
     const [aboutMe, setAboutMe] = useState(false)
     const [interests, setInterests] = useState(false)
-    
-    console.log("Profile.interests: ", interests)
-    console.log("Profile.aboutMe: ", aboutMe)
     const profileData = [
         {
             sectionType: 'About Me',
@@ -62,7 +59,7 @@ const Profile = ({ route }) => {
             <View style={styles.itemm}>
                 <Text style={styles.title}>My Profile</Text>
                 <NoPhotoProfile factor='med' size={100} style={styles.subItem} />
-                <Text style={[styles.subItem, styles.textLarge]}> {route.params.data[0]} {route.params.data[1]}</Text>
+                <Text style={[styles.subItem, styles.textLarge]}> {route.params.data?.payload.given_name} {route.params.data?.payload.family_name}</Text>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity onPress={pickImage} style={[styles.flexRow]}>
                         <Text style={[styles.subItem, styles.underline]}>Upload Profile Photo(s)</Text>
@@ -90,7 +87,7 @@ const Profile = ({ route }) => {
                     <View style={styles.section}>
                         <View style={[styles.flexRow]} >
                             <Text style={styles.textMedium}>{item?.sectionType}</Text>
-                            <TouchableOpacity onPress={() => {item.setState(true), console.log(item.sectionType , item.state)}} style={[styles.flexRow]}>
+                            <TouchableOpacity onPress={() => { item.state ? item.setState(false) : item.setState(true) }} style={[styles.flexRow]}>
                                 <Text style={[styles.underline, { margin: 11 }]}>Edit</Text>
                             </TouchableOpacity>
                         </View>

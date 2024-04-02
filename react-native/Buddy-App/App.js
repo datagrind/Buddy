@@ -30,8 +30,8 @@ const App = () =>  {
     }, 4000); // Simulating a 4-second loading time
   }, [handleSetLogin,handleLogout, handleIsSignUp]);
 
-  function handleSetLogin(data) {
-    setIsLogin((prev) => prev = true)
+  function handleSetLogin(data, bool) {
+    setIsLogin((prev) => prev = bool)
     setUserData((prev) => prev = data)
     setIsLoading((prev) => prev = true)
     setIsSignUp((prev) => prev = false)

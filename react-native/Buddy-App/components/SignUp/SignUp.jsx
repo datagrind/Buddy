@@ -178,10 +178,6 @@ const SignUp = ( { login } ) => {
                     </FormControl.Label>
                     <Input type='email' onChangeText={(text) => setEmail(text)} onBlur={validateEmail}/>
                 </FormControl>
-                {/* <FormControl>
-                    <FormControl.Label>Username *</FormControl.Label>
-                    <Input type='username' onChangeText={(text) => setUsername(text)}/>
-                </FormControl> */}
                 <FormControl>
                     <FormControl.Label>
                     <Text style={[styles.validationMessage, phoneNumber.length >= 1 && (!isPhoneValid && styles.failure)]}>

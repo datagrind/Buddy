@@ -1,5 +1,7 @@
-import { Text, View,Heading, Spacer, ScrollView } from "native-base"
-import { StyleSheet } from "react-native"
+import React from "react";
+import { Text, View, ScrollView } from "react-native"; // Changed import statement
+import { StyleSheet } from "react-native";
+import { Spacer } from "native-base"; // Imported Spacer from native-base
 
 
 const TermsConditions = () => {
@@ -10,7 +12,7 @@ const TermsConditions = () => {
             <Text style={styles.title}>Terms and Conditions for Buddy App:</Text>
             <ScrollView showsVerticalScrollIndicator={false}> 
                 <Text style={styles.text}>
-                    Welcome to Buddy, the companionship-as-a-service app! Before using our platform, please carefully read and agree to the following terms and conditions:
+                    Welcome to Buddy! Before using our platform, please carefully read and agree to the following terms and conditions:
                 </Text>
                 <Text style={styles.text}>
                     1. <Text style={styles.bold}>Acceptance of Terms:</Text> By accessing or using the Buddy app, you agree to be bound by these terms and conditions, our Privacy Policy, and any additional guidelines or rules posted on the app.
