@@ -30,11 +30,11 @@ const ProfileDetails = ({ route }) => {
 
   return (
     <Box w={'100%'} h={'100%'} borderWidth={0} mt={125} px={3} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-      <BackButton topPos={-110} padL={-230} />
-      <View position={'absolute'} top={-65} zIndex={3}>
+      <BackButton topPos={-100} padL={-170} />
+      <View position={'absolute'} top={-45} zIndex={3}>
         <Heading  textAlign={'center'}>Profile</Heading>
       </View>
-      <Box marginTop={0} w={'100%'} h={'100%'} flex={1} overflow={'hidden'} borderRadius={30}>
+      <Box marginTop={-20} w={'100%'} h={'100%'} flex={1} overflow={'hidden'} borderRadius={30}>
         <ScrollView ref={scrollViewRef}  w={"100%"} h="100%" showsVerticalScrollIndicator={false} >
           <VStack w={"100%"} h="100%" >
             <Card img={img} />

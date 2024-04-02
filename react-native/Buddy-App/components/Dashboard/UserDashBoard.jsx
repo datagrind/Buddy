@@ -15,6 +15,9 @@ import Account from '../Settings/Account';
 import ContactSupport from '../Settings/ContactSupport'
 import TermConditions from '../Settings/TermConditions'
 import SecurityPrivacy from '../Settings/SecurityPrivacy'
+import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
+import { useEffect, useState } from 'react';
+import PrivacyPolicy from '../Settings/PrivacyPolicy';
 
 
 const isIos = Platform.OS === 'ios';
@@ -29,25 +32,59 @@ const LogoHeader = () => {
     </View>
   );
 };
-
+ 
 const Drawer = createDrawerNavigator();
 
 const UserDashboard = ({ userData, onLogout }) => {
 
+  const [dataToken, setDataToken] = useState()
+  const [dataAccess, setDataAccess] = useState()
+  const [userAccess, setUserAccess] = useState()
+
 
   console.log("UserDashboard.userData: ", userData)
+  console.log(" accessToken : ",  dataAccess && dataAccess)
+  console.log(" idToken: ", dataToken && dataToken)
+
+
+  async function currentAuthenticatedUser() {
+
+    try {
+      const { username, userId, signInDetails } = await getCurrentUser();
+      console.log(`The username: ${username}`);
+      console.log(`The userId: ${userId}`);
+      console.log(`The signInDetails: ${signInDetails}`,JSON.stringify(signInDetails));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function currentSession() {
+    try {
+      const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+      setDataToken(idToken)
+      setDataAccess(accessToken)
+    } catch (err) {
+      console.log("Err: currentSession: ", err);
+    }
+  }
+
+  useEffect(()=>{
+    currentAuthenticatedUser()
+    currentSession()
+  },[])
 
 
   const navigation = useNavigation();
 
   const navigateToProfile = () => {
-    navigation.navigate('Profile', { data: userData });
+    navigation.navigate('Profile', { data:  dataToken && dataToken });
   };
   
    
   return (
     <Drawer.Navigator
-      drawerContent={(props) => <Sidebar {...props} userData={userData} onLogout={onLogout} />}
+      drawerContent={(props) => <Sidebar {...props} userData={dataToken && dataToken} onLogout={onLogout} />}
       gestureEnabled={false}
       screenOptions={{
         headerTitle: () => null,
@@ -74,6 +111,7 @@ const UserDashboard = ({ userData, onLogout }) => {
       <Drawer.Screen name='ContactSupport' component={ContactSupport} />
       <Drawer.Screen name='TermsConditions' component={TermConditions} />
       <Drawer.Screen name='SecurityPrivacy' component={SecurityPrivacy} />
+      <Drawer.Screen name='PrivacyPolicy' component={PrivacyPolicy} />
     </Drawer.Navigator>
   );
 };
