@@ -106,6 +106,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         flexGrow: 1,
+        width: '100%',
+        height: 3000,
         padding: 20,
         marginTop: 100,
     },

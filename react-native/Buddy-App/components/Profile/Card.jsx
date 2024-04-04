@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from 'react';
 import { 
     Box, 
     Heading, 
@@ -20,11 +20,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { logVariables } from "../../logVariables";
 import Service from "../Service/Service";
 import { useState } from "react";
-import { Linking } from "react-native";
+import { Linking, StyleSheet } from "react-native";
+import Swiper from "react-native-swiper";
 
 
 
-const Card = ({ img }) => { 
+const Card = ({ img, setIndex, swiperRef }) => { 
 
     const [bookMe, setBookMe] = useState(false)
 
@@ -36,7 +37,7 @@ const Card = ({ img }) => {
             </Box>
           );
     }
-    const imageSource = {uri: img.picture.large }  
+    const imageSource = {uri: img?.picture.large }  
 
 
     const toggleBookMe = async () => {
@@ -54,6 +55,10 @@ const Card = ({ img }) => {
         }
     }
 
+    const handleIndexChange = (idx) => {
+        setIndex(idx)
+    };
+
     return <>
     <Box alignItems="center" h={'2000'} w={'100%'}  overflow={'hidden'}>
         <Box  maxW="full"    _dark={{
@@ -65,21 +70,40 @@ const Card = ({ img }) => {
         backgroundColor: "gray.50",
         borderColor: "coolGray.600",
         }} w={'100%'}>
-            <Box w={'100%'}   >
-            <AspectRatio w="100%" ratio={1}>
-                <Image 
-                source={imageSource} 
-                alt="image" />
-            </AspectRatio>
-            <Center bg="red.600" _dark={{
-            bg: "violet.400"
-            }} _text={{
-            color: "warmGray.50",
-            fontWeight: "700",
-            fontSize: "xs"
-            }} position="absolute" bottom="0" px="3" py="1.5">
-                AVAILABLE
-            </Center>
+            <Box style={styles.cardContainer}  >
+                <Swiper  
+                    index={swiperRef.current}     
+                    onIndexChanged={handleIndexChange}       
+                    loop={false}
+                    activeDotColor="red"
+                    style={styles.swiperStyles}
+                >
+                    <AspectRatio w="100%" ratio={6/7}>
+                        <Image 
+                        source={imageSource} 
+                        alt="image" />
+                    </AspectRatio>
+                    <AspectRatio w="100%" ratio={6/7}>
+                        <Image 
+                        source={imageSource} 
+                        alt="image" />
+                    </AspectRatio>
+                    <AspectRatio w="100%" ratio={6/7}>
+                        <Image 
+                        source={imageSource} 
+                        alt="image" />
+                    </AspectRatio>
+                </Swiper>
+
+                <Center bg="red.600" _dark={{
+                bg: "violet.400"
+                }} _text={{
+                color: "warmGray.50",
+                fontWeight: "700",
+                fontSize: "xs"
+                }} position="absolute" bottom="0" px="3" py="1.5">
+                    AVAILABLE
+                </Center>
             </Box>
             <Stack  p="4" w={'100%'} space={3}  borderColor={'pink.500'}>
                 <HStack  w={'100%'} >
@@ -171,6 +195,20 @@ const Card = ({ img }) => {
     </Box>
     </>
 };
+
+const styles = StyleSheet.create({
+    swiperStyles: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    },
+    cardContainer: {
+        position: 'relative',
+        width: '100%',
+        height: '30%',
+    },
+})
 
 export default Card;
 

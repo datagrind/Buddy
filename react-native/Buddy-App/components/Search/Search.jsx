@@ -1,42 +1,10 @@
 import React from 'react';
 import { ScrollView, VStack, Center, HStack, Stack } from 'native-base';
 import ImageCard from '../Profile/ImageCard';
-import { getUsers } from '../../logic/getUsers';
-import { useState, useEffect } from 'react';
-import { logVariables } from '../../logVariables';
+
 
 
 const Search = ( { users }) => {
-
-  
-  // const [users, setUsers] = useState([]);
-  
-  // const fetchData = async () => {
-  //   try {
-  //     const retrievedUser = await getUsers(11);
-  //     setUsers(retrievedUser.results);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-      
-  //     if (error.response && error.response.status === 429) {
-  //       console.log('Retrying after 5 seconds...');
-  //       setTimeout(() => {
-  //         fetchData();
-  //       }, 5000);
-  //     }
-  //   }
-  // };
-  
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-  
-  // const debug = {
-  //   users: users && users
-  // }
-
-  // logVariables(debug, 'Search.debug')
-
 
   const renderTwoCardsPerRow = () => {
     const renderedCards = [];
@@ -52,7 +20,6 @@ const Search = ( { users }) => {
         justifyContent: hStackJustifyContent,
         alignItems: 'flex-start',
         marginLeft: isLastCard ? 0 : 'auto', 
-        // aspectRatio: 1,
         h: 300,
       };
 
