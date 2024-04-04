@@ -4,11 +4,12 @@ import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 
-const BackButton = ( {topPos, padL} ) => {
+const BackButton = ( {topPos, padL, handlePress} ) => {
 
     const navigation = useNavigation()
 
     const handleBackButtonPress = () => {
+        handlePress && handlePress() 
         navigation.goBack();
     };
 
