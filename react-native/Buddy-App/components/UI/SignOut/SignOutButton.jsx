@@ -61,7 +61,7 @@ export default SignOutButton
       textAlign: 'center',
       textAlignVertical: 'center',
       fontSize: 16,
-      marginTop: Platform.OS === 'ios' && 25,
+      marginTop: Platform.OS === 'ios' ? 25 : 0,
     },
     button: {
       // position: 'absolute',

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { 
     Box, 
     Heading, 
@@ -19,13 +19,12 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { logVariables } from "../../logVariables";
 import Service from "../Service/Service";
-import { useState } from "react";
 import { Linking, StyleSheet } from "react-native";
 import Swiper from "react-native-swiper";
 
 
 
-const Card = ({ img, setIndex, swiperRef }) => { 
+const Card = ({ img, indexKey }) => { 
 
     const [bookMe, setBookMe] = useState(false)
 
@@ -42,22 +41,19 @@ const Card = ({ img, setIndex, swiperRef }) => {
 
     const toggleBookMe = async () => {
         !bookMe ? setBookMe(true) : setBookMe(false)
-        const url = 'https://buy.stripe.com/5kA9EE5bW8vq3fO289';
+        // const url = 'https://buy.stripe.com/5kA9EE5bW8vq3fO289';
 
-        // Check if the device can open the given URL
-        const supported = await Linking.canOpenURL(url);
+        // // Check if the device can open the given URL
+        // const supported = await Linking.canOpenURL(url);
 
-        if (supported) {
-        // Open the URL
-        await Linking.openURL(url);
-        } else {
-        console.error("Don't know how to open URI: " + url);
-        }
+        // if (supported) {
+        // // Open the URL
+        // await Linking.openURL(url);
+        // } else {
+        // console.error("Don't know how to open URI: " + url);
+        // }
     }
 
-    const handleIndexChange = (idx) => {
-        setIndex(idx)
-    };
 
     return <>
     <Box alignItems="center" h={'2000'} w={'100%'}  overflow={'hidden'}>
@@ -72,23 +68,23 @@ const Card = ({ img, setIndex, swiperRef }) => {
         }} w={'100%'}>
             <Box style={styles.cardContainer}  >
                 <Swiper  
-                    index={swiperRef.current}     
-                    onIndexChanged={handleIndexChange}       
+                    key={indexKey}
+                    index={0} 
                     loop={false}
                     activeDotColor="red"
                     style={styles.swiperStyles}
                 >
-                    <AspectRatio w="100%" ratio={6/7}>
+                    <AspectRatio w="100%" ratio={3/4}>
                         <Image 
                         source={imageSource} 
                         alt="image" />
                     </AspectRatio>
-                    <AspectRatio w="100%" ratio={6/7}>
+                    <AspectRatio w="100%" ratio={3/4}>
                         <Image 
                         source={imageSource} 
                         alt="image" />
                     </AspectRatio>
-                    <AspectRatio w="100%" ratio={6/7}>
+                    <AspectRatio w="100%" ratio={3/4}>
                         <Image 
                         source={imageSource} 
                         alt="image" />

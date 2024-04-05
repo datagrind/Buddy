@@ -33,7 +33,7 @@ const Account = () => {
 
   const deleteAccount = () => {
     // Implement account deletion logic here
-    Alert.alert('Account Deleted Successfully');
+    Alert.alert('Account Deletion Processed', 'Please allow 24-48 hours for deletion to process');
   };
 
   return (

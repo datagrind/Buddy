@@ -31,21 +31,22 @@ const BottomTabNavigator = () => {
 
 
     return (
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
         <Ionicons name={iconName} size={size} color={focused ? 'white': color} />
         {focused && (
           <View
             style={{
               position: 'absolute',
-              top: -10,
-              right: -10,
+              top: 12,
+              right: 40,
               width: 45,
               height: 45,
               borderRadius: 22.5,
               backgroundColor: 'red',
               zIndex: -1,
             }}
-          />
+          >
+          </View>
         )}
       </View>
     );

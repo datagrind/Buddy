@@ -12,7 +12,7 @@ const SearchHub = ({ handleHeader, path }) => {
   
     const fetchDataUsers = async () => {
       try {
-        const retrievedUser = await getUsers(11);
+        const retrievedUser = await getUsers(31);
         setUsers(retrievedUser.results);
       } catch (error) {
         console.error('Error:', error);
@@ -50,8 +50,8 @@ const SearchHub = ({ handleHeader, path }) => {
     // console.log(users)
 
     return (
-        <Box w={'100%'} h={'100%'} p={5}>
-            <Box w={'100%'} h={'100%'} flex={1} overflow={'hidden'} borderRadius={30}>
+        <Box w={'100%'} h={'100%'} p={5} borderWidth={0}>
+            <Box w={'100%'} h={'100%'} flex={1} >
                 {path === 'search' ? <Search users={users && users}  /> : <Requests users={requests && requests} />}
             </Box>
         </Box>
