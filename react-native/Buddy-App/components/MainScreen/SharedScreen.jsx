@@ -9,7 +9,7 @@ import Chat from '../Chat/Chat'
 import Host from '../Host/Host';
 import Search from '../Search/Search';
 import Background from '../UI/Background';
-import { Box, Pressable, HamburgerIcon } from 'native-base';
+import { Box, Pressable, HamburgerIcon, VStack } from 'native-base';
 import HeaderSearchHub from '../Search/HeaderSearch';
 import ProfileDetails from '../Profile/ProfileDetails';
 import SearchHub from '../Search/SearchHub';
@@ -67,16 +67,18 @@ const SharedScreen = ({ route }) => {
     return (
         <View style={styles.container}>
             {/* <Background /> */}
-            <View style={styles.overlay}>
+            <VStack style={styles.overlay}>
                 <Box 
                     safeAreaTop 
                     bg="transparent"
-                    w='100%'
-                    height={'10%'}
-                    position="absolute"
-                    zIndex={1}
-                    top={75}
-                    borderWidth={0}
+                    w='85%'
+                    height={70}
+                    top={150}
+                    left={0}
+                    // borderWidth={2}
+                    alignItems={'center'}
+                    justifyContent={'center'}
+                    mx={40}
                 >
                     {/* <Pressable onPress={ () => navigation.navigate('Settings')}>
                         <HamburgerIcon />
@@ -88,21 +90,17 @@ const SharedScreen = ({ route }) => {
                         </Text>
                     }
                 </Box>
-                {/* <Spacer /> */}
                 <Box 
                     w='100%' 
                     h='100%'         
-                    position="absolute"
-                    top={40}
-                    zIndex={2}
-                    borderColor={'black'}
+                    top={150}
                     borderTopRadius={50}
                     overflow={'hidden'}
-                    borderWidth={0}
+                    // borderWidth={2}
                 >
                     { currentPath() }
                 </Box>
-            </View>
+            </VStack>
         </View>
     )
 };
@@ -112,6 +110,9 @@ const styles = StyleSheet.create({
       flex: 1,
       height: "100%",
       width: "100%",
+    //   borderWidth: 5,
+      borderColor: 'pink',
+      overflow: 'hidden',
     },
     menuButton: {
       backgroundColor: 'blue',
@@ -125,9 +126,12 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
     overlay: {
-        flex: 1,
+        width: '100%',
+        height: '100%',
         backgroundColor: 'transparent', // Make sure to set a transparent background
-        // Add other styles as needed
+        alignItems: 'center', 
+        justifyContent: 'center',
+        // borderWidth: 2,
     },
   });
 
