@@ -4,7 +4,7 @@ import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, C
 import { signIn } from '@aws-amplify/auth';
 
 
-const LoginScreen = ({ login, signup }) => {
+const LoginScreen = ({ login, signup, userData }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,10 +19,10 @@ const LoginScreen = ({ login, signup }) => {
       }});
       if (isSignedIn) {
         console.log("signIn.isSignedIn: ", isSignedIn);
-        login('Friend', true)
+        login(userData?.payload?.given_name, true)
       }
     } catch (error) {
-      error.message === 'There is already a signed in user.' ? (login('Friend', true), console.log(error.message)) : (console.log('LoginScreen.signIn: error signing in:', error.message), Alert.alert(error.message));
+      error.message === 'There is already a signed in user.' ? (console.log("already signedin: ", error.message) , login(userData.payload?.given_name, true)) : (console.log('LoginScreen.signIn: error signing in:', error.message), Alert.alert(error.message));
 
     }
   }

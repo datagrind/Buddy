@@ -20,7 +20,7 @@ const Sidebar = ({ navigation, userData, onLogout }) => {
         color={focused ? 'blue' : 'black'}
       />
     )}>
-      <Text style={styles.username}>Hello, {data?.payload.given_name} !</Text>
+      <Text style={styles.username}>Hello, {data?.payload?.given_name} !</Text>
 
       <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Dashboard')}>
         <Text>Home</Text>
