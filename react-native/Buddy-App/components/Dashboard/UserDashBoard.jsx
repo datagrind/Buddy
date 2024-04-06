@@ -18,6 +18,7 @@ import SecurityPrivacy from '../Settings/SecurityPrivacy'
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { useEffect, useState } from 'react';
 import PrivacyPolicy from '../Settings/PrivacyPolicy';
+import { signOut } from 'aws-amplify/auth';
 
 
 const isIos = Platform.OS === 'ios';
@@ -45,6 +46,22 @@ const UserDashboard = ({ userData, onLogout }) => {
   console.log("UserDashboard.userData: ", userData)
   console.log(" accessToken : ",  dataAccess && dataAccess)
   console.log(" idToken: ", dataToken && dataToken)
+  console.log(" userAccess: ", userAccess && userAccess )
+
+  const userSelector = (context) => context; 
+
+  async function handleSignOut() {
+    try {
+      console.log("handleSignOut: signingout...")
+      console.log("handleSignOut.userSelector: ", userSelector.authStatus)
+      await signOut();
+      // await signOut({ global: true }); //signout of all devices
+      onLogout()
+    } catch (error) {
+      console.log('error signing out: ', error);
+    }
+  }
+
 
 
   async function currentAuthenticatedUser() {
@@ -64,6 +81,7 @@ const UserDashboard = ({ userData, onLogout }) => {
       const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
       setDataToken(idToken)
       setDataAccess(accessToken)
+      setUserAccess(accessToken.payload.token_use)
     } catch (err) {
       console.log("Err: currentSession: ", err);
     }
@@ -72,6 +90,7 @@ const UserDashboard = ({ userData, onLogout }) => {
   useEffect(()=>{
     currentAuthenticatedUser()
     currentSession()
+    userAccess !== 'access' && handleSignOut()
   },[])
 
 
@@ -82,7 +101,7 @@ const UserDashboard = ({ userData, onLogout }) => {
   };
   
    
-  return (
+  return (   
     <Drawer.Navigator
       drawerContent={(props) => <Sidebar {...props} userData={dataToken && dataToken} onLogout={onLogout} />}
       gestureEnabled={false}
@@ -113,7 +132,7 @@ const UserDashboard = ({ userData, onLogout }) => {
       <Drawer.Screen name='TermsConditions' component={TermConditions} />
       <Drawer.Screen name='SecurityPrivacy' component={SecurityPrivacy} />
       <Drawer.Screen name='PrivacyPolicy' component={PrivacyPolicy} />
-    </Drawer.Navigator>
+    </Drawer.Navigator> 
   );
 };
 

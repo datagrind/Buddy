@@ -1,7 +1,4 @@
-import {
-    useAuthenticator
-  } from '@aws-amplify/ui-react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { View, Pressable, Text, StyleSheet, Platform } from 'react-native';
 import { signOut } from 'aws-amplify/auth';
 
@@ -13,8 +10,10 @@ import { signOut } from 'aws-amplify/auth';
     // console.log("SignOutButton.onLogout: ", onLogOut)
     // const { user, signOut } = useAuthenticator(userSelector);
     // console.log("SignoutButton.userData: ", userData)
+    // console.log("handleSignOut.signout: ", signOut)
 
     // const logout  = () => onLogOut()
+
 
     async function handleSignOut() {
       // console.log("SignOutButton.handleSignOut.onLogout: ", onLogOut)
