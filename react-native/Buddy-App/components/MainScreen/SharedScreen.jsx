@@ -1,17 +1,13 @@
 // SharedScreen.js
 
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { Text, StyleSheet, Platform } from 'react-native';
 import Home from '../Home/Home';
 import Profile from '../Profile/Profile'
-import Requests from '../Requests/Requests'
 import Chat from '../Chat/Chat'
 import Host from '../Host/Host';
-import Search from '../Search/Search';
-import Background from '../UI/Background';
-import { Box, Pressable, HamburgerIcon, VStack } from 'native-base';
+import { View, Box, VStack } from 'native-base';
 import HeaderSearchHub from '../Search/HeaderSearch';
-import ProfileDetails from '../Profile/ProfileDetails';
 import SearchHub from '../Search/SearchHub';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -65,7 +61,7 @@ const SharedScreen = ({ route }) => {
 
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container}  backgroundColor={'red.600' || 'white'}>
             {/* <Background /> */}
             <VStack style={styles.overlay}>
                 <Box 

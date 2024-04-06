@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import UserDashboard from './components/Dashboard/UserDashBoard';
 import LoadingScreen from './components/Loading/LoadingScreen';
-import { View, StyleSheet} from 'react-native';
+import { StyleSheet} from 'react-native';
+import { View } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
 import Login from './components/Login/Login'
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,7 +22,6 @@ const App = () =>  {
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState('');
   const [isSignUp, setIsSignUp] = useState(false)
-
 
   useEffect(() => {
     // Simulate some asynchronous operation (e.g., fetching data)
@@ -46,6 +46,7 @@ const App = () =>  {
     setUserData((prev) => prev = []);
     setIsLoading((prev) => prev = true)
   };
+
 
   return (
     <Authenticator.Provider>
