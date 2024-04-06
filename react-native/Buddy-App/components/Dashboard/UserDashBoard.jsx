@@ -16,65 +16,40 @@ import ContactSupport from '../Settings/ContactSupport'
 import TermConditions from '../Settings/TermConditions'
 import SecurityPrivacy from '../Settings/SecurityPrivacy'
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useLayoutEffect } from 'react';
 import PrivacyPolicy from '../Settings/PrivacyPolicy';
-import { signOut } from 'aws-amplify/auth';
 
 
 const isIos = Platform.OS === 'ios';
-
-const LogoHeader = () => {
-  return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Image
-        source={require('../../assets/logo_white_background.jpg')}
-        style={(isIos) ? { width: 75, height: 100, marginBottom: 10 } : { width: 75, height: 100 }}
-      />
-    </View>
-  );
-};
  
 const Drawer = createDrawerNavigator();
 
-const UserDashboard = ({ userData, onLogout }) => {
+const UserDashboard = ({ onLogout, userData }) => {
 
   const [dataToken, setDataToken] = useState()
   const [dataAccess, setDataAccess] = useState()
   const [userAccess, setUserAccess] = useState()
 
+  // console.log(" accessToken : ",  dataAccess && dataAccess)
+  // console.log(" idToken: ", dataToken && dataToken)
+  // console.log(" userAccess: ", userAccess && userAccess )
+  // console.log("Userdashboard.userData: ", userData)
 
-  console.log("UserDashboard.userData: ", userData)
-  console.log(" accessToken : ",  dataAccess && dataAccess)
-  console.log(" idToken: ", dataToken && dataToken)
-  console.log(" userAccess: ", userAccess && userAccess )
-
-  const userSelector = (context) => context; 
-
-  async function handleSignOut() {
-    try {
-      console.log("handleSignOut: signingout...")
-      console.log("handleSignOut.userSelector: ", userSelector.authStatus)
-      await signOut();
-      // await signOut({ global: true }); //signout of all devices
+  function handleSignOut() {
       onLogout()
-    } catch (error) {
-      console.log('error signing out: ', error);
-    }
   }
 
+  // async function currentAuthenticatedUser() {
 
-
-  async function currentAuthenticatedUser() {
-
-    try {
-      const { username, userId, signInDetails } = await getCurrentUser();
-      console.log(`The username: ${username}`);
-      console.log(`The userId: ${userId}`);
-      console.log(`The signInDetails: ${signInDetails}`,JSON.stringify(signInDetails));
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  //   try {
+  //     const { username, userId, signInDetails } = await getCurrentUser();
+  //     console.log(`The username: ${username}`);
+  //     console.log(`The userId: ${userId}`);
+  //     console.log(`The signInDetails: ${signInDetails}`,JSON.stringify(signInDetails));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   async function currentSession() {
     try {
@@ -86,13 +61,16 @@ const UserDashboard = ({ userData, onLogout }) => {
       console.log("Err: currentSession: ", err);
     }
   }
-
-  useEffect(()=>{
-    currentAuthenticatedUser()
+  
+  useLayoutEffect(()=>{
+    // currentAuthenticatedUser()
     currentSession()
-    userAccess !== 'access' && handleSignOut()
   },[])
-
+  
+  useEffect(()=>{
+    userAccess && (userAccess !== 'access' && handleSignOut())
+  },[])
+  
 
   const navigation = useNavigation();
 

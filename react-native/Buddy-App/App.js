@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import UserDashboard from './components/Dashboard/UserDashBoard';
 import LoadingScreen from './components/Loading/LoadingScreen';
 import { StyleSheet} from 'react-native';
@@ -9,6 +9,8 @@ import Login from './components/Login/Login'
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider } from 'native-base';
 import SignUp from './components/SignUp/SignUp';
+import { fetchAuthSession } from 'aws-amplify/auth';
+import { signOut } from 'aws-amplify/auth';
 import { Amplify } from 'aws-amplify';
 import amplifyconfig from './amplifyconfiguration.json'
 import { Authenticator } from '@aws-amplify/ui-react-native';
@@ -22,30 +24,62 @@ const App = () =>  {
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState('');
   const [isSignUp, setIsSignUp] = useState(false)
+  const [dataAccess, setDataAccess] = useState()
+  const [userAccess, setUserAccess] = useState()
+
+  // console.log("App.userData: ", userData && userData)
+
+  const userSelector = (context) => context; 
+
+
+  
+  function handleSetLogin(data, bool) {
+    setIsLogin((prev) => prev = bool)
+    setIsLoading((prev) => prev = true)
+    setIsSignUp((prev) => prev = false)
+  }
+  
+  function handleIsSignUp(bool) {
+    setIsSignUp((prev) => prev = bool)
+  }
+  
+  async function handleLogout(){
+    try {
+      console.log("handleSignOut: signingout...")
+      console.log("handleSignOut.userSelector: ", userSelector.authStatus)
+      await signOut();
+      setIsLogin((prev) => prev = false);
+      setUserData((prev) => prev = []);
+      setIsLoading((prev) => prev = true)
+      // await signOut({ global: true }); //signout of all devices
+    } catch (error) {
+      console.log('error signing out: ', error);
+    }
+  };
+  
+  
+  async function currentSession() {
+    try {
+      const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+      setDataAccess(accessToken)
+      setUserAccess(accessToken.payload.token_use)
+      accessToken.payload.token_use && handleSetLogin(idToken, true)
+    } catch (err) {
+      console.log("Err: currentSession: ", err);
+    }
+  }
+  
+  useLayoutEffect(()=>{
+    currentSession()
+  },[])
 
   useEffect(() => {
     // Simulate some asynchronous operation (e.g., fetching data)
     setTimeout(() => {
       setIsLoading((prev) => prev = false); // Set loading to false after the operation is complete
     }, 4000); // Simulating a 4-second loading time
+    userAccess && (userAccess !== 'access' && handleLogout())
   }, [handleSetLogin,handleLogout, handleIsSignUp]);
-
-  function handleSetLogin(data, bool) {
-    setIsLogin((prev) => prev = bool)
-    setUserData((prev) => prev = data)
-    setIsLoading((prev) => prev = true)
-    setIsSignUp((prev) => prev = false)
-  }
-
-  function handleIsSignUp(bool) {
-    setIsSignUp((prev) => prev = bool)
-  }
-
-  function handleLogout(){
-    setIsLogin((prev) => prev = false);
-    setUserData((prev) => prev = []);
-    setIsLoading((prev) => prev = true)
-  };
 
 
   return (
@@ -56,7 +90,7 @@ const App = () =>  {
                   !isLogin ?  (
                   <View style={styles.container}>
                     { isSignUp ? <SignUp login={handleSetLogin} /> :
-                      <Login login={handleSetLogin} signup={handleIsSignUp} /> 
+                      <Login login={handleSetLogin} signup={handleIsSignUp} userData={userData} /> 
                     }
                       <StatusBar style="auto" />
                   </View>
