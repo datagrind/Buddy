@@ -16,7 +16,7 @@
         "buddyprelaunchsignupdata": {
           "sesEmail": "xiongbenjamin@gmail.com",
           "deploymentBucketName": "amplify-amplifyd084252db69e4-staging-231853-deployment",
-          "s3Key": "amplify-builds/buddyprelaunchsignupdata-4f704b7174555867485a-build.zip"
+          "s3Key": "amplify-builds/buddyprelaunchsignupdata-47376933777a61496c35-build.zip"
         }
       },
       "api": {

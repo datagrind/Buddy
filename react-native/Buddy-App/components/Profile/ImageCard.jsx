@@ -3,7 +3,7 @@ import { Box, Heading, AspectRatio, Image, Text, Center } from "native-base";
 import { TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
-const ImageCard = ({ img, status }) => {
+const ImageCard = ({ img, status, path }) => {
 
   const navigation = useNavigation()
 
@@ -46,6 +46,7 @@ const ImageCard = ({ img, status }) => {
           <AspectRatio ratio={1}>
             <Image source={imageSource} alt="image" borderTopRadius={10} />
           </AspectRatio>
+          { path !== 'favorites' &&
           <Center
             bg="red.600"
             _dark={{
@@ -64,6 +65,7 @@ const ImageCard = ({ img, status }) => {
           >
             {status}
           </Center>
+          }
         </Box>
         <Box p="4" space={3} bg={'white'} borderBottomRadius={15} height={100}>
           <Heading size="md" ml="-1">

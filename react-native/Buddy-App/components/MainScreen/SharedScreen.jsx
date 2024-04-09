@@ -9,8 +9,13 @@ import Host from '../Host/Host';
 import { View, Box, VStack } from 'native-base';
 import HeaderSearchHub from '../Search/HeaderSearch';
 import SearchHub from '../Search/SearchHub';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import Requests from '../Requests/Requests';
+import { getUsers } from "../../logic/getUsers";
+import FavoritesHeader from './FavoritesHeader';
+import Bookingheader from './BookingHeader';
+
 
 
 
@@ -33,16 +38,16 @@ const SharedScreen = ({ route }) => {
         } else if (path === 'profile'){
             return <Profile />
         } else if (path === 'requests'){
-            return <Host />
-        } else if (path === 'chat'){
-            return <Chat />
+            return <Requests users={requests}/>
+        } else if (path === 'favorites'){
+            return <Requests users={requests} path={path}/>
         } else if (path === 'host'){
             return <Host />
         } else if (path === 'search'){
             // return <Search handleSetPath={handleSetPath}/>
-        // } else if (path === 'search' || path === 'requests'){
-        // return <ProfileDetails handleSetPath={handleSetPath} />
-        return <SearchHub path={searchHubPath} />
+            // } else if (path === 'search' || path === 'requests'){
+            // return <ProfileDetails handleSetPath={handleSetPath} />
+            return <SearchHub path={searchHubPath} users={users} requests={requests}/>
         }else{
             return <DefaultPath />
         }
@@ -58,6 +63,47 @@ const SharedScreen = ({ route }) => {
             setSearchHubPath(newPath);
         }
       };
+
+
+      const [users, setUsers] = useState([]);
+      const [requests, setRequests] = useState([]);
+    
+      const fetchDataUsers = async () => {
+        try {
+          const retrievedUser = await getUsers(31);
+          setUsers(retrievedUser.results);
+        } catch (error) {
+          console.error('Error:', error);
+          
+          if (error.response && error.response.status === 429) {
+            console.log('Retrying after 5 seconds...');
+            setTimeout(() => {
+              fetchDataUsers();
+            }, 5000);
+          }
+        }
+      };
+  
+      const fetchDataRequests = async () => {
+          try {
+            const retrievedUser = await getUsers(11);
+            setRequests(retrievedUser.results);
+          } catch (error) {
+            console.error('Error:', error);
+            
+            if (error.response && error.response.status === 429) {
+              console.log('Retrying after 5 seconds...');
+              setTimeout(() => {
+                fetchDataRequests();
+              }, 5000);
+            }
+          }
+        };
+      
+      useEffect(() => {
+        fetchDataUsers();
+        fetchDataRequests();
+      }, []);
 
 
     return (
@@ -81,6 +127,10 @@ const SharedScreen = ({ route }) => {
                     </Pressable> */}
                     { path === 'search'
                     ?   <HeaderSearchHub handlePress={handlePress} searchHubPath={searchHubPath} marginTop={100}/>
+                    :   path === 'requests'
+                    ?   <Bookingheader />
+                    :   path === 'favorites'
+                    ?   <FavoritesHeader />
                     :   <Text fontSize="xl" color="white">
                         Your Transparent Header
                         </Text>

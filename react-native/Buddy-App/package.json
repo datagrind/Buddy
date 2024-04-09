@@ -39,6 +39,7 @@
     "expo-document-picker": "~11.10.1",
     "expo-image-picker": "^14.7.1",
     "expo-status-bar": "~1.11.1",
+    "expo-updates": "^0.24.12",
     "lottie-react-native": "6.5.1",
     "native-base": "^3.4.28",
     "pod": "^0.9.0",

@@ -24,12 +24,24 @@
         "buddyappauthPostConfirmation": {
           "GROUP": "buddyusers",
           "deploymentBucketName": "amplify-buddyapp-dev-e63dd-deployment",
-          "s3Key": "amplify-builds/buddyappauthPostConfirmation-364b6c365678726e546b-build.zip"
+          "s3Key": "amplify-builds/buddyappauthPostConfirmation-45385270634836546a4f-build.zip"
+        },
+        "BuddyAppPostConfirmation": {
+          "deploymentBucketName": "amplify-buddyapp-dev-e63dd-deployment",
+          "s3Key": "amplify-builds/BuddyAppPostConfirmation-683344567a6a4f543561-build.zip",
+          "GROUP": "buddyusers"
+        },
+        "AdminQueriesc6b0e880": {
+          "deploymentBucketName": "amplify-buddyapp-dev-e63dd-deployment",
+          "s3Key": "amplify-builds/AdminQueriesc6b0e880-32424330736249763369-build.zip"
         }
       },
       "auth": {
         "BuddyApp": {},
         "userPoolGroups": {}
+      },
+      "api": {
+        "AdminQueries": {}
       }
     }
   }

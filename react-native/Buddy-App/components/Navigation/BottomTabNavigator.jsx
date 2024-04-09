@@ -85,13 +85,13 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="Become a Buddy"
         component={SharedScreen}
-        initialParams={{ path: 'host'}}
+        initialParams={{ path: 'requests'}}
         options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Requests"
         component={SharedScreen}
-        initialParams={{ path: 'requests'}}
+        initialParams={{ path: 'favorites'}}
         options={{ headerShown: false }}
       />
       {/* <Tab.Screen
