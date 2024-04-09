@@ -1,9 +1,42 @@
 {
-  "api": {},
+  "api": {
+    "AdminQueries": {
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "BuddyApp"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "AdminQueriesc6b0e880"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "BuddyApp": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "BuddyAppPostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
         "mfaConfiguration": "OPTIONAL",
         "mfaTypes": [
@@ -11,12 +44,7 @@
           "TOTP"
         ],
         "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_NUMBERS",
-            "REQUIRES_SYMBOLS",
-            "REQUIRES_UPPERCASE"
-          ],
+          "passwordPolicyCharacters": [],
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
@@ -42,8 +70,7 @@
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
+            "AppClientID"
           ],
           "category": "auth",
           "resourceName": "BuddyApp"
@@ -54,6 +81,25 @@
     }
   },
   "function": {
+    "AdminQueriesc6b0e880": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "BuddyApp"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "BuddyAppPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "buddyappauthCustomMessage": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -66,6 +112,46 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_AdminQueriesc6b0e880_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AdminQueriesc6b0e880"
+        }
+      ]
+    },
+    "AMPLIFY_function_AdminQueriesc6b0e880_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AdminQueriesc6b0e880"
+        }
+      ]
+    },
+    "AMPLIFY_function_BuddyAppPostConfirmation_GROUP": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "BuddyAppPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_BuddyAppPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "BuddyAppPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_BuddyAppPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "BuddyAppPostConfirmation"
+        }
+      ]
+    },
     "AMPLIFY_function_buddyappauthCustomMessage_EMAILMESSAGE": {
       "usedBy": [
         {

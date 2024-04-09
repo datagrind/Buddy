@@ -22,7 +22,7 @@ const NoPhotoProfile = ( {focused, size = 25, color, factor}) => {
 
   
   return <View style={!userImage && styles[factor+"Circle"]}>
-        {!userImage && <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={factor === 'small' ? 'white' : color}/>}
+        {!userImage && <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={factor === 'small' ? 'black' : color}/>}
         {userImage && <Image source={{uri: userImage} || userImage} style={styles[factor+"Circle"]} />}
       </View>
 }
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         border: 10,
         // borderColor: 'black',
         borderRadius: 25, // Half of the width and height to make it a circle
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
         // borderWidth: 2,

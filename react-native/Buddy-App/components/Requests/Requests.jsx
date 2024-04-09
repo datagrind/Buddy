@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { logVariables } from '../../logVariables';
 
 
-const Requests = ( { users }) => {
+const Requests = ( { users, path }) => {
 
   
   // const [users, setUsers] = useState([]);
@@ -59,11 +59,11 @@ const Requests = ( { users }) => {
       renderedCards.push(
         <HStack space={3} {...hStackStyles} borderWidth={0} key={i}>
           <Center flex={1} >
-              <ImageCard img={users[i]} status={'PENDING'}  />
+              <ImageCard img={users[i]} status={'PENDING'}  path={path} />
           </Center>
           {!isLastCard && (
             <Center flex={1}>
-                <ImageCard img={users[i + 1]} status={'PENDING'}  />
+                <ImageCard img={users[i + 1]} status={'ACCEPTED'} path={path}  />
             </Center>
           )}
           {isLastCard && totalUsers % 2 !== 0 && (

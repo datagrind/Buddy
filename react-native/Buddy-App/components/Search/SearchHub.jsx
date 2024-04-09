@@ -1,51 +1,10 @@
 // SearchHub.js
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Box } from "native-base";
 import Search from "./Search";
 import Requests from "../Requests/Requests";
-import { getUsers } from "../../logic/getUsers";
 
-const SearchHub = ({ handleHeader, path }) => {
-
-    const [users, setUsers] = useState([]);
-    const [requests, setRequests] = useState([]);
-  
-    const fetchDataUsers = async () => {
-      try {
-        const retrievedUser = await getUsers(31);
-        setUsers(retrievedUser.results);
-      } catch (error) {
-        console.error('Error:', error);
-        
-        if (error.response && error.response.status === 429) {
-          console.log('Retrying after 5 seconds...');
-          setTimeout(() => {
-            fetchDataUsers();
-          }, 5000);
-        }
-      }
-    };
-
-    const fetchDataRequests = async () => {
-        try {
-          const retrievedUser = await getUsers(11);
-          setRequests(retrievedUser.results);
-        } catch (error) {
-          console.error('Error:', error);
-          
-          if (error.response && error.response.status === 429) {
-            console.log('Retrying after 5 seconds...');
-            setTimeout(() => {
-              fetchDataRequests();
-            }, 5000);
-          }
-        }
-      };
-    
-    useEffect(() => {
-      fetchDataUsers();
-      fetchDataRequests();
-    }, []);
+const SearchHub = ({ handleHeader, path, users, requests }) => {
 
     // console.log(users)
 
