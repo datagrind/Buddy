@@ -28,7 +28,7 @@
         },
         "BuddyAppPostConfirmation": {
           "deploymentBucketName": "amplify-buddyapp-dev-e63dd-deployment",
-          "s3Key": "amplify-builds/BuddyAppPostConfirmation-683344567a6a4f543561-build.zip",
+          "s3Key": "amplify-builds/BuddyAppPostConfirmation-4d4e7779333933366b76-build.zip",
           "GROUP": "buddyusers"
         },
         "AdminQueriesc6b0e880": {
