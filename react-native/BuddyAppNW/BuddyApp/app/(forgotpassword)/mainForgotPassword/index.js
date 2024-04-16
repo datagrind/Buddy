@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Alert} from 'react-native';
 import { resetPassword } from 'aws-amplify/auth';
-import { useRouter } from 'expo-router'
+import { useRouter, Link, useLocalSearchParams } from 'expo-router'
 import Animated, {FadeInDown, FadeInUp} from 'react-native-reanimated';
 
 export default function PasswordRecoveryForm () {
   const [email, setEmail] = useState('');
 
   const router = useRouter()
+  const params = useLocalSearchParams()
 
   const handlePasswordRecovery = () => {
     // Handle password recovery logic here
@@ -16,10 +17,11 @@ export default function PasswordRecoveryForm () {
     // You can call your password recovery API endpoint or perform other actions here
   };
 
+
   async function handleResetPassword(username) {
     console.log("handleResetPassword.username: ", username)
     try {
-      router.push({pathname: '/confirmation', params: { username: username, handleResetPasswordNextSteps: handleResetPasswordNextSteps }})
+      router.push({pathname: '/confirmation', params: { username: username }})
       const output = await resetPassword({ username });
       handleResetPasswordNextSteps(output);
     } catch (error) {
@@ -70,7 +72,7 @@ export default function PasswordRecoveryForm () {
               placeholder="Enter your email"
               placeholderTextColor={'gray'}
               value={email}
-              onChangeText={(e) => {setEmail(e); console.log(email)}}
+              onChangeText={(e) => {setEmail(e);}}
               keyboardType="email-address"
               autoCapitalize="none"
             />
@@ -81,7 +83,7 @@ export default function PasswordRecoveryForm () {
             className=" p-5 rounded-2xl w-full mb-5"
           >
             <TouchableOpacity
-              className="bg-red-600 px-6 py-3 rounded-md"
+              className="bg-red-600 px-6 py-3 rounded-md mb-3"
               onPress={handlePasswordRecovery}
             >
               <Text className="text-white font-bold text-center">Recover Password</Text>

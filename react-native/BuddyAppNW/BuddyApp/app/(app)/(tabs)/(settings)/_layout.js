@@ -6,11 +6,12 @@ export default function _layout() {
   return (
     <Stack initialRouteName='mainSettings/index'>
         <Stack.Screen name='mainSettings/index' options={{
-            title: 'Main Settings',
-            headerShown: false
+            title: '',
+            // headerShown: false
         }} />
         <Stack.Screen name='(account)' options={{
-            headerShown: false,
+          title: '',
+          headerShown: false,
         }} />
     </Stack>
   )

@@ -30,13 +30,13 @@ export default function Page() {
                           <Text className="text-red-600">Click Here</Text>
                       </TouchableOpacity>
                 </Animated.View>
-                {/* <Animated.View 
+                <Animated.View 
                     entering={FadeInDown.delay(600).duration(1000).springify()} 
                     className="flex-row justify-center">
                       <TouchableOpacity onPress={()=> router.back(0)} >
                           <Text className="text-red-600">Go Back</Text>
                       </TouchableOpacity>
-                </Animated.View> */}
+                </Animated.View>
             </View>
     </View>
   )

@@ -29,6 +29,12 @@ export default function _layout() {
             tabBarLabel: 'Settings',
             headerShown: false
         }} />
+        <Tabs.Screen name="components/DatesCard" options={{
+            href: null,
+        }} />
+        <Tabs.Screen name="components/matches" options={{
+            href: null,
+        }} />
     </Tabs>
   )
 }

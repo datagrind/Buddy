@@ -7,10 +7,11 @@ export default function _layout() {
     <Stack initialRouteName='mainAccount/index'>
         <Stack.Screen name='mainAccount/index' options={{
             title: '',
-            // headerShown: false
+            headerShown: false
         }} />
         <Stack.Screen name='delete/index' options={{
             title: "",
+            // headerShown: false
         }} />
     </Stack>
   )

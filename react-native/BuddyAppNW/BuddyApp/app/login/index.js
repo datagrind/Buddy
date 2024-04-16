@@ -18,7 +18,7 @@ export default function Login() {
 
   const handleForgotPassword = () => {
     router.push('/mainForgotPassword')
-  }; 
+  };  
  
   const handleLogin = () => {
     handleAmplifySignIn( username, password )
@@ -30,13 +30,13 @@ export default function Login() {
       }
   },[session])
 
-      
+    
   return (
     <KeyboardAvoidingView className="flex-1 w-full h-full" behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View className="bg-white h-full w-full px-5 flex justify-center ">
             <StatusBar style="light" />
             {/* <Image className="h-full w-full absolute" source={null} /> */}
- 
+  
             {/* lights */}
             <View className=" flex justify-center items-center w-full mb-20 ">
                 <Animated.Image 
@@ -109,7 +109,7 @@ export default function Login() {
                             <TouchableOpacity onPress={handleForgotPassword}>
                                 <Text className="text-red-600">Click Here</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> 
                         <View className="flex-row justify-center">
                             <Text>Don't have an account? </Text>
                             <TouchableOpacity onPress={handleSignUp}>
