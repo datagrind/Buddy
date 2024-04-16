@@ -11,16 +11,30 @@ const PasswordRecoveryConfirmation = () => {
   const [ newPassword, setNewPassword ] = useState('')
   const [ confirmNewPassword, setConfirmNewPassword ] = useState('')
 
-  const { username, handleResetPasswordNextSteps } = useLocalSearchParams()
+  const { username } = useLocalSearchParams()
   const router = useRouter()
 
-  console.log("username: ", username)
+  function handleResetPasswordNextSteps(output) {
+    const { nextStep } = output;
+    switch (nextStep.resetPasswordStep) {
+      case 'CONFIRM_RESET_PASSWORD_WITH_CODE':
+        const codeDeliveryDetails = nextStep.codeDeliveryDetails;
+        console.log(
+          `Confirmation code was sent to ${codeDeliveryDetails.deliveryMedium}`
+        );
+        // Collect the confirmation code from the user and pass to confirmResetPassword.
+        break;
+      case 'DONE':
+        console.log('Successfully reset password.');
+        break;
+    }
+  }
+
 
   const handleConfirmCode = () => {
     // Handle confirmation code submission logic here
     try{
-      handleConfirmResetPassword(username, confirmationCode, newPassword)
-      console.log('Confirmation code submitted:', confirmationCode);
+      handleConfirmResetPassword({username, confirmationCode, newPassword})
     } catch(error) {
         console.log(error)
         Alert.alert(error.message)
@@ -38,6 +52,8 @@ const PasswordRecoveryConfirmation = () => {
       validatePassword(newPassword)
       validatePasswordsMatch()
       await confirmResetPassword({ username: username, confirmationCode: confirmationCode, newPassword: newPassword });
+      Alert.alert("Your password has reset successfully")
+      router.replace('/login')
     } catch (error) {
       console.log(error);
       Alert.alert(error.message)
@@ -45,6 +61,7 @@ const PasswordRecoveryConfirmation = () => {
   }
 
   const handleResendCode = async () =>{
+    console.log("handleResendCode")
     const output = await resetPassword({ username });
     handleResetPasswordNextSteps(output)
   }
@@ -162,7 +179,7 @@ const validatePasswordsMatch = () => {
         >
           <TouchableOpacity
               className="mt-4"
-              onPress={() => handleResendCode}
+              onPress={() => handleResendCode()}
           >
               <Text className=" text-center underline">Resend Code</Text>
           </TouchableOpacity>
@@ -171,9 +188,9 @@ const validatePasswordsMatch = () => {
               entering={FadeInDown.delay(600).duration(1000).springify()} 
               className="flex-col justify-center">
               <View className="flex-row justify-center mb-3">
-                  <Text>Go back to login: </Text>
+                  {/* <Text>Go back to login: </Text> */}
                   <TouchableOpacity onPress={()=>router.back(2)}>
-                      <Text className="text-red-600">Click Here</Text>
+                      <Text className="text-red-600">Go Back</Text>
                   </TouchableOpacity>
               </View>
           </Animated.View>

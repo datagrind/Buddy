@@ -15,7 +15,7 @@ export default function Page() {
     <View className="bg-white h-full w-full px-5 flex justify-center items-center">
       <View className="flex-1 items-center mb-10 justify-around">
           <View className="flex w-full">
-            <Animated.Text 
+            <Animated.Text  
                 entering={FadeInUp.duration(1000).springify()} 
                 className=" font-bold tracking-wider text-5xl">
                     Settings
