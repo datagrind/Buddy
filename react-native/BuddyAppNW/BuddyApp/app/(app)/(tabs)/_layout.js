@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
 
-export default function _layout() {
+export default function TabsLayout() {
   return ( 
     <Tabs initialRouteName='search/index'>
         <Tabs.Screen name="search/index" options={{
@@ -25,7 +25,7 @@ export default function _layout() {
             headerTitle: 'Posts',
             headerShown: false
         }} /> 
-        <Tabs.Screen name="(settings)" options={{
+        <Tabs.Screen name="settings" options={{
             tabBarLabel: 'Settings',
             headerShown: false
         }} />
@@ -35,6 +35,9 @@ export default function _layout() {
         <Tabs.Screen name="components/matches" options={{
             href: null,
         }} />
+        {/* <Tabs.Screen name="components/userdata" options={{
+            href: null,
+        }} /> */}
     </Tabs>
   )
 }
