@@ -15,7 +15,7 @@ export default function Login() {
     console.log('Signing up...');
     router.push('/signup')
   }; 
-
+  
   const handleForgotPassword = () => {
     router.push('/mainForgotPassword')
   };  
