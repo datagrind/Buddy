@@ -1,4 +1,4 @@
-import { View, Text, Alert, Image, KeyboardAvoidingView , Platform, SafeAreaView, TextInput, TouchableOpacity, Pressable } from 'react-native'
+import { View, Text, Alert, Image, KeyboardAvoidingView , Platform,  TextInput, TouchableOpacity, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useRouter, useLocalSearchParams } from 'expo-router'
@@ -176,7 +176,6 @@ export default function SignupScreen() {
   return (
     <KeyboardAvoidingView className="flex-1 w-full h-full" behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View className="bg-white h-full w-full flex justify-center p-5 ">
-        {/* <StatusBar style="light" /> */}
         {/* <Image className="h-full w-full absolute" source={require('../assets/images/background.png')} /> */}
 
         {/* lights */}

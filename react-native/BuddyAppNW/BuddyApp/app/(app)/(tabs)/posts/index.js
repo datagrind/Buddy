@@ -15,17 +15,17 @@ export default function Posts() {
           <Animated.View 
             entering={FadeInDown.delay(200).duration(1000).springify()} 
             className="flex-row justify-center">
-            <Link className="text-4xl" href="/posts/1"> Open Post 1 </Link>
+            <Link className="text-4xl" href="/posts/1" asChild> Open Post 1 </Link>
           </Animated.View>
           <Animated.View 
             entering={FadeInDown.delay(400).duration(1000).springify()} 
             className="flex-row justify-center">
-            <Link className="text-4xl" href="/posts/2"> Open Post 2 </Link>
+            <Link className="text-4xl" href="/posts/2" asChild> Open Post 2 </Link>
           </Animated.View>
           <Animated.View 
             entering={FadeInDown.delay(600).duration(1000).springify()} 
             className="flex-row justify-center">
-            <Link className="text-4xl" href="/posts/3"> Open Post 3 </Link>
+            <Link className="text-4xl" href="/posts/3" asChild> Open Post 3 </Link>
           </Animated.View>
       </View>
     </View>
