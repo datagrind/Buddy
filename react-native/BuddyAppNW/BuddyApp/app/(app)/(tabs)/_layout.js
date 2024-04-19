@@ -27,17 +27,8 @@ export default function TabsLayout() {
         }} /> 
         <Tabs.Screen name="settings" options={{
             tabBarLabel: 'Settings',
-            headerShown: false
+            headerShown: false,
         }} />
-        <Tabs.Screen name="components/DatesCard" options={{
-            href: null,
-        }} />
-        <Tabs.Screen name="components/matches" options={{
-            href: null,
-        }} />
-        {/* <Tabs.Screen name="components/userdata" options={{
-            href: null,
-        }} /> */}
     </Tabs>
   )
 }

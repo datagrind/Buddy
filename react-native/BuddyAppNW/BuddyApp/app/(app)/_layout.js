@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Stack, useRouter, Redirect } from "expo-router";
 import "../../global.css"
 import { useSession } from '../../ctx';
+import { StatusBar } from 'expo-status-bar'
+
 
 
 
@@ -28,16 +30,25 @@ export default function _layout() {
     }
     
   return (
+    <View className="w-full h-full">
+        <StatusBar barStyle="dark-content" backgroundColor='black' />
+        <Stack 
+            initialRouteName='(tabs)'
+        >
+            <Stack.Screen name="(tabs)" options={{
+                headerShown: false
+            }} />
+            <Stack.Screen name="[missing]" options={{
+                title: '404'
+            }} />
+            <Stack.Screen name='searchmodal/index' options={{
+                title: '',
+                headerTitle: '',
+                headerShown: false,
+                presentation: 'modal',
+            }} initialParams={{}}/>
+        </Stack>
+    </View>
 
-    <Stack 
-        initialRouteName='(tabs)'
-    >
-        <Stack.Screen name="(tabs)" options={{
-            headerShown: false
-        }} />
-        <Stack.Screen name="[missing]" options={{
-            title: '404'
-        }} />
-    </Stack>
   )
 }

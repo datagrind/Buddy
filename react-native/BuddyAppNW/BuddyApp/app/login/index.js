@@ -6,7 +6,7 @@ import { router } from 'expo-router'
 import { useSession } from '../../ctx'
 
 export default function Login() {
- 
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { handleAmplifySignIn, session } = useSession()  
@@ -14,8 +14,8 @@ export default function Login() {
   const handleSignUp = () => {
     console.log('Signing up...');
     router.push('/signup')
-  }; 
-  
+  };    
+    
   const handleForgotPassword = () => {
     router.push('/mainForgotPassword')
   };  
@@ -30,11 +30,11 @@ export default function Login() {
       }
   },[session])
 
-    
+     
   return (
     <KeyboardAvoidingView className="flex-1 w-full h-full" behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View className="bg-white h-full w-full px-5 flex justify-center ">
-            <StatusBar style="light" />
+            {/* <StatusBar style="light" /> */}
             {/* <Image className="h-full w-full absolute" source={null} /> */}
   
             {/* lights */}
@@ -75,7 +75,7 @@ export default function Login() {
                             value={username}
                             type="email"
                             onChange={(e) => { e.persist(); setUsername( e.nativeEvent.text)}} 
-                        /> 
+                        />  
                     </Animated.View>
                     <Animated.View 
                         entering={FadeInDown.delay(200).duration(1000).springify()} 
@@ -117,7 +117,7 @@ export default function Login() {
                             </TouchableOpacity>
                         </View>
                     </Animated.View>
-                </View> 
+                </View>   
             {/* </View> */}
         </View>
     </KeyboardAvoidingView>
