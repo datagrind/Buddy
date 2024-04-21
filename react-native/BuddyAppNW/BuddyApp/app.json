@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "BuddyApp",
+    "name": "buddynw",
     "slug": "buddynw",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -47,6 +47,12 @@
         "expo-camera",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+        }
+      ],
+      [
+        "expo-updates",
+        {
+          "username": "buddy_app"
         }
       ]
     ],

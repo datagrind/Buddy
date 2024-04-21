@@ -9,9 +9,10 @@ import { Authenticator } from '@aws-amplify/ui-react-native';
 import { Provider } from 'react-redux'
 import { applyMiddleware, compose, configureStore } from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk'
-import loggerMiddleware from '../middleware/logger'
-import monitorReducerEnhancer from '../enhancers/monitorReducer'
-import { store } from '../store'
+import loggerMiddleware from '../context/middleware/logger'
+import { store } from '../context/store'
+// import * as Updates from 'expo-updates'
+import { useEffect } from 'react';
 
 Amplify.configure(amplifyconfig);
 
@@ -25,6 +26,27 @@ Amplify.configure(amplifyconfig);
 
 
 export default function RootLayout() {
+
+  // async function onFetchUpdateAsync() {
+  //   try {
+  //     const update = await Updates.checkForUpdateAsync();
+
+  //     if (update.isAvailable){
+  //       await Updates.fetchUpdateAsync()
+  //       await Updates.reloadAsync()
+  //     } 
+
+  //   } catch (error) {
+  //     // alert( `Error fetching latest Expo update: ${ error } ` )
+  //     console.log( `Error fetching latest Expo update: ${ error } ` )
+  //   }
+  // }
+
+  // useEffect(()=>{
+  //   onFetchUpdateAsync()
+  // },[])
+
+
 
     return (
       <Provider store={store}>
