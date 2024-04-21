@@ -1,4 +1,4 @@
-import { Alert, View, Text, KeyboardAvoidingView, Platform, Image, TextInput, TouchableOpacity } from 'react-native'
+import { Alert, View, Text, KeyboardAvoidingView, Platform, Image, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated'
@@ -9,13 +9,20 @@ export default function Login() {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [windowSize, setwindowSize] = useState()
+
+
   const { handleAmplifySignIn, session } = useSession()  
+  const { width, height } = useWindowDimensions();
+  const smallScreenWidth = 320;
+  const mediumScreenWidth = 375;
+
   
   const handleSignUp = () => {
-    console.log('Signing up...');
+    console.log('Signing up...'); 
     router.push('/signup')
   };    
-    
+       
   const handleForgotPassword = () => {
     router.push('/mainForgotPassword')
   };  
@@ -25,11 +32,18 @@ export default function Login() {
   } 
 
   useEffect(()=>{
-      if (session){
-        router.replace('/search')
-      }
+        if (session){
+            router.replace('/search')
+        }
+        if(width < mediumScreenWidth){
+            setwindowSize('small')
+        } else if ( width > mediumScreenWidth){
+            setwindowSize('large')
+        } else {
+            setwindowSize('medium')
+        }
   },[session])
-
+ 
      
   return (
     <KeyboardAvoidingView className="flex-1 w-full h-full" behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -67,8 +81,7 @@ export default function Login() {
                 <View className="flex items-center mx-5 px-10 sapce-y-4">
                     <Animated.View 
                         entering={FadeInDown.duration(1000).springify()} 
-                        className="bg-black/5 p-5 rounded-2xl w-full mb-5"
-                    >
+                        className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
                         <TextInput
                             placeholder="Email"
                             placeholderTextColor={'gray'}
@@ -79,7 +92,7 @@ export default function Login() {
                     </Animated.View>
                     <Animated.View 
                         entering={FadeInDown.delay(200).duration(1000).springify()} 
-                        className="bg-black/5 p-5 rounded-2xl w-full mb-5">
+                        className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
 
                         <TextInput
                             placeholder="Password"
@@ -96,10 +109,10 @@ export default function Login() {
                         entering={FadeInDown.delay(400).duration(1000).springify()}>
                             <TouchableOpacity 
                                 onPress={handleLogin}
-                                className="w-full bg-red-600 p-3 rounded-2xl mb-6">
+                                className={`w-full bg-red-600 ${windowSize === 'small' ? 'p-1' : 'p-3'} rounded-2xl mb-6`}>
                                     <Text className="text-xl font-bold text-white text-center">Login</Text>
                             </TouchableOpacity>
-                    </Animated.View>
+                    </Animated.View>   
 
                     <Animated.View 
                         entering={FadeInDown.delay(600).duration(1000).springify()} 
