@@ -17,13 +17,13 @@ const { width, height } = Dimensions.get("window");
 
 export default function Search() {
 
-  const { providerData } = useSelector(state => state);
+  const data = useSelector(state => state.providerData.data);
   const router = useRouter()
 
   const CarouselComponent = () => {
     return (
       <Carousel
-        data={providerData.data}
+        data={data}
         renderItem={({ item }) => <DatesCard item={item} />}
         keyExtractor={(item, index) => index.toString()} 
         firstItem={1}
@@ -54,17 +54,19 @@ export default function Search() {
       <View className="w-full  h-screen " >
         <View className="w-full flex-row justify-between items-center px-5 mb-8 ">
           <View className="">
-            <TouchableOpacity className="rounded-full items-center justify-center">
-              <Image
-                source={require("../../../../assets/images/userImages/user1.jpg")}
-                style={{
-                  width: hp(5),
-                  height: hp(5),
-                  resizeMode: "cover",
-                }}
-                className="rounded-full"
-              />
-            </TouchableOpacity>
+            <Link href="/(app)/profilesettings" asChild>
+              <TouchableOpacity className="rounded-full items-center justify-center">
+                <Image
+                  source={require("../../../../assets/images/userImages/user1.jpg")}
+                  style={{
+                    width: hp(5),
+                    height: hp(5),
+                    resizeMode: "cover",
+                  }}
+                  className="rounded-full"
+                />
+              </TouchableOpacity>
+            </Link>
           </View>
           <View className="flex-row space-x-2 gap-5">
             <View className="">
@@ -83,9 +85,9 @@ export default function Search() {
         </View>
 
         <View className="flex-1 justify-between items-center ">
-          <View className="pb-4 w-full flex-1 ">
+          <View className=" w-full flex-1">
             <View className="flex w-full justify-center items-center">
-              {providerData.data.length === 0 ? 
+              {data.length === 0 ? 
                 <View>
                   <Text className="text-center">No Buddy exists in this criteria.</Text>
                   <Text className="text-center">Please adjust your filter.</Text>
