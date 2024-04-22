@@ -112,7 +112,7 @@ export default function Login() {
                                 className={`w-full bg-red-600 ${windowSize === 'small' ? 'p-1' : 'p-3'} rounded-2xl mb-6`}>
                                     <Text className="text-xl font-bold text-white text-center">Login</Text>
                             </TouchableOpacity>
-                    </Animated.View>   
+                    </Animated.View>    
 
                     <Animated.View 
                         entering={FadeInDown.delay(600).duration(1000).springify()} 

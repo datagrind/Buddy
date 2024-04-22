@@ -14,6 +14,10 @@ export default function TabsLayout() {
             tabBarIcon: ()=> <Ionicons name="search" size={24} color="black" />,
             headerShown: false
         }} />
+        <Tabs.Screen name="index" options={{
+            headerShown: false,
+            href: null,
+        }} />
         <Tabs.Screen name="requests/index" options={{
             tabBarLabel: 'Requests',
             headerTitle: 'Requests',

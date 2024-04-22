@@ -36,6 +36,8 @@ export default function _layout() {
             initialRouteName='(tabs)'
         >
             <Stack.Screen name="(tabs)" options={{
+                headerTitle: '',
+                title: '',
                 headerShown: false
             }} />
             <Stack.Screen name="[missing]" options={{
@@ -45,6 +47,20 @@ export default function _layout() {
                 title: '',
                 headerTitle: '',
                 headerShown: false,
+                presentation: 'modal',
+            }} initialParams={{}}/>
+            <Stack.Screen name='profilesettings/index' options={{
+                title: '',
+                headerTitle: '',
+                headerBackTitle:'',
+                // headerShown: false,
+                // presentation: 'modal',
+            }} initialParams={{}}/>
+            <Stack.Screen name='calender/index' options={{
+                title: '',
+                headerTitle: '',
+                headerBackTitle:'',
+                // headerShown: false,
                 presentation: 'modal',
             }} initialParams={{}}/>
         </Stack>
