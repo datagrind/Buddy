@@ -7,12 +7,19 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 export default function TabsLayout() {
   return ( 
-    <Tabs initialRouteName='search'>
-        <Tabs.Screen name="search" options={{
+    <Tabs initialRouteName='search/index'>
+        <Tabs.Screen name="search/index" options={{
             tabBarLabel: 'Search',
             headerTitle: 'Search',
             tabBarIcon: ()=> <Ionicons name="search" size={24} color="black" />,
             headerShown: false
+        }} />
+        <Tabs.Screen name="profile" options={{
+            tabBarLabel: 'Profile',
+            headerTitle: 'Profile',
+            headerShown: false,
+            href: null,
+            tabBarHideOnKeyboard: true,
         }} />
         <Tabs.Screen name="index" options={{
             headerShown: false,
@@ -24,7 +31,7 @@ export default function TabsLayout() {
             tabBarIcon: () => <Ionicons name="notifications-outline" size={24} color="black" />,
             headerShown: false
         }} />
-        <Tabs.Screen name="favorites/index" options={{
+        <Tabs.Screen name="favorites" options={{
             tabBarLabel: 'Favorites',
             headerTitle: 'Favorites',
             tabBarIcon: ()=> <FontAwesome name="heart-o" size={24} color="black" />,
