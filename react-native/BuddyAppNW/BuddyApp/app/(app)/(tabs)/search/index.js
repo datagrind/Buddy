@@ -57,7 +57,7 @@ export default function Search() {
             <Link href="/(app)/profilesettings" asChild>
               <TouchableOpacity className="rounded-full items-center justify-center">
                 <Image
-                  source={require("../../../../assets/images/userImages/user1.jpg")}
+                  source={{ uri: 'https://www.goodfreephotos.com/albums/people/beautiful-women-in-white-dress.jpg' }}
                   style={{
                     width: hp(5),
                     height: hp(5),
@@ -88,7 +88,7 @@ export default function Search() {
           <View className=" w-full flex-1">
             <View className="flex w-full justify-center items-center">
               {data.length === 0 ? 
-                <View>
+                <View className="flex w-full h-3/4 justify-center items-center">
                   <Text className="text-center">No Buddy exists in this criteria.</Text>
                   <Text className="text-center">Please adjust your filter.</Text>
                 </View>

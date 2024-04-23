@@ -102,8 +102,8 @@ export default function Login() {
                             type="password" 
                             onChange={(e) => { e.persist(); setPassword(e.nativeEvent.text);}}
                         />
-                    </Animated.View>
-
+                    </Animated.View>   
+    
                     <Animated.View 
                         className="w-full mb-5" 
                         entering={FadeInDown.delay(400).duration(1000).springify()}>
