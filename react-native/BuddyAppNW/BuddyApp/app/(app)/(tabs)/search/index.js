@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useLayoutEffect } from "react";
+import React, { useState, useEffect, useReducer, useLayoutEffect, memo } from "react";
 import { View, Text, Dimensions, TouchableOpacity, Image, Platform, TouchableWithoutFeedback } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-new-snap-carousel";
@@ -15,7 +15,7 @@ const { width, height } = Dimensions.get("window");
 
 
 
-export default function Search() {
+const Search = memo(() => {
 
   const data = useSelector(state => state.providerData.data);
   const router = useRouter()
@@ -25,7 +25,7 @@ export default function Search() {
       <Carousel
         data={data}
         renderItem={({ item }) => <DatesCard item={item} />}
-        keyExtractor={(item, index) => index.toString()} 
+        keyExtractor={(item, index) => index.toString() } 
         firstItem={1}
         sliderWidth={width}
         itemWidth={width * 0.8}
@@ -35,9 +35,9 @@ export default function Search() {
     )
   }
 
-  useLayoutEffect(()=>{
-    CarouselComponent()
-  },[])
+  // useLayoutEffect(()=>{
+  //   CarouselComponent()
+  // },[])
 
 
   return (
@@ -102,4 +102,8 @@ export default function Search() {
       </View>
     </SafeAreaView>
   );
-}
+}, (prevProps, nextProps) => { // and here is what i didn't notice before.
+  return prevProps.data === nextProps.data;
+})
+
+export default Search

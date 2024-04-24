@@ -10,7 +10,7 @@ import { Link } from 'expo-router';
 const android = Platform.OS === "android"
 const { width, height } = Dimensions.get("window");
 
-export default function Page() {
+export default function Favorites() {
 
   const favoriteId = useSelector((state) => state.favoriteData.data.id)
   const providerData = useSelector(state => state.providerData.data);
