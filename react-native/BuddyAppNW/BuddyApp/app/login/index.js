@@ -17,7 +17,7 @@ export default function Login() {
   const smallScreenWidth = 320;
   const mediumScreenWidth = 375;
 
-  
+          
   const handleSignUp = () => {
     console.log('Signing up...'); 
     router.push('/signup')
@@ -30,7 +30,7 @@ export default function Login() {
   const handleLogin = () => {
     handleAmplifySignIn( username, password )
   } 
-
+ 
   useEffect(()=>{
         if (session){
             router.replace('/search')
@@ -103,7 +103,7 @@ export default function Login() {
                             onChange={(e) => { e.persist(); setPassword(e.nativeEvent.text);}}
                         />
                     </Animated.View>   
-    
+       
                     <Animated.View 
                         className="w-full mb-5" 
                         entering={FadeInDown.delay(400).duration(1000).springify()}>
