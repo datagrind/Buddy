@@ -113,7 +113,7 @@ export default function Login() {
                                     <Text className="text-xl font-bold text-white text-center">Login</Text>
                             </TouchableOpacity>
                     </Animated.View>    
-
+  
                     <Animated.View 
                         entering={FadeInDown.delay(600).duration(1000).springify()} 
                         className="flex-col justify-center">
