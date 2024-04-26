@@ -88,7 +88,7 @@ export default function Login() {
                             value={username}
                             type="email"
                             onChange={(e) => { e.persist(); setUsername( e.nativeEvent.text)}} 
-                        />  
+                        />    
                     </Animated.View>
                     <Animated.View 
                         entering={FadeInDown.delay(200).duration(1000).springify()} 
