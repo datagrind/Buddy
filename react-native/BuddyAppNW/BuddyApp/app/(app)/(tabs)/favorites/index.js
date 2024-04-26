@@ -68,7 +68,7 @@ export default function Favorites() {
   return (
     <View
     style={{
-      paddingTop: android ? hp(7) : 0,
+      paddingTop: android ? hp(7) : 75,
       backgroundColor: 'white',
       flex: 1,
       height: height,

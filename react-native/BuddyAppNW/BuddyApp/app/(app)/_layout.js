@@ -53,7 +53,7 @@ export default function _layout() {
                 title: '',
                 headerTitle: '',
                 headerBackTitle:'',
-                // headerShown: false,
+                headerShown: false,
                 // presentation: 'modal',
             }} initialParams={{}}/>
             <Stack.Screen name='calender/index' options={{

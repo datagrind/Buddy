@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useLayoutEffect, memo } from "react";
+import React, { useState, useEffect, useReducer, useLayoutEffect, memo, useCallback, useMemo } from "react";
 import { View, Text, Dimensions, TouchableOpacity, Image, Platform, TouchableWithoutFeedback } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-new-snap-carousel";
@@ -15,25 +15,30 @@ const { width, height } = Dimensions.get("window");
 
 
 
-const Search = memo(() => {
+const Search = () => {
 
   const data = useSelector(state => state.providerData.data);
   const router = useRouter()
 
+
+
+  
   const CarouselComponent = () => {
     return (
       <Carousel
         data={data}
-        renderItem={({ item }) => <DatesCard item={item} />}
-        keyExtractor={(item, index) => index.toString() } 
+        renderItem={(items) => <DatesCard items={items} />}
+        keyExtractor={(item, index) => index.toString()}
         firstItem={1}
         sliderWidth={width}
         itemWidth={width * 0.8}
         slideStyle={{ display: "flex", alignItems: "center" }}
         loop={true}
       />
-    )
-  }
+    );
+  };
+  
+  const memoizedCarousel = useMemo((item) =>  CarouselComponent(), [data]);
 
   // useLayoutEffect(()=>{
   //   CarouselComponent()
@@ -102,8 +107,9 @@ const Search = memo(() => {
       </View>
     </SafeAreaView>
   );
-}, (prevProps, nextProps) => { // and here is what i didn't notice before.
-  return prevProps.data === nextProps.data;
-})
+}
+// }, (prevProps, nextProps) => { // and here is what i didn't notice before.
+//   return prevProps.data === nextProps.data;
+// })
 
 export default Search
