@@ -16,21 +16,21 @@ export default function Login() {
   const { width, height } = useWindowDimensions();
   const smallScreenWidth = 320;
   const mediumScreenWidth = 375;
-
-          
+   
+            
   const handleSignUp = () => {
-    console.log('Signing up...'); 
+    console.log('Signing up...');   
     router.push('/signup')
   };    
-       
+        
   const handleForgotPassword = () => {
     router.push('/mainForgotPassword')
   };  
- 
+  
   const handleLogin = () => {
     handleAmplifySignIn( username, password )
   } 
- 
+  
   useEffect(()=>{
         if (session){
             router.replace('/search')

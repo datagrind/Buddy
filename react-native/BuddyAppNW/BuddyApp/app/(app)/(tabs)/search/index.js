@@ -15,30 +15,45 @@ const { width, height } = Dimensions.get("window");
 
 
 
-const Search = () => {
+const Search = memo(() => {
 
   const data = useSelector(state => state.providerData.data);
   const router = useRouter()
+  const [first, setfirst] = useState(false)
 
+  const toggleTest = () =>{
+    console.log("toggleTest")
+    setfirst(!first)
+  }
 
+  const memoizedCarouselCallback = useCallback((items) => (
+    <DatesCard items={items} />
+  ), [])
+
+  // const dateCard = (item) =>     <DatesCard items={item} />
+
+  console.log("Search rerendered")
+
+  // const memoizedCarousel = useMemo((item) => (
+  //   dateCard
+  // ), [data])
+
+  // const memoizedCarousel = useMemo(() =>  CarouselComponent(), [data]);
 
   
-  const CarouselComponent = () => {
-    return (
+  const CarouselComponent = memo(({data}) =>{ 
+    return(
       <Carousel
         data={data}
-        renderItem={(items) => <DatesCard items={items} />}
-        keyExtractor={(item, index) => index.toString()}
+        renderItem={memoizedCarouselCallback}
+        keyExtractor={(item, index) => item.toString() + index.toString()}
         firstItem={1}
         sliderWidth={width}
         itemWidth={width * 0.8}
         slideStyle={{ display: "flex", alignItems: "center" }}
-        loop={true}
-      />
-    );
-  };
+        // loop={true}
+      />)})
   
-  const memoizedCarousel = useMemo((item) =>  CarouselComponent(), [data]);
 
   // useLayoutEffect(()=>{
   //   CarouselComponent()
@@ -75,7 +90,7 @@ const Search = () => {
           </View>
           <View className="flex-row space-x-2 gap-5">
             <View className="">
-              <TouchableOpacity className="bg-black/10 p-2 rounded-full items-center justify-center">
+              <TouchableOpacity onPress={toggleTest} className="bg-black/10 p-2 rounded-full items-center justify-center">
                 <Ionicons name="notifications-outline" size={24} color="black" />
               </TouchableOpacity>
             </View>
@@ -98,7 +113,7 @@ const Search = () => {
                   <Text className="text-center">Please adjust your filter.</Text>
                 </View>
               :
-                <CarouselComponent />
+                <CarouselComponent data={data}/>
               }
             </View>
 
@@ -107,9 +122,9 @@ const Search = () => {
       </View>
     </SafeAreaView>
   );
-}
-// }, (prevProps, nextProps) => { // and here is what i didn't notice before.
-//   return prevProps.data === nextProps.data;
-// })
+}, (prevProps, nextProps) => { 
+  console.log("Search.prevProps===nextProps: ", prevProps === nextProps)
+  return prevProps.data === nextProps.data;
+})
 
 export default Search
