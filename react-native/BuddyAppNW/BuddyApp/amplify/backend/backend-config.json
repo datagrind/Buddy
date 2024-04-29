@@ -97,47 +97,5 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
-  },
-  "parameters": {
-    "AMPLIFY_function_AdminQueries32fe056d_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AdminQueries32fe056d"
-        }
-      ]
-    },
-    "AMPLIFY_function_AdminQueries32fe056d_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AdminQueries32fe056d"
-        }
-      ]
-    },
-    "AMPLIFY_function_buddyappnw780950ae780950aePostConfirmation_GROUP": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "buddyappnw780950ae780950aePostConfirmation"
-        }
-      ]
-    },
-    "AMPLIFY_function_buddyappnw780950ae780950aePostConfirmation_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "buddyappnw780950ae780950aePostConfirmation"
-        }
-      ]
-    },
-    "AMPLIFY_function_buddyappnw780950ae780950aePostConfirmation_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "buddyappnw780950ae780950aePostConfirmation"
-        }
-      ]
-    }
   }
 }
