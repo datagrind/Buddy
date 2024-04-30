@@ -1,6 +1,7 @@
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
+import fetch from 'node-fetch';
 const { SESClient, SendEmailCommand } = require("@aws-sdk/client-ses");
 const { fromEnv } = require("@aws-sdk/credential-providers");
 
@@ -11,6 +12,7 @@ exports.handler = async (event, context) => {
 
     const firstname = event?.request?.userAttributes?.given_name 
     const lastname = event?.request?.userAttributes?.family_name 
+    const GRAPHQL_ENDPOINT = process.env
 
     const handleCheckName = () => {
         if (firstname === undefined || lastname === undefined){
