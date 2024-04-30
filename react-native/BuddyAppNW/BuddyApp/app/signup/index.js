@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { signUp } from "aws-amplify/auth";
+import { newUser } from '../../components/Profile/logic/users'
 
 
 export default function SignupScreen() {
@@ -172,6 +173,7 @@ export default function SignupScreen() {
             },
             // optional
             autoSignIn: true // or SignInOptions e.g { authFlowType: "USER_SRP_AUTH" }
+            
             }
         });
         router.push({pathname: '/verify', params: { username: userId, preferred_username: username, given_name: given_name }})

@@ -1,7 +1,6 @@
 {
   "api": {
-    "AdminQueries": {
-      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+    "BuddyAppNW": {
       "dependsOn": [
         {
           "attributes": [
@@ -9,18 +8,32 @@
           ],
           "category": "auth",
           "resourceName": "buddyappnw780950ae780950ae"
-        },
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "AdminQueries32fe056d"
         }
       ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            },
+            {
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 30,
+                "description": "api key description"
+              },
+              "authenticationType": "API_KEY"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authbuddyappnw780950ae780950ae"
+            }
+          }
+        }
+      },
       "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
+      "service": "AppSync"
     }
   },
   "auth": {
@@ -67,7 +80,8 @@
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
-            "AppClientID"
+            "AppClientID",
+            "IdentityPoolId"
           ],
           "category": "auth",
           "resourceName": "buddyappnw780950ae780950ae"
@@ -78,15 +92,17 @@
     }
   },
   "function": {
-    "AdminQueries32fe056d": {
+    "buddyappNWsignupTodynamoDB": {
       "build": true,
       "dependsOn": [
         {
           "attributes": [
-            "UserPoolId"
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
           ],
-          "category": "auth",
-          "resourceName": "buddyappnw780950ae780950ae"
+          "category": "api",
+          "resourceName": "BuddyAppNW"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -96,6 +112,13 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    }
+  },
+  "storage": {
+    "s3buddyappnwstorageee71d628media": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }

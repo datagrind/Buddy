@@ -23,13 +23,7 @@
           "deploymentBucketName": "amplify-buddyappnw-dev-8d485-deployment",
           "s3Key": "amplify-builds/buddyappnw780950ae780950aePostConfirmation-446c6474566d68694832-build.zip"
         },
-        "AdminQueries32fe056d": {
-          "deploymentBucketName": "amplify-buddyappnw-dev-8d485-deployment",
-          "s3Key": "amplify-builds/AdminQueries32fe056d-4c4668476b7079475342-build.zip"
-        }
-      },
-      "api": {
-        "AdminQueries": {}
+        "buddyappNWsignupTodynamoDB": {}
       }
     }
   }
