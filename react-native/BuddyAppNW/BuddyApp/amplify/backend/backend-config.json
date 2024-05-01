@@ -1,34 +1,30 @@
 {
   "api": {
-    "BuddyAppNW": {
+    "buddyappv2": {
       "dependsOn": [
         {
           "attributes": [
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "buddyappnw780950ae780950ae"
+          "resourceName": "buddyappv2auth"
         }
       ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AWS_IAM"
-            },
-            {
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 30,
-                "description": "api key description"
-              },
-              "authenticationType": "API_KEY"
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authbuddyappv2auth"
+              }
             }
           ],
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authbuddyappnw780950ae780950ae"
-            }
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
           }
         }
       },
@@ -37,7 +33,7 @@
     }
   },
   "auth": {
-    "buddyappnw780950ae780950ae": {
+    "buddyappv2auth": {
       "customAuth": false,
       "dependsOn": [
         {
@@ -46,7 +42,7 @@
             "Name"
           ],
           "category": "function",
-          "resourceName": "buddyappnw780950ae780950aePostConfirmation",
+          "resourceName": "buddyappv2authPostConfirmation",
           "triggerProvider": "Cognito"
         }
       ],
@@ -60,12 +56,15 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "FAMILY_NAME",
+          "GIVEN_NAME",
+          "PHONE_NUMBER",
+          "PREFERRED_USERNAME"
         ],
         "socialProviders": [],
         "usernameAttributes": [
-          "EMAIL",
-          "PHONE_NUMBER"
+          "EMAIL"
         ],
         "verificationMechanisms": [
           "EMAIL"
@@ -84,7 +83,7 @@
             "IdentityPoolId"
           ],
           "category": "auth",
-          "resourceName": "buddyappnw780950ae780950ae"
+          "resourceName": "buddyappv2auth"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -92,7 +91,7 @@
     }
   },
   "function": {
-    "buddyappNWsignupTodynamoDB": {
+    "buddyappv2authPostConfirmation": {
       "build": true,
       "dependsOn": [
         {
@@ -102,23 +101,37 @@
             "GraphQLAPIKeyOutput"
           ],
           "category": "api",
-          "resourceName": "BuddyAppNW"
+          "resourceName": "buddyappv2"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "buddyappnw780950ae780950aePostConfirmation": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     }
   },
-  "storage": {
-    "s3buddyappnwstorageee71d628media": {
-      "dependsOn": [],
-      "providerPlugin": "awscloudformation",
-      "service": "S3"
+  "parameters": {
+    "AMPLIFY_function_buddyappv2authPostConfirmation_GROUP": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappv2authPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappv2authPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappv2authPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_buddyappv2authPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "buddyappv2authPostConfirmation"
+        }
+      ]
     }
   }
 }

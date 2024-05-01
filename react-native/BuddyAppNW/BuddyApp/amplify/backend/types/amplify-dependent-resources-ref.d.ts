@@ -1,13 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "BuddyAppNW": {
+    "buddyappv2": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
       "GraphQLAPIKeyOutput": "string"
     }
   },
   "auth": {
-    "buddyappnw780950ae780950ae": {
+    "buddyappv2auth": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "CreatedSNSRole": "string",
@@ -18,30 +18,17 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolName": "string"
     },
     "userPoolGroups": {
-      "AdminGroupRole": "string",
-      "ProvidersGroupRole": "string",
-      "UsersGroupRole": "string"
+      "adminGroupRole": "string",
+      "providerGroupRole": "string",
+      "userGroupRole": "string"
     }
   },
   "function": {
-    "buddyappNWsignupTodynamoDB": {
+    "buddyappv2authPostConfirmation": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
-      "Region": "string"
-    },
-    "buddyappnw780950ae780950aePostConfirmation": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    }
-  },
-  "storage": {
-    "s3buddyappnwstorageee71d628media": {
-      "BucketName": "string",
       "Region": "string"
     }
   }
