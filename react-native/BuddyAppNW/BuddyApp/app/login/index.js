@@ -10,8 +10,8 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [windowSize, setwindowSize] = useState()
-
-
+  
+ 
   const { handleAmplifySignIn, session } = useSession()  
   const { width, height } = useWindowDimensions();
   const smallScreenWidth = 320;
