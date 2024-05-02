@@ -12,7 +12,7 @@ export default function Login() {
   const [windowSize, setwindowSize] = useState()
   
  
-  const { handleAmplifySignIn, session } = useSession()  
+  const { handleAmplifySignIn, session: hiddencredentials } = useSession()  
   const { width, height } = useWindowDimensions();
   const smallScreenWidth = 320;
   const mediumScreenWidth = 375;
@@ -32,7 +32,7 @@ export default function Login() {
   } 
   
   useEffect(()=>{
-        if (session){
+        if (hiddencredentials){
             router.replace('/search')
         }
         if(width < mediumScreenWidth){
@@ -42,7 +42,7 @@ export default function Login() {
         } else {
             setwindowSize('medium')
         }
-  },[session])
+  },[hidecredentials])
  
      
   return (
@@ -85,6 +85,7 @@ export default function Login() {
                         <TextInput
                             placeholder="Email"
                             placeholderTextColor={'gray'}
+                            autoCapitalize="none"
                             value={username}
                             type="email"
                             onChange={(e) => { e.persist(); setUsername( e.nativeEvent.text)}} 
