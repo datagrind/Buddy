@@ -42,7 +42,7 @@ export default function Login() {
         } else {
             setwindowSize('medium')
         }
-  },[hidecredentials])
+  },[hiddencredentials])
  
      
   return (
