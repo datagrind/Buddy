@@ -31,5 +31,11 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     }
+  },
+  "storage": {
+    "s3buddyappv2media": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }
