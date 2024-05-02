@@ -8,7 +8,7 @@ import { StatusBar } from 'expo-status-bar'
 
 
 
-export default function _layout() {
+export default function Applayout() {
 
     const { session, isLoading } = useSession()
     const router = useRouter()
@@ -63,6 +63,12 @@ export default function _layout() {
                 // headerShown: false,
                 presentation: 'modal',
             }} initialParams={{}}/>
+            <Stack.Screen name='photos/index' options={{
+                title: '',
+                headerTitle: '',
+                headerShown: false,
+                presentation: "modal"
+            }} />
         </Stack>
     </View>
 

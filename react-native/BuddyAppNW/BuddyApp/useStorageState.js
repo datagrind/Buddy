@@ -20,7 +20,9 @@ export async function setStorageItemAsync(key, value) {
   } else {
     if (value == null) {
       await SecureStore.deleteItemAsync(key);
-    } else {
+    } else if (typeof value === 'object') {
+        await SecureStore.setItemAsync(key, JSON.stringify(value));
+    } else{
       await SecureStore.setItemAsync(key, value);
     }
   }
@@ -40,15 +42,24 @@ export function useStorageState(key) {
       }
     } else {
       SecureStore.getItemAsync(key).then(value => {
-        setState(value);
+        if (typeof value === 'string') {
+          setState(JSON.parse(value));
+        } else {
+          setState(value)
+        }
       });
     }
   }, [key]);
 
   const setValue = useCallback(
     value => {
-      setState(value);
-      setStorageItemAsync(key, value);
+      if (typeof value === 'string') {
+        setState(JSON.parse(value));
+        setStorageItemAsync(key, JSON.parse(value));
+      } else {
+        setState(value);
+        setStorageItemAsync(key, value);
+      }
     },
     [key]
   );

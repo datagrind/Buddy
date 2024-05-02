@@ -64,13 +64,11 @@ export function SessionProvider(props) {
   async function currentSession() {
     try {
       const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-      const tokenAccess = JSON.stringify(accessToken)
-      const tokenID = JSON.stringify(idToken)
 
       if (accessToken === undefined || idToken === undefined){
         return
       } else {
-        setSession(`\n\n[accesToken:${tokenAccess},\n\nidToken:${tokenID}]\n\n`)
+        setSession([accessToken, idToken])
       }
 
       } catch (err) {
@@ -84,7 +82,7 @@ export function SessionProvider(props) {
       console.log("signingout...")
       await signOut();
       // await signOut({ global: true }); //signout of all devices
-      setSession('');
+      setSession(null);
     } catch (error) {
       console.log('error signing out: ', error);
     }
@@ -109,7 +107,7 @@ export function SessionProvider(props) {
         router.replace('/(app)');
       }
     } catch (error) {
-        error.message === 'There is already a signed in user.' ? (console.log("already signedin: ", error.message, setSession('xxx')), Alert.alert(error.message)) : (console.log('LoginScreen.signIn: error signing in:', error.message), Alert.alert(error.message));
+        error.message === 'There is already a signed in user.' ? (console.log("already signedin: ", error.message, currentSession()), Alert.alert(error.message)) : (console.log('LoginScreen.signIn: error signing in:', error.message), Alert.alert(error.message));
 
     }
   }
