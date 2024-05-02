@@ -21,11 +21,14 @@
         "buddyappv2authPostConfirmation": {
           "GROUP": "user",
           "deploymentBucketName": "amplify-buddyappv2-dev-5bd0d-deployment",
-          "s3Key": "amplify-builds/buddyappv2authPostConfirmation-693844382b6353697648-build.zip"
+          "s3Key": "amplify-builds/buddyappv2authPostConfirmation-7549562f7a66584b3861-build.zip"
         }
       },
       "api": {
         "buddyappv2": {}
+      },
+      "storage": {
+        "s3buddyappv2media": {}
       }
     }
   }

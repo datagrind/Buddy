@@ -133,5 +133,12 @@
         }
       ]
     }
+  },
+  "storage": {
+    "s3buddyappv2media": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

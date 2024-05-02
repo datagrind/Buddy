@@ -17,7 +17,7 @@ export default function Login() {
   const smallScreenWidth = 320;
   const mediumScreenWidth = 375;
    
-            
+             
   const handleSignUp = () => {
     console.log('Signing up...');   
     router.push('/signup')
