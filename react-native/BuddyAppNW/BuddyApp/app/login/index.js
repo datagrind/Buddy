@@ -16,7 +16,7 @@ export default function Login() {
   const { width, height } = useWindowDimensions();
   const smallScreenWidth = 320;
   const mediumScreenWidth = 375;
-   
+    
              
   const handleSignUp = () => {
     console.log('Signing up...');   
@@ -25,7 +25,7 @@ export default function Login() {
         
   const handleForgotPassword = () => {
     router.push('/mainForgotPassword')
-  };  
+  };   
   
   const handleLogin = () => {
     handleAmplifySignIn( username, password )
@@ -43,7 +43,7 @@ export default function Login() {
             setwindowSize('medium')
         }
   },[hiddencredentials])
- 
+  
      
   return (
     <KeyboardAvoidingView className="flex-1 w-full h-full" behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
