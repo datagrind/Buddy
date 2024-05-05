@@ -1,4 +1,5 @@
-import { View, Text, SafeAreaView, Platform, Dimensions, ScrollView, Image } from 'react-native'
+import { View, Text, SafeAreaView, Platform, Dimensions, ScrollView } from 'react-native'
+import { Image } from 'expo-image';
 import React, { useState, useEffect } from 'react'
 import Animated, {FadeInDown, FadeInUp} from 'react-native-reanimated'
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -48,7 +49,7 @@ export default function Favorites() {
                       style={{
                         width: hp(25),
                         height: hp(50),
-                        resizeMode: "cover",
+                        contentFit: "cover",
                       }}
                       className="rounded-full"
                     />

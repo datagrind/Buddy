@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useReducer, useLayoutEffect, memo, useCallback, useMemo } from "react";
-import { View, Text, Dimensions, TouchableOpacity, Image, Platform, TouchableWithoutFeedback } from "react-native";
+import React, { useState, useEffect, memo, useCallback } from "react";
+import { View, Text, Dimensions, TouchableOpacity,  Platform } from "react-native";
+import { Image } from 'expo-image';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-new-snap-carousel";
 import DatesCard from "../../../../components/DatesCard";
@@ -9,56 +10,34 @@ import { Link, useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Ionicons } from '@expo/vector-icons';
 
-
 const android = Platform.OS === "android";
-const { width, height } = Dimensions.get("window");
-
-
+const { width } = Dimensions.get("window");
 
 const Search = memo(() => {
-
   const data = useSelector(state => state.providerData.data);
-  const router = useRouter()
-  const [first, setfirst] = useState(false)
+  const router = useRouter();
+  const [first, setFirst] = useState(false);
 
-  const toggleTest = () =>{
-    console.log("toggleTest")
-    setfirst(!first)
-  }
+  const toggleTest = () => {
+    setFirst(!first);
+  }; 
 
   const memoizedCarouselCallback = useCallback((items) => (
     <DatesCard items={items} />
-  ), [])
+  ), []);
 
-  // const dateCard = (item) =>     <DatesCard items={item} />
-
-  console.log("Search rerendered")
-
-  // const memoizedCarousel = useMemo((item) => (
-  //   dateCard
-  // ), [data])
-
-  // const memoizedCarousel = useMemo(() =>  CarouselComponent(), [data]);
-
-  
-  const CarouselComponent = memo(({data}) =>{ 
-    return(
-      <Carousel
-        data={data}
-        renderItem={memoizedCarouselCallback}
-        keyExtractor={(item, index) => item.toString() + index.toString()}
-        firstItem={1}
-        sliderWidth={width}
-        itemWidth={width * 0.8}
-        slideStyle={{ display: "flex", alignItems: "center" }}
-        // loop={true}
-      />)})
-  
-
-  // useLayoutEffect(()=>{
-  //   CarouselComponent()
-  // },[])
-
+  const CarouselComponent = memo(({ data }) => (
+    <Carousel
+      data={data}
+      renderItem={memoizedCarouselCallback}
+      keyExtractor={(item, index) => item.toString() + index.toString()}
+      firstItem={1}
+      sliderWidth={width}
+      itemWidth={width * 0.8}
+      slideStyle={{ display: "flex", alignItems: "center" }}
+      loop={true}
+    />
+  ), [data]);
 
   return (
     <SafeAreaView
@@ -67,64 +46,51 @@ const Search = memo(() => {
         backgroundColor: 'white',
         paddingVertical: 10,
         flex: 1,
-        height: height,
       }}
     >
       <StatusBar style="dark" backgroundColor="white" />
-      <View className="w-full  h-screen " >
-        <View className="w-full flex-row justify-between items-center px-5 mb-8 ">
-          <View className="">
-            <Link href="/(app)/profilesettings" asChild>
-              <TouchableOpacity className="rounded-full items-center justify-center">
-                <Image
-                  source={{ uri: 'https://www.goodfreephotos.com/albums/people/beautiful-women-in-white-dress.jpg' }}
-                  style={{
-                    width: hp(5),
-                    height: hp(5),
-                    resizeMode: "cover",
-                  }}
-                  className="rounded-full"
-                />
+      <View style={{ display: 'flex', padding: 10, width: "100%", height: "100%"}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 15, marginBottom: 8 }}>
+        <Link href="/(app)/profilesettings" asChild>  
+            <TouchableOpacity>
+              <Image
+                source={{ uri: 'https://www.goodfreephotos.com/albums/people/beautiful-women-in-white-dress.jpg' }}
+                style={{
+                  width: hp(5),
+                  height: hp(5),
+                  contentFit: "cover",
+                  borderRadius: hp(5) / 2,
+                }}
+              />
+            </TouchableOpacity>
+          </Link>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
+            <TouchableOpacity onPress={toggleTest} style={{ backgroundColor: 'rgba(0,0,0,0.1)', padding: 10, borderRadius: 20, marginRight: 10 }}>
+              <Ionicons name="notifications-outline" size={24} color="black" />
+            </TouchableOpacity>
+            <Link href='/searchmodal' asChild>
+            <TouchableOpacity onPress={toggleTest} style={{ backgroundColor: 'rgba(0,0,0,0.1)', padding: 10, borderRadius: 20, marginRight: 10 }}>
+                <Ionicons name="filter" size={24} color="black" />
               </TouchableOpacity>
             </Link>
           </View>
-          <View className="flex-row space-x-2 gap-5">
-            <View className="">
-              <TouchableOpacity onPress={toggleTest} className="bg-black/10 p-2 rounded-full items-center justify-center">
-                <Ionicons name="notifications-outline" size={24} color="black" />
-              </TouchableOpacity>
-            </View>
-            <View className="">
-                <Link href='/searchmodal' asChild>
-                  <TouchableOpacity className="bg-black/10 p-2 rounded-full items-center justify-center">
-                    <Ionicons name="filter" size={24} color="black" />
-                  </TouchableOpacity>
-                </Link>
-            </View>
-          </View>
         </View>
 
-        <View className="flex-1 justify-between items-center ">
-          <View className=" w-full flex-1">
-            <View className="flex w-full justify-center items-center">
-              {data.length === 0 ? 
-                <View className="flex w-full h-3/4 justify-center items-center">
-                  <Text className="text-center">No Buddy exists in this criteria.</Text>
-                  <Text className="text-center">Please adjust your filter.</Text>
-                </View>
-              :
-                <CarouselComponent data={data}/>
-              }
+        <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
+          {data.length === 0 ?
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <Text>No Buddy exists in this criteria.</Text>
+              <Text>Please adjust your filter.</Text>
             </View>
-
-          </View>
+            :
+            <CarouselComponent data={data} />
+          }
         </View>
       </View>
     </SafeAreaView>
   );
-}, (prevProps, nextProps) => { 
-  console.log("Search.prevProps===nextProps: ", prevProps === nextProps)
+}, (prevProps, nextProps) => {
   return prevProps.data === nextProps.data;
-})
+});
 
-export default Search
+export default Search;

@@ -11,12 +11,12 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [windowSize, setwindowSize] = useState()
   
- 
+  
   const { handleAmplifySignIn, session: hiddencredentials } = useSession()  
   const { width, height } = useWindowDimensions();
   const smallScreenWidth = 320;
   const mediumScreenWidth = 375;
-    
+     
              
   const handleSignUp = () => {
     console.log('Signing up...');   
@@ -26,7 +26,7 @@ export default function Login() {
   const handleForgotPassword = () => {
     router.push('/mainForgotPassword')
   };   
-  
+   
   const handleLogin = () => {
     handleAmplifySignIn( username, password )
   } 
