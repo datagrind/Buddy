@@ -13,6 +13,26 @@ import loggerMiddleware from '../context/middleware/logger'
 import { store } from '../context/store'
 // import * as Updates from 'expo-updates'
 import { useEffect } from 'react';
+import {
+  setJSExceptionHandler,
+  setNativeExceptionHandler,
+} from 'react-native-exception-handler';
+
+
+
+
+
+
+const handleError = (error, isFatal) => {
+  // fetch
+  console.log(error, isFatal);
+  alert(error.name);
+};
+
+setJSExceptionHandler((error, isFatal) => {
+  console.log('caught global error');
+  handleError(error, isFatal);
+}, true);
 
 Amplify.configure(amplifyconfig);
 
@@ -45,7 +65,7 @@ export default function RootLayout() {
   // useEffect(()=>{
   //   onFetchUpdateAsync()
   // },[])
-
+  
 
 
     return (

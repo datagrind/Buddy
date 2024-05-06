@@ -17,12 +17,12 @@ export default function Login() {
   const smallScreenWidth = 320;
   const mediumScreenWidth = 375;
      
-             
+              
   const handleSignUp = () => {
     console.log('Signing up...');   
     router.push('/signup')
   };    
-        
+          
   const handleForgotPassword = () => {
     router.push('/mainForgotPassword')
   };   
@@ -43,7 +43,7 @@ export default function Login() {
             setwindowSize('medium')
         }
   },[hiddencredentials])
-  
+   
      
   return (
     <KeyboardAvoidingView className="flex-1 w-full h-full" behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -114,7 +114,7 @@ export default function Login() {
                                     <Text className="text-xl font-bold text-white text-center">Login</Text>
                             </TouchableOpacity>
                     </Animated.View>    
-  
+    
                     <Animated.View 
                         entering={FadeInDown.delay(600).duration(1000).springify()} 
                         className="flex-col justify-center">
@@ -136,4 +136,4 @@ export default function Login() {
         </View>
     </KeyboardAvoidingView>
   ) 
-}
+} 
