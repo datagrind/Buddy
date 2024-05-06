@@ -69,6 +69,12 @@ export default function Applayout() {
                 headerShown: false,
                 presentation: "modal"
             }} />
+            <Stack.Screen name='editprofile/index' options={{
+                title: '',
+                headerTitle: '',
+                headerShown: false,
+                presentation: "modal"
+            }} />
         </Stack>
     </View>
 

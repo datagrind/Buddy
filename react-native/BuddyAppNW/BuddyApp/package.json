@@ -13,6 +13,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@aws-amplify/api-graphql": "^4.1.0",
     "@aws-amplify/auth": "^6.0.27",
     "@aws-amplify/react-native": "^1.0.28",
     "@aws-amplify/storage": "^6.4.0",
@@ -25,6 +26,7 @@
     "@expo/vector-icons": "^14.0.0",
     "@react-native-async-storage/async-storage": "1.21.0",
     "@react-native-community/datetimepicker": "^7.7.0",
+    "@react-native-community/netinfo": "^11.3.1",
     "@react-native-picker/picker": "^2.7.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.3.29",
@@ -53,6 +55,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
     "react-native-daterange-picker": "^1.5.1",
+    "react-native-exception-handler": "^2.10.10",
     "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-get-random-values": "~1.8.0",
