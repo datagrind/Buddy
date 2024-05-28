@@ -1,14 +1,22 @@
 import { View, Text, useWindowDimensions, TouchableOpacity } from 'react-native'
 import React from 'react'
 import LottieView from 'lottie-react-native'
+<<<<<<< HEAD
 // import Animated, { Extrapolation, useAnimatedStyle, interpolate } from 'react-native-reanimated'
+=======
+import Animated, { Extrapolation, useAnimatedStyle, interpolate } from 'react-native-reanimated'
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
 import { useRouter } from 'expo-router'
 
 export default function OnboardSwipe({item, index, x, last, preferred_username, given_name}) {
 
     const router = useRouter()
     const {width: SCREEN_WIDTH} = useWindowDimensions()
+<<<<<<< HEAD
     // const circleAnimation = useAnimatedStyle(() => {
+=======
+    const circleAnimation = useAnimatedStyle(() => {
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
     const scale = interpolate(
         x.value,
         [
@@ -26,7 +34,11 @@ export default function OnboardSwipe({item, index, x, last, preferred_username, 
   return (
     <View className="flex-1 justify-center items-center mb-32 p-3" style={{width: SCREEN_WIDTH}}>
         <View className="absolute items-center justify-end">
+<<<<<<< HEAD
             {/* <Animated.View style={[{width: SCREEN_WIDTH, height: SCREEN_WIDTH, backgroundColor: item.backgroundColor, borderRadius: SCREEN_WIDTH/2,}, circleAnimation]} /> */}
+=======
+            <Animated.View style={[{width: SCREEN_WIDTH, height: SCREEN_WIDTH, backgroundColor: item.backgroundColor, borderRadius: SCREEN_WIDTH/2,}, circleAnimation]} />
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
         </View>
         <View >
             {/* <LottieView 

@@ -13,8 +13,32 @@ import loggerMiddleware from '../context/middleware/logger'
 import { store } from '../context/store'
 // import * as Updates from 'expo-updates'
 import { useEffect } from 'react';
+<<<<<<< HEAD
 
 
+=======
+import {
+  setJSExceptionHandler,
+  setNativeExceptionHandler,
+} from 'react-native-exception-handler';
+
+
+
+
+
+
+const handleError = (error, isFatal) => {
+  // fetch
+  console.log(error, isFatal);
+  alert(error.name);
+};
+
+setJSExceptionHandler((error, isFatal) => {
+  console.log('caught global error');
+  handleError(error, isFatal);
+}, true);
+
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
 Amplify.configure(amplifyconfig);
 
 // const reducer = () => {}

@@ -1,7 +1,11 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useRouter, useLocalSearchParams } from 'expo-router'
+<<<<<<< HEAD
 // import Animated, { useAnimatedRef, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
+=======
+import Animated, { useAnimatedRef, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
 import OnboardSwipe from './component/OnboardSwipe';
 
 export default function Onboarding() {
@@ -27,7 +31,11 @@ export default function Onboarding() {
         },
     ];
  
+<<<<<<< HEAD
     // const flatListRef = useAnimatedRef() //review 
+=======
+    const flatListRef = useAnimatedRef() //review 
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
     const x = useSharedValue(0)
 
     const router = useRouter()
@@ -37,6 +45,7 @@ export default function Onboarding() {
         router.push('/welcome')
     }
 
+<<<<<<< HEAD
     // const onScrollHandle = useAnimatedScrollHandler({
     //     onScroll: event => {
     //         x.value = event.contentOffset.x
@@ -46,6 +55,17 @@ export default function Onboarding() {
   return (
     <View className=" flex-1 ">
         {/* <Animated.FlatList 
+=======
+    const onScrollHandle = useAnimatedScrollHandler({
+        onScroll: event => {
+            x.value = event.contentOffset.x
+        }
+    })
+
+  return (
+    <View className=" flex-1 ">
+        <Animated.FlatList 
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
             ref={flatListRef}
             data={textTitles} 
             onScroll={onScrollHandle}
@@ -57,7 +77,11 @@ export default function Onboarding() {
             bounces={false}
             pagingEnabled={true}
             showsHorizontalScrollIndicator={false}
+<<<<<<< HEAD
         /> */}
+=======
+        />
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
     </View>
   )
 }

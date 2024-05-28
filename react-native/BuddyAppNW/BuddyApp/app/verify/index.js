@@ -2,7 +2,11 @@ import { View, Text, Alert, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { confirmSignUp } from 'aws-amplify/auth';
 import { useLocalSearchParams, useRouter } from 'expo-router'
+<<<<<<< HEAD
 // import Animated, {FadeInDown, FadeInUp} from 'react-native-reanimated';
+=======
+import Animated, {FadeInDown, FadeInUp} from 'react-native-reanimated';
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
 
 
 export default function Verify() {
@@ -52,6 +56,7 @@ export default function Verify() {
   return (
     <View className="flex-1 justify-center items-center px-5">
       <View className="flex items-center mb-5">
+<<<<<<< HEAD
         {/* <Animated.Text 
             entering={FadeInUp.duration(1000).springify()}  */}
             {/* className=" font-bold tracking-wider text-center text-3xl mb-10"> */}
@@ -62,45 +67,84 @@ export default function Verify() {
           entering={FadeInDown.delay(600).duration(1000).springify()} 
           className=" p-5 rounded-2xl w-full mb-5 items-center"
       > */}
+=======
+        <Animated.Text 
+            entering={FadeInUp.duration(1000).springify()} 
+            className=" font-bold tracking-wider text-center text-3xl mb-10">
+            Enter Verification Code
+        </Animated.Text>
+      </View>
+      <Animated.View 
+          entering={FadeInDown.delay(600).duration(1000).springify()} 
+          className=" p-5 rounded-2xl w-full mb-5 items-center"
+      >
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
         <TextInput
           className="border-b-2 border-gray-500 px-3 py-2 w-4/5 mb-5 text-center"
           placeholder="Confirmation Code"
           value={confirmation}
           onChangeText={setConfirmation}
         />
+<<<<<<< HEAD
       {/* </Animated.View> */}
       {/* <Animated.View 
         entering={FadeInDown.delay(600).duration(1000).springify()} 
         className=" p-5 rounded-2xl w-full mb-5"
         > */}
+=======
+      </Animated.View>
+      <Animated.View 
+        entering={FadeInDown.delay(600).duration(1000).springify()} 
+        className=" p-5 rounded-2xl w-full mb-5"
+        >
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
       <TouchableOpacity
         className="bg-red-600 py-2 px-5 rounded-full"
         onPress={handleConfirm}
       >
         <Text className="text-white font-bold text-center">Submit</Text>
       </TouchableOpacity>
+<<<<<<< HEAD
       {/* </Animated.View>
       <Animated.View 
             entering={FadeInDown.delay(600).duration(1000).springify()} 
             className=" p-5 rounded-2xl w-full mb-5"
         > */}
+=======
+      </Animated.View>
+      <Animated.View 
+            entering={FadeInDown.delay(600).duration(1000).springify()} 
+            className=" p-5 rounded-2xl w-full mb-5"
+        >
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
           <TouchableOpacity
               className="mt-4"
               onPress={() => handleResendCode}
           >
               <Text className=" text-center underline">Resend Code</Text>
           </TouchableOpacity>
+<<<<<<< HEAD
         {/* </Animated.View>
         <Animated.View 
               entering={FadeInDown.delay(600).duration(1000).springify()} 
               className="flex-col justify-center"> */}
+=======
+        </Animated.View>
+        <Animated.View 
+              entering={FadeInDown.delay(600).duration(1000).springify()} 
+              className="flex-col justify-center">
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
               <View className="flex-row justify-center mb-3">
                   <Text>Go back to signup: </Text>
                   <TouchableOpacity onPress={()=>router.back()}>
                       <Text className="text-red-600">Click Here</Text>
                   </TouchableOpacity>
               </View>
+<<<<<<< HEAD
           {/* </Animated.View> */}
+=======
+          </Animated.View>
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
     </View>
   )
 }

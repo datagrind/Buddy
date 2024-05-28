@@ -1,16 +1,22 @@
 {
   "version": "1",
   "cognitoConfig": {
+<<<<<<<< HEAD:react-native/Test/my-app/amplify/backend/auth/buddyappv2auth/cli-inputs.json
     "identityPoolName": "buddyappv2874cad9a_identitypool_874cad9a",
     "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "buddya874cad9a",
     "userPoolName": "buddyappv2874cad9a_userpool_874cad9a",
+========
+    "resourceNameTruncated": "buddya9561d323",
+    "userPoolName": "BuddyApp",
+>>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9:react-native/Buddy-App/amplify/backend/auth/BuddyApp/cli-inputs.json
     "autoVerifiedAttributes": [
       "email"
     ],
     "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
-      "SMS Text Message"
+      "SMS Text Message",
+      "TOTP"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
@@ -23,12 +29,17 @@
       "email",
       "family_name",
       "given_name",
+<<<<<<<< HEAD:react-native/Test/my-app/amplify/backend/auth/buddyappv2auth/cli-inputs.json
       "phone_number",
       "preferred_username"
+========
+      "phone_number"
+>>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9:react-native/Buddy-App/amplify/backend/auth/BuddyApp/cli-inputs.json
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
+<<<<<<<< HEAD:react-native/Test/my-app/amplify/backend/auth/buddyappv2auth/cli-inputs.json
     "userpoolClientWriteAttributes": [
       "email",
       "family_name",
@@ -65,6 +76,28 @@
       "admin"
     ],
     "serviceName": "Cognito",
+========
+    "userpoolClientWriteAttributes": [],
+    "userpoolClientReadAttributes": [],
+    "userpoolClientLambdaRole": "BuddyA9561d323_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "9561d323",
+    "resourceName": "BuddyApp",
+    "authSelections": "userPoolOnly",
+    "serviceName": "Cognito",
+    "usernameAttributes": [
+      "email",
+      "phone_number"
+    ],
+    "useDefault": "manual",
+    "userPoolGroups": false,
+    "userPoolGroupList": [
+      "buddyusers",
+      "buddyproviders",
+      "buddyadmin"
+    ],
+    "adminQueries": false,
+>>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9:react-native/Buddy-App/amplify/backend/auth/BuddyApp/cli-inputs.json
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
     "authRoleArn": {
@@ -83,7 +116,11 @@
     "dependsOn": [
       {
         "category": "function",
+<<<<<<<< HEAD:react-native/Test/my-app/amplify/backend/auth/buddyappv2auth/cli-inputs.json
         "resourceName": "buddyappv2authPostConfirmation",
+========
+        "resourceName": "BuddyAppPostConfirmation",
+>>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9:react-native/Buddy-App/amplify/backend/auth/BuddyApp/cli-inputs.json
         "triggerProvider": "Cognito",
         "attributes": [
           "Arn",
@@ -91,14 +128,29 @@
         ]
       }
     ],
+<<<<<<<< HEAD:react-native/Test/my-app/amplify/backend/auth/buddyappv2auth/cli-inputs.json
     "permissions": [
       "{\"policyName\":\"AddToGroupCognito\",\"trigger\":\"PostConfirmation\",\"effect\":\"Allow\",\"actions\":[\"cognito-idp:AdminAddUserToGroup\",\"cognito-idp:GetGroup\",\"cognito-idp:CreateGroup\"],\"resource\":{\"paramType\":\"!GetAtt\",\"keys\":[\"UserPool\",\"Arn\"]}}"
     ],
     "authTriggerConnections": [
       "{\"triggerType\":\"PostConfirmation\",\"lambdaFunctionName\":\"buddyappv2authPostConfirmation\"}"
     ],
+========
+    "hostedUI": false,
+    "triggers": {
+      "PostConfirmation": [
+        "add-to-group",
+        "custom"
+      ]
+    },
+>>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9:react-native/Buddy-App/amplify/backend/auth/BuddyApp/cli-inputs.json
     "parentStack": {
       "Ref": "AWS::StackId"
-    }
+    },
+    "permissions": [
+      "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
+    ],
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"BuddyAppPostConfirmation\"\n  }\n]",
+    "authProviders": []
   }
 }

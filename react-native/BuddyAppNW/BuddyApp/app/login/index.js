@@ -1,7 +1,11 @@
 import { Alert, View, Text, KeyboardAvoidingView, Platform, Image, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
+<<<<<<< HEAD
 // import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated'
+=======
+import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated'
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
 import { router } from 'expo-router'
 import { useSession } from '../../ctx'
 
@@ -53,11 +57,19 @@ export default function Login() {
   
             {/* lights */}
             <View className=" flex justify-center items-center w-full mb-20 ">
+<<<<<<< HEAD
                 {/* <Animated.Image  */}
                     {/* entering={FadeInUp.delay(200).duration(1000).springify()}  */}
                     {/* source={require('../../assets/images/logo_white_background.jpg')} */}
                     {/* className="h-[220] w-[175]"  */}
                 {/* /> */}
+=======
+                <Animated.Image 
+                    entering={FadeInUp.delay(200).duration(1000).springify()} 
+                    source={require('../../assets/images/logo_white_background.jpg')}
+                    className="h-[220] w-[175]" 
+                />
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
                 {/* <Animated.Image 
                     entering={FadeInUp.delay(400).duration(1000).springify()} 
                     source={null}
@@ -79,9 +91,15 @@ export default function Login() {
   
                 {/* form */}
                 <View className="flex items-center mx-5 px-10 sapce-y-4">
+<<<<<<< HEAD
                     {/* <Animated.View  */}
                         {/* entering={FadeInDown.duration(1000).springify()}  */}
                         {/* className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}> */}
+=======
+                    <Animated.View 
+                        entering={FadeInDown.duration(1000).springify()} 
+                        className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
                         <TextInput
                             placeholder="Email"
                             placeholderTextColor={'gray'}
@@ -90,10 +108,17 @@ export default function Login() {
                             type="email"
                             onChange={(e) => { e.persist(); setUsername( e.nativeEvent.text)}} 
                         />    
+<<<<<<< HEAD
                     {/* </Animated.View> */}
                     {/* <Animated.View  */}
                         {/* entering={FadeInDown.delay(200).duration(1000).springify()}  */}
                         {/* className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}> */}
+=======
+                    </Animated.View>
+                    <Animated.View 
+                        entering={FadeInDown.delay(200).duration(1000).springify()} 
+                        className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
 
                         <TextInput
                             placeholder="Password"
@@ -103,21 +128,37 @@ export default function Login() {
                             type="password" 
                             onChange={(e) => { e.persist(); setPassword(e.nativeEvent.text);}}
                         />
+<<<<<<< HEAD
                     {/* </Animated.View>    */}
        
                     {/* <Animated.View  */}
                         {/* className="w-full mb-5"  */}
                         {/* entering={FadeInDown.delay(400).duration(1000).springify()}> */}
+=======
+                    </Animated.View>   
+       
+                    <Animated.View 
+                        className="w-full mb-5" 
+                        entering={FadeInDown.delay(400).duration(1000).springify()}>
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
                             <TouchableOpacity 
                                 onPress={handleLogin}
                                 className={`w-full bg-red-600 ${windowSize === 'small' ? 'p-1' : 'p-3'} rounded-2xl mb-6`}>
                                     <Text className="text-xl font-bold text-white text-center">Login</Text>
                             </TouchableOpacity>
+<<<<<<< HEAD
                     {/* </Animated.View>     */}
     
                     {/* <Animated.View  */}
                         {/* entering={FadeInDown.delay(600).duration(1000).springify()}  */}
                         {/* className="flex-col justify-center"> */}
+=======
+                    </Animated.View>    
+    
+                    <Animated.View 
+                        entering={FadeInDown.delay(600).duration(1000).springify()} 
+                        className="flex-col justify-center">
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
                         <View className="flex-row justify-center mb-3">
                             <Text>Forgot Password? </Text>
                             <TouchableOpacity onPress={handleForgotPassword}>
@@ -130,7 +171,11 @@ export default function Login() {
                                 <Text className="text-red-600">SignUp</Text>
                             </TouchableOpacity>
                         </View>
+<<<<<<< HEAD
                     {/* </Animated.View> */}
+=======
+                    </Animated.View>
+>>>>>>> e3f4dec2cfa9a2dad11faa24bbf7fc9963ece5b9
                 </View>   
             {/* </View> */}
         </View>
