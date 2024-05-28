@@ -1,7 +1,7 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useRouter, useLocalSearchParams } from 'expo-router'
-import Animated, { useAnimatedRef, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
+// import Animated, { useAnimatedRef, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import OnboardSwipe from './component/OnboardSwipe';
 
 export default function Onboarding() {
@@ -27,7 +27,7 @@ export default function Onboarding() {
         },
     ];
  
-    const flatListRef = useAnimatedRef() //review 
+    // const flatListRef = useAnimatedRef() //review 
     const x = useSharedValue(0)
 
     const router = useRouter()
@@ -37,15 +37,15 @@ export default function Onboarding() {
         router.push('/welcome')
     }
 
-    const onScrollHandle = useAnimatedScrollHandler({
-        onScroll: event => {
-            x.value = event.contentOffset.x
-        }
-    })
+    // const onScrollHandle = useAnimatedScrollHandler({
+    //     onScroll: event => {
+    //         x.value = event.contentOffset.x
+    //     }
+    // })
 
   return (
     <View className=" flex-1 ">
-        <Animated.FlatList 
+        {/* <Animated.FlatList 
             ref={flatListRef}
             data={textTitles} 
             onScroll={onScrollHandle}
@@ -57,7 +57,7 @@ export default function Onboarding() {
             bounces={false}
             pagingEnabled={true}
             showsHorizontalScrollIndicator={false}
-        />
+        /> */}
     </View>
   )
 }

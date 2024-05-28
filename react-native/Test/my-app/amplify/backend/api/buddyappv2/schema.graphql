@@ -1,0 +1,226 @@
+type Messaging @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  senderID: ID
+  receiverID: ID
+  sessionID: ID! @index(name: "bySession")
+  content: String
+  status: String
+  providerID: ID! @index(name: "byProvider")
+  userID: ID! @index(name: "byUser")
+}
+
+type ProviderAvailability @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  providerID: ID! @index(name: "byProvider")
+  date: AWSDate
+  start_time: AWSTime
+  end_time: AWSTime
+  status: String
+  provider: Provider @belongsTo(fields: ["providerID"])
+}
+
+type Session @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  providerID: ID! @index(name: "byProvider")
+  userID: ID! @index(name: "byUser")
+  date: AWSDate
+  start_time: AWSTime
+  end_time: AWSTime
+  status: String
+  service_type: String
+  locationID: ID
+  transactionID: ID
+  userRatingID: ID
+  providerRatingID: ID
+  location: Location @hasOne(fields: ["locationID"])
+  transaction: Transaction @hasOne(fields: ["transactionID"])
+  userRating: UserRating @hasOne(fields: ["userRatingID"])
+  providerRating: ProviderRating @hasOne(fields: ["providerRatingID"])
+  provider: Provider @belongsTo(fields: ["providerID"])
+  user: User @belongsTo(fields: ["userID"])
+  Messagings: [Messaging] @hasMany(indexName: "bySession", fields: ["id"])
+}
+
+type Location @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  providerID: ID! @index(name: "byProvider")
+  start_address: String
+  start_city: String
+  start_state: String
+  start_zip_code: String
+  start_country: String
+  end_address: String
+  end_city: String
+  end_state: String
+  end_zip_code: String
+  end_country: String
+  user: User @belongsTo(fields: ["userID"])
+  provider: Provider @belongsTo(fields: ["providerID"])
+}
+
+type ProviderNotification @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  providerID: ID! @index(name: "byProvider")
+  type: String
+  content: String
+  status: String
+  provider: Provider @belongsTo(fields: ["providerID"])
+}
+
+type UserNotification @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  type: String
+  content: String
+  status: String
+  user: User @belongsTo(fields: ["userID"])
+}
+
+type Photos @model @auth(rules: [{allow: public}, {allow: owner}]) {
+  id: ID!
+  photos: [String]
+}
+
+type ProviderRating @model @auth(rules: [{allow: public}, {allow: private}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  providerID: ID! @index(name: "byProvider")
+  type: String!
+  stars: Int!
+  review: String
+  user: User @belongsTo(fields: ["userID"])
+  provider: Provider @belongsTo(fields: ["providerID"])
+}
+
+type UserRating @model @auth(rules: [{allow: public}, {allow: private}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  providerID: ID! @index(name: "byProvider")
+  type: String!
+  stars: Int!
+  review: String
+  user: User @belongsTo(fields: ["userID"])
+  provider: Provider @belongsTo(fields: ["providerID"])
+}
+
+type Transaction @model @auth(rules: [{allow: private}, {allow: public}, {allow: owner}, {allow: private, provider: iam}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  providerID: ID! @index(name: "byProvider")
+  provider_pay_rate: Float!
+  provider_service_fee: Float!
+  user_service_fee: Float!
+  taxes: Float!
+  total: Float!
+  status: String!
+  hours: Float!
+  user: User @belongsTo(fields: ["userID"])
+  provider: Provider @belongsTo(fields: ["providerID"])
+  notes: String
+}
+
+type Reservation @model @auth(rules: [{allow: private}, {allow: owner}, {allow: public}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  providerID: ID! @index(name: "byProvider")
+  future_date_time: String!
+  service_type: String!
+  status: String!
+  purpose: String!
+  transactionID: ID
+  locationID: ID
+  transaction: Transaction @hasOne(fields: ["transactionID"])
+  location: Location @hasOne(fields: ["locationID"])
+  user: User @belongsTo(fields: ["userID"])
+  provider: Provider @belongsTo(fields: ["providerID"])
+  notes: String
+}
+
+type UserFavorite @model @auth(rules: [{allow: public}, {allow: owner}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  favorite_providers: [String]
+  user: User @belongsTo(fields: ["userID"])
+}
+
+type ProviderFavorite @model @auth(rules: [{allow: public}, {allow: owner}]) {
+  id: ID!
+  providerID: ID! @index(name: "byProvider")
+  favorite_users: [String]
+  provider: Provider @belongsTo(fields: ["providerID"])
+}
+
+type User @model @auth(rules: [{allow: groups, groups: ["Admin"]}, {allow: public}, {allow: owner}, {allow: private}]) {
+  id: ID!
+  firstname: String
+  lastname: String
+  birthdate: AWSDate
+  about_me: String
+  nickname: String
+  interests: [String]
+  city: String
+  state: String
+  likes: Int
+  gender: String
+  sexual_preference: String
+  height: String
+  ethnicity: String
+  education: String
+  smoke: String
+  alcohol: String
+  occupation: String
+  user_star_rating: Float
+  filter_preference: [String]
+  userFavorites: [UserFavorite] @hasMany(indexName: "byUser", fields: ["id"])
+  reservations: [Reservation] @hasMany(indexName: "byUser", fields: ["id"])
+  transactions: [Transaction] @hasMany(indexName: "byUser", fields: ["id"])
+  userRatings: [UserRating] @hasMany(indexName: "byUser", fields: ["id"])
+  providerRatings: [ProviderRating] @hasMany(indexName: "byUser", fields: ["id"])
+  userNotifications: [UserNotification] @hasMany(indexName: "byUser", fields: ["id"])
+  locations: [Location] @hasMany(indexName: "byUser", fields: ["id"])
+  sessions: [Session] @hasMany(indexName: "byUser", fields: ["id"])
+  photos: Photos @hasOne
+  age: Int
+  tier: String
+  Messagings: [Messaging] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type Provider @model @auth(rules: [{allow: public}, {allow: owner}, {allow: private}]) {
+  id: ID!
+  firstname: String
+  lastname: String
+  nickname: String
+  birthdate: AWSDate
+  city: String
+  state: String
+  pay_rate: Float
+  likes: Int
+  available_now: Boolean
+  provider_star_rating: Float
+  service: [String]
+  about_me: String
+  interests: [String]
+  gender: String
+  sexual_preference: String
+  height: String
+  ethnicity: String
+  education: String
+  smoke: String
+  alcohol: String
+  occupation: String
+  providerFavorites: [ProviderFavorite] @hasMany(indexName: "byProvider", fields: ["id"])
+  transactions: [Transaction] @hasMany(indexName: "byProvider", fields: ["id"])
+  reservations: [Reservation] @hasMany(indexName: "byProvider", fields: ["id"])
+  providerRatings: [ProviderRating] @hasMany(indexName: "byProvider", fields: ["id"])
+  userRatings: [UserRating] @hasMany(indexName: "byProvider", fields: ["id"])
+  providerNotifications: [ProviderNotification] @hasMany(indexName: "byProvider", fields: ["id"])
+  providerAvailabilities: [ProviderAvailability] @hasMany(indexName: "byProvider", fields: ["id"])
+  locations: [Location] @hasMany(indexName: "byProvider", fields: ["id"])
+  sessions: [Session] @hasMany(indexName: "byProvider", fields: ["id"])
+  photos: Photos @hasOne
+  age: Int
+  tier: String
+  Messagings: [Messaging] @hasMany(indexName: "byProvider", fields: ["id"])
+}
+ 

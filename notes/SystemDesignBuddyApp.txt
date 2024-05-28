@@ -1,0 +1,129 @@
+Designing a system for the Buddy App using React Native Expo and AWS Amplify involves several components and considerations. Here's an outline of the system design:
+
+### 1. **Frontend: React Native with Expo**
+
+#### Components:
+- **App Entry Point**: Handles navigation and initial setup.
+- **Authentication Screens**: Login, Signup, Forgot Password.
+- **Main App Screens**:
+  - **Home Screen**: Displays a list of available providers.
+  - **Profile Screen**: Displays provider/user details.
+  - **Booking Screen**: Allows users to book sessions.
+  - **Favorites Screen**: Lists user's favorite providers.
+  - **Notifications Screen**: Displays notifications.
+  - **Settings Screen**: Allows users to manage account settings.
+  
+#### Navigation:
+- **React Navigation**: Used for handling navigation within the app (e.g., stack navigator, tab navigator).
+
+### 2. **Backend: AWS Amplify**
+
+#### Services:
+- **Authentication**: AWS Cognito for user authentication and authorization.
+- **GraphQL API**: AWS AppSync for managing GraphQL endpoints and data interactions.
+- **Data Storage**: Amazon DynamoDB for storing user, provider, session, and other related data.
+- **File Storage**: Amazon S3 for storing photos and other media files.
+- **Notifications**: AWS SNS (Simple Notification Service) or Pinpoint for sending push notifications.
+
+### 3. **Database Schema**
+
+#### Tables and Relationships:
+
+1. **Users**
+   - Fields: `id`, `firstname`, `lastname`, `age`, `about_me`, `nickname`, `interests`, `city`, `state`, `likes`, `gender`, `sexual_preference`, `height`, `ethnicity`, `education`, `smoke`, `alcohol`, `occupation`, `user_star_rating`, `filter_preference`, `createdAt`, `updatedAt`
+   - Relationships: `hasMany` Reservations, Transactions, UserRatings, ProviderRatings, UserNotifications, Locations, Sessions, Photos
+
+2. **Providers**
+   - Fields: `id`, `firstname`, `lastname`, `nickname`, `age`, `city`, `state`, `pay_rate`, `likes`, `available_now`, `provider_star_rating`, `things_we_can_do`, `about_me`, `interests`, `gender`, `sexual_preference`, `height`, `ethnicity`, `education`, `smoke`, `alcohol`, `occupation`, `createdAt`, `updatedAt`
+   - Relationships: `hasMany` Reservations, Transactions, ProviderRatings, UserRatings, ProviderNotifications, ProviderAvailibility, Locations, Sessions, Photos
+
+3. **Sessions**
+   - Fields: `id`, `providerID`, `userID`, `date`, `start_time`, `end_time`, `status`, `service_type`, `createdAt`, `updatedAt`
+   - Relationships: `hasOne` Location, Transaction, `hasMany` UserRatings, ProviderRatings
+
+4. **Reservations**
+   - Fields: `id`, `userID`, `providerID`, `future_date_time`, `service_type`, `status`, `purpose`, `createdAt`, `updatedAt`
+   - Relationships: `hasOne` Transaction, Location
+
+5. **Locations**
+   - Fields: `id`, `userID`, `providerID`, `start_address`, `start_city`, `start_state`, `start_zip_code`, `start_country`, `end_address`, `end_city`, `end_state`, `end_zip_code`, `end_country`, `createdAt`, `updatedAt`
+
+6. **Transactions**
+   - Fields: `id`, `userID`, `providerID`, `provider_pay_rate`, `provider_service_fee`, `user_service_fee`, `taxes`, `total`, `status`, `hours`, `createdAt`, `updatedAt`
+
+7. **UserRatings and ProviderRatings**
+   - Fields: `id`, `userID`, `providerID`, `sessionID`, `type`, `stars`, `review`, `createdAt`, `updatedAt`
+
+8. **UserNotifications and ProviderNotifications**
+   - Fields: `id`, `userID`/`providerID`, `type`, `content`, `status`, `createdAt`, `updatedAt`
+
+9. **Photos**
+   - Fields: `id`, `photos` (Array of Strings), `createdAt`, `updatedAt`
+
+10. **ProviderAvailibility**
+    - Fields: `id`, `providerID`, `date`, `start_time`, `end_time`, `status`, `createdAt`, `updatedAt`
+
+### 4. **Amplify Configuration**
+
+#### Setup:
+1. **Amplify CLI**: Initialize Amplify in your project and configure necessary services.
+   ```bash
+   amplify init
+   amplify add auth
+   amplify add api
+   amplify add storage
+   amplify push
+   ```
+
+2. **GraphQL API**: Define GraphQL schema using the schema provided above.
+3. **Authentication**: Configure Cognito for user sign-up, sign-in, and multi-factor authentication.
+4. **Storage**: Configure S3 for file uploads and management.
+
+### 5. **App Logic and Workflows**
+
+#### Booking a Session:
+1. **User selects a provider** from the home screen.
+2. **User selects date and time** for the session.
+3. **Booking request is created** and sent to the provider for approval.
+4. **Provider approves or denies** the booking request.
+5. If approved, **session details** are confirmed and stored.
+6. **Notifications** are sent to both user and provider.
+
+#### Viewing and Managing Reservations:
+1. **User views upcoming sessions** on the reservations screen.
+2. **User can cancel** a session if needed.
+3. **Provider can also cancel or reschedule** the session.
+4. **Notifications** are updated accordingly.
+
+#### Ratings and Reviews:
+1. After a session, **users and providers can rate** each other.
+2. **Ratings and reviews** are stored and displayed in profiles.
+
+### 6. **Security and Permissions**
+
+#### Amplify Auth Rules:
+- Public access for general data.
+- Owner-based access for user-specific data.
+- Admin group for administrative actions.
+
+#### Example Auth Rules:
+```graphql
+type User @model @auth(rules: [{allow: groups, groups: ["Admin"]}, {allow: public}, {allow: owner}, {allow: private}]) {
+  ...
+}
+type Provider @model @auth(rules: [{allow: public}, {allow: owner}, {allow: private}]) {
+  ...
+}
+```
+
+### 7. **Deployment and Maintenance**
+
+#### Continuous Integration:
+- Use GitHub Actions or another CI/CD tool to automate deployment.
+- Ensure Amplify CLI is set up in the CI environment.
+
+#### Monitoring:
+- Use AWS CloudWatch for monitoring API calls and Lambda functions.
+- Set up alerts for critical issues.
+
+This design provides a robust structure for the Buddy App, leveraging AWS Amplify’s powerful features and ensuring scalability, security, and ease of use.

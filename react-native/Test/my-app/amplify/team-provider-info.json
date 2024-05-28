@@ -1,0 +1,50 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-buddyappv2-dev-5bd0d-authRole",
+      "UnauthRoleArn": "arn:aws:iam::396495691727:role/amplify-buddyappv2-dev-5bd0d-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::396495691727:role/amplify-buddyappv2-dev-5bd0d-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-buddyappv2-dev-5bd0d-deployment",
+      "UnauthRoleName": "amplify-buddyappv2-dev-5bd0d-unauthRole",
+      "StackName": "amplify-buddyappv2-dev-5bd0d",
+      "StackId": "arn:aws:cloudformation:us-west-1:396495691727:stack/amplify-buddyappv2-dev-5bd0d/63610f70-0778-11ef-bea7-02d95972d41b",
+      "AmplifyAppId": "du8vmhlar3g7z",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-buddyappv2-dev-5bd0d-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "function": {
+        "buddyappv2authPostConfirmation": {
+          "GROUP": "user",
+          "deploymentBucketName": "amplify-buddyappv2-dev-5bd0d-deployment",
+          "s3Key": "amplify-builds/buddyappv2authPostConfirmation-36546f397465644d7954-build.zip"
+        }
+      },
+      "auth": {
+        "buddyappv2auth": {},
+        "userPoolGroups": {}
+      },
+      "storage": {
+        "s3buddyappv2media": {}
+      },
+      "api": {
+        "buddyappv2": {}
+      },
+      "analytics": {
+        "buddyapp": {},
+        "Pinpoint": {
+          "Name": "buddyapp-dev",
+          "Id": "984a071319f545dc96c3c898ded54752",
+          "Region": "us-west-2"
+        }
+      },
+      "notifications": {
+        "Pinpoint": {
+          "Name": "buddyapp-dev",
+          "Id": "984a071319f545dc96c3c898ded54752",
+          "Region": "us-west-2"
+        }
+      }
+    }
+  }
+}

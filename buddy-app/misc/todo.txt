@@ -1,0 +1,35 @@
+03/16
+- Demo Day
+
+03/15
+- Last minute bug fixes
+
+03/14
+- Deployment
+
+03/13
+- Deployment
+
+03/12
+-App completion
+
+03/11
+- Styling
+
+03/10
+- Payments
+
+03/09
+- Payments
+
+03/08
+- Chat
+
+03/07
+- Settings
+
+03/06
+- Calender / Side Menu
+
+03/05
+- Onboarding / Search Filter

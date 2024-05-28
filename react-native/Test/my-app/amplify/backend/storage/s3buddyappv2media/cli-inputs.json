@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3buddyappv2media",
+  "policyUUID": "7db024d5",
+  "bucketName": "buddyappv2media",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

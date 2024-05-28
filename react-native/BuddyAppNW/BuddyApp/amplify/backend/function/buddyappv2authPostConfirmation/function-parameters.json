@@ -1,0 +1,24 @@
+{
+  "trigger": true,
+  "modules": [
+    "add-to-group",
+    "custom"
+  ],
+  "parentResource": "buddyappv2auth",
+  "functionName": "buddyappv2authPostConfirmation",
+  "resourceName": "buddyappv2authPostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": "[]",
+  "triggerDir": "C:\\snapshot\\amplify-cli\\build\\node_modules\\@aws-amplify\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "triggerEventPath": "PostConfirmation.event.json",
+  "roleName": "buddyappv2authPostConfirmation",
+  "skipEdit": true,
+  "permissions": {
+    "api": {
+      "buddyappv2": [
+        "Mutation"
+      ]
+    }
+  }
+}

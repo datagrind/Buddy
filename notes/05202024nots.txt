@@ -1,0 +1,8 @@
+no booking until profile filled
+
+-firstname
+-lastname
+-1 photo
+-
+
+Add Tips

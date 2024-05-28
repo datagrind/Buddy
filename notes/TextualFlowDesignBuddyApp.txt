@@ -1,0 +1,165 @@
+Sure, I can describe how the flow chart would look. You can use a flowchart tool like Lucidchart, Draw.io, or any other preferred tool to visualize the flow chart.
+
+### Flow Chart Description:
+
+1. **App Entry Point**
+    - Start
+    - Initialize App
+    - Navigate to Authentication
+
+2. **Authentication Screens**
+    - [Login Screen]
+        - User Login
+        - Successful -> Navigate to Main App Screens
+        - Failure -> Show Error
+    - [Signup Screen]
+        - User Signup
+        - Successful -> Navigate to Main App Screens
+        - Failure -> Show Error
+    - [Forgot Password Screen]
+        - User Requests Password Reset
+        - Reset Link Sent -> Navigate to Login Screen
+
+3. **Main App Screens**
+    - [Home Screen]
+        - Display List of Available Providers
+        - User Selects Provider -> Navigate to Profile Screen
+
+    - [Profile Screen]
+        - Display Provider Details
+        - User Clicks Book -> Navigate to Booking Screen
+        - User Clicks Favorite -> Add to Favorites
+        - User Clicks Back -> Navigate to Home Screen
+
+    - [Booking Screen]
+        - User Selects Date and Time
+        - User Confirms Booking
+        - Create Booking Request
+        - Send Notification to Provider
+        - Navigate to Confirmation Screen
+
+    - [Favorites Screen]
+        - Display User's Favorite Providers
+        - User Selects Provider -> Navigate to Profile Screen
+
+    - [Notifications Screen]
+        - Display Notifications
+        - User Reads Notification
+
+    - [Settings Screen]
+        - User Updates Account Settings
+
+4. **Backend Services (AWS Amplify)**
+    - **Authentication (AWS Cognito)**
+        - Handle User Sign Up/In
+        - Handle Multi-Factor Authentication
+    - **GraphQL API (AWS AppSync)**
+        - Interact with DynamoDB for CRUD Operations
+    - **Data Storage (Amazon DynamoDB)**
+        - Store User Data
+        - Store Provider Data
+        - Store Session Data
+        - Store Transaction Data
+    - **File Storage (Amazon S3)**
+        - Upload and Retrieve Photos
+    - **Notifications (AWS SNS/Pinpoint)**
+        - Send Notifications to Users and Providers
+
+5. **Database Schema**
+    - **Users Table**
+        - id, firstname, lastname, age, etc.
+    - **Providers Table**
+        - id, firstname, lastname, nickname, age, etc.
+    - **Sessions Table**
+        - id, providerID, userID, date, start_time, end_time, etc.
+    - **Reservations Table**
+        - id, userID, providerID, future_date_time, service_type, etc.
+    - **Locations Table**
+        - id, userID, providerID, start_address, start_city, etc.
+    - **Transactions Table**
+        - id, userID, providerID, provider_pay_rate, provider_service_fee, etc.
+    - **UserRatings Table**
+        - id, userID, providerID, sessionID, type, stars, review, etc.
+    - **ProviderRatings Table**
+        - id, userID, providerID, sessionID, type, stars, review, etc.
+    - **UserNotifications Table**
+        - id, userID, type, content, status, etc.
+    - **ProviderNotifications Table**
+        - id, providerID, type, content, status, etc.
+    - **Photos Table**
+        - id, photos (Array of Strings)
+    - **ProviderAvailability Table**
+        - id, providerID, date, start_time, end_time, status, etc.
+
+6. **Booking a Session Workflow**
+    - User Selects Provider -> Navigate to Booking Screen
+    - User Selects Date and Time -> Confirm Booking
+    - Create Booking Request -> Send to Provider for Approval
+    - Provider Approves/Deny Booking Request
+    - Update Booking Status -> Notify User and Provider
+    - Store Booking Details
+
+7. **Viewing and Managing Reservations Workflow**
+    - User Views Upcoming Sessions
+    - User Cancels Session (If Needed)
+    - Update Reservation Status -> Notify User and Provider
+
+8. **Ratings and Reviews Workflow**
+    - After Session -> User/Provider Rates Each Other
+    - Store Ratings and Reviews -> Display in Profiles
+
+9. **Security and Permissions**
+    - AWS Cognito for User Authentication
+    - Auth Rules in GraphQL Schema
+
+10. **Continuous Integration and Monitoring**
+    - CI/CD Setup with GitHub Actions
+    - Monitor API Calls and Lambda Functions with AWS CloudWatch
+    - Set Up Alerts for Critical Issues
+
+### Flow Chart Visualization:
+To visualize this in a flow chart tool:
+
+- **Boxes**: Represent different components (e.g., Screens, AWS Services).
+- **Arrows**: Indicate the flow of data and user actions.
+- **Labels**: Provide additional context for each step.
+
+Here’s a simplified textual representation to help you visualize:
+
+```
+Start -> App Entry Point -> Authentication Screens
+    -> [Login Screen]
+    -> [Signup Screen]
+    -> [Forgot Password Screen]
+    -> Main App Screens
+        -> [Home Screen] -> [Profile Screen] -> [Booking Screen] -> [Confirmation Screen]
+        -> [Favorites Screen] -> [Profile Screen]
+        -> [Notifications Screen]
+        -> [Settings Screen]
+    -> Backend Services
+        -> Authentication
+        -> GraphQL API
+        -> Data Storage
+        -> File Storage
+        -> Notifications
+    -> Database Schema
+        -> Users Table
+        -> Providers Table
+        -> Sessions Table
+        -> Reservations Table
+        -> Locations Table
+        -> Transactions Table
+        -> UserRatings Table
+        -> ProviderRatings Table
+        -> UserNotifications Table
+        -> ProviderNotifications Table
+        -> Photos Table
+        -> ProviderAvailability Table
+    -> Booking a Session Workflow
+    -> Viewing and Managing Reservations Workflow
+    -> Ratings and Reviews Workflow
+    -> Security and Permissions
+    -> Continuous Integration and Monitoring
+```
+
+Using a flowchart tool, you can create boxes for each component and link them with arrows to represent the workflow and data flow as described. This will provide a visual representation of the Buddy App's system design.

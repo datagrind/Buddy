@@ -15,7 +15,7 @@ export default function Applayout() {
 
     // You can keep the splash screen open, or render a loading screen like we do here.
     if (isLoading) {
-        return <View className="w-full h-full">
+        return <View className="justify-center items-center flex-1">
             <Text>Loading...</Text>
         </View> 
     }
@@ -69,12 +69,12 @@ export default function Applayout() {
                 headerShown: false,
                 presentation: "modal"
             }} />
-            <Stack.Screen name='editprofile/index' options={{
+            {/* <Stack.Screen name='editprofile/index' options={{
                 title: '',
                 headerTitle: '',
                 headerShown: false,
                 presentation: "modal"
-            }} />
+            }} /> */}
         </Stack>
     </View>
 

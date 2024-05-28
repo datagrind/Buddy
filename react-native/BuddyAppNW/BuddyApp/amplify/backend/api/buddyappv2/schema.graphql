@@ -1,0 +1,70 @@
+type Rating @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  type: [String!]
+  stars: Int!
+  review: String
+}
+
+type Transaction @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  provider_pay_rate: Float!
+  provider_service_fee: Float!
+  user_service_fee: Float!
+  taxes: Float!
+  total: Float!
+  userID: ID! @index(name: "byUser")
+  providerID: ID! @index(name: "byProvider")
+}
+
+type Reservation @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  future_date_time: AWSDateTime!
+  Transactions: Transaction @hasOne
+  userID: ID! @index(name: "byUser")
+  providerID: ID! @index(name: "byProvider")
+}
+
+type Request @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  providerID: ID! @index(name: "byProvider")
+  userID: ID! @index(name: "byUser")
+}
+
+type Favorite @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  providerID: ID! @index(name: "byProvider")
+  userID: ID! @index(name: "byUser")
+}
+
+type User @model @auth(rules: [{ allow: groups, groups: ["Admin"] }, {allow: public}, {allow: owner}, {allow: private}]) {
+  id: ID!
+  firstname: String
+  lastname: String
+  age: Int
+  about_me: String
+  nickname: String
+  interests: [String]
+  city: String
+  state: String
+  likes: Int
+  Favorites: [Favorite] @hasMany(indexName: "byUser", fields: ["id"])
+  Requests: [Favorite] @hasMany(indexName: "byUser", fields: ["id"])
+  user_star_rating: Int
+  Transactions: [Favorite] @hasMany(indexName: "byUser", fields: ["id"])
+  Bookings: [Favorite] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type Provider @model @auth(rules: [{allow: public}, {allow: owner}, {allow: private}]) {
+  id: ID!
+  userID: ID!
+  things_we_can_do: [String]
+  pay_rate: Float
+  provider_star_rating: Int
+  likes: Int
+  available_now: Boolean
+  Requests: [Favorite] @hasMany(indexName: "byProvider", fields: ["id"])
+  Favorites: [Favorite] @hasMany(indexName: "byProvider", fields: ["id"])
+  Transactions: [Favorite] @hasMany(indexName: "byProvider", fields: ["id"])
+  Bookings: [Favorite] @hasMany(indexName: "byProvider", fields: ["id"])
+  User: User @hasOne
+}

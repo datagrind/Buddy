@@ -1,6 +1,6 @@
 import { View, Text, Alert, Image, KeyboardAvoidingView , Platform,  TextInput, TouchableOpacity, Pressable, useWindowDimensions  } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
+// import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { signUp } from "aws-amplify/auth";
 import { newUser } from '../../components/Profile/logic/users'
@@ -214,28 +214,28 @@ export default function SignupScreen() {
             
             {/* title */}
             <View className="flex items-center mb-10">
+                {/* <Animated.Text 
+                    entering={FadeInUp.duration(1000).springify()} 
+                    className=" font-bold tracking-wider text-5xl"> */}
+                        <Text>Sign Up</Text>
+                {/* </Animated.Text>
                 <Animated.Text 
                     entering={FadeInUp.duration(1000).springify()} 
-                    className=" font-bold tracking-wider text-5xl">
-                        Sign Up
-                </Animated.Text>
-                <Animated.Text 
-                    entering={FadeInUp.duration(1000).springify()} 
-                    className=" tracking-wider text-xl">
-                        Please enter your information below
-                </Animated.Text>
+                    className=" tracking-wider text-xl"> */}
+                        <Text>Please enter your information below</Text>
+                {/* </Animated.Text> */}
             </View>
 
             {/* form */}
             <View className="flex mx-5 space-y-4 text-start">
-                <Animated.Text 
+                {/* <Animated.Text 
                         entering={FadeInUp.duration(1000).springify()} 
-                        className=" tracking-wider text-xl text-start mb-3">
+                        className=" tracking-wider text-xl text-start mb-3"> */}
                             (*) Required
-                </Animated.Text>
+                {/* </Animated.Text>
                 <Animated.View 
                     entering={FadeInDown.duration(1000).springify()} 
-                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
+                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}> */}
                     <TextInput
                         placeholder="Email *"
                         placeholderTextColor={'gray'}
@@ -247,7 +247,7 @@ export default function SignupScreen() {
                         // style={{height: 10,}}
 
                     />
-                </Animated.View>
+                {/* </Animated.View> */}
                 {/* <Animated.View 
                     entering={FadeInDown.delay(200).duration(1000).springify()} 
                     className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
@@ -272,39 +272,39 @@ export default function SignupScreen() {
                         // onBlur={handlePhoneNumberChange}
                     />
                 </Animated.View> */}
-                <Animated.View 
+                {/* <Animated.View 
                     entering={FadeInDown.delay(400).duration(1000).springify()} 
-                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
+                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}> */}
                     <TextInput
                         placeholder="Username *"
                         placeholderTextColor={'gray'}
                         type='username' 
                         onChangeText={(text) => setUsername(text)}
                     />
-                </Animated.View>
+                {/* </Animated.View>
                 <Animated.View 
                     entering={FadeInDown.delay(400).duration(1000).springify()} 
-                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
+                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}> */}
                     <TextInput
                         placeholder="First Name"
                         placeholderTextColor={'gray'}
                         type='firstname' 
                         onChangeText={(text) => setFirstname(text)}
                     />
-                </Animated.View>
+                {/* </Animated.View>
                 <Animated.View 
                     entering={FadeInDown.delay(400).duration(1000).springify()} 
-                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
+                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}> */}
                     <TextInput
                         placeholder="Last Name"
                         placeholderTextColor={'gray'}
                         type='lastname' 
                         onChangeText={(text) => setLastname(text)}
                     />
-                </Animated.View>
+                {/* </Animated.View>
                 <Animated.View 
                     entering={FadeInDown.delay(500).duration(1000).springify()} 
-                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
+                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}> */}
                     <TextInput
                         placeholder="Password *"
                         placeholderTextColor={'gray'}
@@ -312,10 +312,10 @@ export default function SignupScreen() {
                         type="password" 
                         onChangeText={(text) => setPassword(text)} 
                     />
-                </Animated.View>
+                {/* </Animated.View>
                 <Animated.View 
                     entering={FadeInDown.delay(600).duration(1000).springify()} 
-                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}>
+                    className={`bg-black/5 ${windowSize === 'small' ? 'p-2' : 'p-5'} rounded-2xl w-full mb-3`}> */}
                     <TextInput
                         placeholder="Confirm Password *"
                         placeholderTextColor={'gray'}
@@ -323,24 +323,24 @@ export default function SignupScreen() {
                         type="password" 
                         onChangeText={(text) => setConfirmPassword(text)} 
                     />
-                </Animated.View>
+                {/* </Animated.View>
 
-                <Animated.View className="w-full mb-10" entering={FadeInDown.delay(600).duration(1000).springify()}>
+                <Animated.View className="w-full mb-10" entering={FadeInDown.delay(600).duration(1000).springify()}> */}
                     <TouchableOpacity onPress={handleSignUpButton} className={`w-full bg-red-600 ${windowSize === 'small' ? 'p-1' : 'p-3'} rounded-2xl mb-3`}>
                         <Text className="text-xl font-bold text-white text-center">SignUp</Text>
                     </TouchableOpacity>
-                </Animated.View>
+                {/* </Animated.View>
 
                 <Animated.View 
                     entering={FadeInDown.delay(800).duration(1000).springify()} 
-                    className="flex-row justify-center">
+                    className="flex-row justify-center"> */}
 
                     <Text>Already have an account? </Text>
                     <TouchableOpacity onPress={() => router.push('/login')}>
                         <Text className="text-red-600">Login</Text>
                     </TouchableOpacity>
 
-                </Animated.View>
+                {/* </Animated.View> */}
             </View>
         {/* </View> */}
         </View>
